@@ -3,16 +3,22 @@
 <html lang="pt-BR">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
 
 <title>Chamada Escolar</title>
 
 <style>
 
-/* ================================
+/* =========================================================
    RESET
-================================ */
+========================================================= */
 
 * {
   box-sizing: border-box;
@@ -27,68 +33,93 @@ body {
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   background: #f8f9fa;
   color: #202124;
 }
 
-/* ================================
+
+/* =========================================================
    APLICAÇÃO
-================================ */
+========================================================= */
 
 .app {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 24px;
 }
 
-/* ================================
+
+/* =========================================================
    CABEÇALHO
-================================ */
+========================================================= */
 
 .header {
-  margin-bottom: 22px;
+  margin-bottom: 20px;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
 }
 
 .header h1 {
-  margin: 0 0 6px;
-  font-size: 28px;
+  margin: 0;
+  font-size: 27px;
   font-weight: 600;
+  letter-spacing: -.3px;
 }
 
 .header p {
-  margin: 0;
+  margin: 6px 0 0;
   color: #5f6368;
   font-size: 14px;
 }
 
-/* ================================
-   CONTROLES
-================================ */
+
+/* =========================================================
+   PAINEL DE CONTROLES
+========================================================= */
 
 .controles {
-  width: 100%;
   background: #fff;
+
   border: 1px solid #dadce0;
-  border-radius: 12px;
+  border-radius: 14px;
+
   padding: 18px;
+
   display: grid;
-  grid-template-columns: 180px minmax(0, 1fr) auto;
+
+  grid-template-columns:
+    170px
+    minmax(180px, 1fr)
+    auto;
+
   gap: 14px;
+
   align-items: end;
-  margin-bottom: 20px;
+
+  margin-bottom: 18px;
 }
 
 .campo {
   display: flex;
   flex-direction: column;
   gap: 7px;
+
   min-width: 0;
 }
 
 .campo label {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: #5f6368;
 }
@@ -96,40 +127,61 @@ body {
 input,
 select {
   width: 100%;
-  height: 42px;
+  height: 44px;
+
   border: 1px solid #dadce0;
-  border-radius: 8px;
+  border-radius: 9px;
+
   padding: 0 12px;
-  font-size: 14px;
+
   background: #fff;
+
   color: #202124;
+
+  font-size: 14px;
+
   outline: none;
 }
 
 input:focus,
 select:focus {
   border-color: #1a73e8;
-  box-shadow: 0 0 0 2px rgba(26, 115, 232, .12);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(26,115,232,.10);
 }
 
-/* ================================
+
+/* =========================================================
    BOTÕES
-================================ */
+========================================================= */
 
 button {
   border: 0;
-  border-radius: 8px;
-  height: 42px;
+
+  border-radius: 9px;
+
+  height: 44px;
+
   padding: 0 18px;
+
   font-size: 14px;
+
   font-weight: 600;
+
   cursor: pointer;
-  transition: .15s;
+
+  transition:
+    background .15s,
+    transform .08s,
+    opacity .15s;
+
   -webkit-tap-highlight-color: transparent;
 }
 
-button:hover {
-  opacity: .92;
+button:active {
+  transform: scale(.98);
 }
 
 button:disabled {
@@ -142,9 +194,17 @@ button:disabled {
   color: #fff;
 }
 
+.btn-principal:hover {
+  background: #1769d1;
+}
+
 .btn-secundario {
   background: #f1f3f4;
   color: #202124;
+}
+
+.btn-secundario:hover {
+  background: #e8eaed;
 }
 
 .btn-perigo {
@@ -152,104 +212,198 @@ button:disabled {
   color: #fff;
 }
 
-/* ================================
+
+/* =========================================================
    STATUS
-================================ */
+========================================================= */
 
 .status {
   display: none;
+
   width: 100%;
-  background: #fff;
-  border: 1px solid #dadce0;
-  border-radius: 10px;
+
   padding: 12px 15px;
+
   margin-bottom: 18px;
+
+  border-radius: 10px;
+
   font-size: 14px;
 }
 
 .status.sucesso {
   display: block;
-  border-color: #b7dfb9;
-  background: #f1f8f1;
+
+  background: #e6f4ea;
+
   color: #137333;
+
+  border: 1px solid #b7dfb9;
 }
 
 .status.erro {
   display: block;
-  border-color: #f1b7b3;
+
   background: #fce8e6;
+
   color: #c5221f;
+
+  border: 1px solid #f5aaa5;
 }
 
-/* ================================
-   TURMA
-================================ */
 
-.turma-titulo {
+/* =========================================================
+   ÁREA DA TURMA
+========================================================= */
+
+.turma-area {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
 }
 
-.turma-titulo h2 {
-  margin: 0;
+.turma-cabecalho {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 12px;
+}
+
+.turma-nome {
   font-size: 21px;
   font-weight: 600;
 }
 
-.contador {
+.turma-info {
   color: #5f6368;
   font-size: 13px;
-  flex-shrink: 0;
 }
 
-/* ==================================================
-   ESTUDANTES
-   DUAS COLUNAS FORÇADAS
-================================================== */
 
-.estudantes {
-  display: grid !important;
+/* =========================================================
+   BARRA DE RESUMO
+========================================================= */
 
-  /* DUAS COLUNAS SEMPRE */
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+.resumo-topo {
 
-  gap: 10px;
-
-  width: 100% !important;
-  max-width: 100% !important;
-
-  margin: 0;
-  padding: 0;
-}
-
-/* ================================
-   ESTUDANTE
-================================ */
-
-.estudante {
   background: #fff;
+
   border: 1px solid #dadce0;
-  border-radius: 10px;
 
-  padding: 14px 16px;
+  border-radius: 12px;
 
-  min-height: 58px;
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100%;
+  padding: 13px 16px;
+
+  margin-bottom: 12px;
 
   display: flex;
+
   align-items: center;
 
-  transition: .15s;
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+.resumo-esquerda {
+  color: #5f6368;
+  font-size: 13px;
+}
+
+.resumo-esquerda strong {
+  color: #202124;
+}
+
+.resumo-faltas {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+.falta-numero {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 30px;
+  height: 30px;
+
+  padding: 0 8px;
+
+  border-radius: 15px;
+
+  background: #fce8e6;
+
+  color: #c5221f;
+}
+
+
+/* =========================================================
+   LISTA DE ESTUDANTES
+========================================================= */
+
+/*
+   DUAS COLUNAS REAIS.
+   Não depende de largura mínima dos cartões.
+*/
+
+.estudantes {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   ITEM DO ESTUDANTE
+========================================================= */
+
+.estudante {
+
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  min-height: 52px;
+
+  background: #fff;
+
+  border: 1px solid #dadce0;
+
+  border-radius: 9px;
+
+  padding: 9px 12px;
+
+  display: flex;
+
+  align-items: center;
+
   cursor: pointer;
+
   user-select: none;
 
-  overflow: hidden;
+  transition:
+    background .12s,
+    border-color .12s,
+    transform .08s;
 
   -webkit-tap-highlight-color: transparent;
 }
@@ -259,357 +413,447 @@ button:disabled {
   background: #f8fbff;
 }
 
-/* ================================
-   FALTA SELECIONADA
-================================ */
-
-.estudante.ausente {
-  background: #fce8e6;
-  border-color: #f5aaa5;
+.estudante:active:not(.bloqueado) {
+  transform: scale(.99);
 }
 
-.estudante.ausente:hover {
-  background: #fce8e6;
-  border-color: #d93025;
+
+/* =========================================================
+   INDICADOR
+========================================================= */
+
+.indicador {
+
+  width: 22px;
+  height: 22px;
+
+  min-width: 22px;
+
+  border-radius: 50%;
+
+  border: 2px solid #bdc1c6;
+
+  margin-right: 9px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 12px;
+
+  font-weight: bold;
+
+  color: transparent;
+
+  transition: .12s;
 }
 
-/* ================================
+
+/* =========================================================
    NOME
-================================ */
+========================================================= */
 
 .nome {
-  display: block;
 
   width: 100%;
   min-width: 0;
-  max-width: 100%;
 
-  font-size: 14px;
+  font-size: 13px;
+
+  line-height: 1.25;
+
   font-weight: 600;
-  line-height: 1.35;
 
   color: #202124;
 
   overflow-wrap: anywhere;
-  word-break: break-word;
 }
 
-.nome-falta {
+
+/* =========================================================
+   FALTA
+========================================================= */
+
+.estudante.ausente {
+
+  background: #fce8e6;
+
+  border-color: #f5aaa5;
+}
+
+.estudante.ausente .indicador {
+
+  background: #d93025;
+
+  border-color: #d93025;
+
+  color: #fff;
+}
+
+.estudante.ausente .nome {
   color: #c5221f;
 }
 
-/* ================================
-   JÁ PREENCHIDO
-================================ */
 
-.bloqueado {
-  cursor: default;
+/* =========================================================
+   REGISTRO JÁ EXISTENTE
+========================================================= */
+
+.estudante.bloqueado {
+
   background: #f8f9fa;
+
+  cursor: default;
+
+  border-color: #e0e0e0;
 }
 
-.bloqueado .nome {
-  color: #5f6368;
+.estudante.bloqueado .indicador {
+
+  border-color: #dadce0;
+
+  background: #f1f3f4;
 }
 
-/* ================================
-   RESUMO
-================================ */
-
-.resumo {
-  width: 100%;
-  margin-top: 20px;
-
-  background: #fff;
-  border: 1px solid #dadce0;
-  border-radius: 10px;
-
-  padding: 14px 16px;
-
-  display: flex;
-  gap: 25px;
-
-  font-size: 14px;
-}
-
-.resumo span {
-  color: #5f6368;
-}
-
-.resumo strong {
-  color: #202124;
-}
-
-/* ================================
-   FILA
-================================ */
-
-.fila {
-  width: 100%;
-  margin-top: 25px;
-}
-
-.fila-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.fila-header h2 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.fila-vazia {
-  width: 100%;
-
-  background: #fff;
-  border: 1px dashed #dadce0;
-  border-radius: 10px;
-
-  padding: 24px;
-
-  text-align: center;
+.estudante.bloqueado .nome {
 
   color: #80868b;
+}
+
+
+/* =========================================================
+   CARREGANDO / VAZIO
+========================================================= */
+
+.carregando,
+.vazio {
+
+  background: #fff;
+
+  border: 1px solid #dadce0;
+
+  border-radius: 12px;
+
+  padding: 35px 20px;
+
+  text-align: center;
+
+  color: #5f6368;
+
   font-size: 14px;
 }
 
-.fila-item {
-  width: 100%;
+
+/* =========================================================
+   ÁREA DE SALVAMENTO
+========================================================= */
+
+.salvar-area {
+
+  position: sticky;
+
+  bottom: 0;
+
+  z-index: 10;
+
+  margin-top: 18px;
+
+  padding-top: 10px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(248,249,250,0),
+      #f8f9fa 20%
+    );
+}
+
+.salvar-box {
 
   background: #fff;
-  border: 1px solid #dadce0;
-  border-radius: 10px;
 
-  padding: 13px 15px;
-  margin-bottom: 8px;
+  border: 1px solid #dadce0;
+
+  border-radius: 12px;
+
+  padding: 12px;
 
   display: flex;
-  justify-content: space-between;
+
   align-items: center;
 
-  gap: 10px;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  box-shadow:
+    0 2px 8px rgba(60,64,67,.10);
 }
 
-.fila-info {
-  min-width: 0;
-}
+.salvar-info {
 
-.fila-info strong {
-  display: block;
-  margin-bottom: 4px;
-}
-
-.fila-info span {
   font-size: 13px;
-  color: #5f6368;
-}
-
-.acoes-finais {
-  display: flex;
-  justify-content: flex-end;
-
-  gap: 10px;
-  margin-top: 18px;
-}
-
-.carregando {
-  width: 100%;
-
-  padding: 35px;
-
-  text-align: center;
 
   color: #5f6368;
-  font-size: 14px;
 }
 
-.vazio {
-  width: 100%;
+.salvar-info strong {
 
-  padding: 35px;
+  color: #202124;
 
-  text-align: center;
-
-  color: #5f6368;
-
-  background: #fff;
-  border: 1px solid #dadce0;
-  border-radius: 10px;
+  font-size: 15px;
 }
 
-/* ==================================================
-   MOBILE
-   DUAS COLUNAS CONTINUAM OBRIGATORIAMENTE
-================================================== */
+.btn-salvar {
+
+  height: 46px;
+
+  padding: 0 24px;
+
+  background: #1a73e8;
+
+  color: #fff;
+
+  white-space: nowrap;
+}
+
+.btn-salvar:hover {
+  background: #1769d1;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
 
 @media screen and (max-width: 750px) {
 
   .app {
+
     width: 100%;
+
     max-width: none;
+
     padding: 12px;
   }
 
   .header {
-    margin-bottom: 16px;
+
+    margin-bottom: 15px;
   }
 
   .header h1 {
+
     font-size: 23px;
   }
 
   .header p {
+
     font-size: 13px;
   }
 
+
+  /* CONTROLES */
+
   .controles {
-    width: 100%;
 
     grid-template-columns: 1fr;
 
-    gap: 12px;
+    gap: 10px;
 
-    padding: 14px;
+    padding: 13px;
+
+    border-radius: 12px;
   }
 
-  /* ==========================================
+
+  /* =====================================================
      DUAS COLUNAS NO CELULAR
-  ========================================== */
+  ===================================================== */
 
   .estudantes {
+
     display: grid !important;
 
     grid-template-columns:
       minmax(0, 1fr)
       minmax(0, 1fr) !important;
 
-    gap: 7px !important;
+    gap: 6px !important;
 
     width: 100% !important;
   }
 
+
   .estudante {
-    width: 100% !important;
-    min-width: 0 !important;
 
-    min-height: 54px;
+    min-height: 50px;
 
-    padding: 11px 10px;
+    padding: 8px 8px;
 
     border-radius: 8px;
   }
 
-  .nome {
-    width: 100%;
-    min-width: 0;
 
-    font-size: 12px;
-    line-height: 1.3;
+  .indicador {
+
+    width: 20px;
+    height: 20px;
+
+    min-width: 20px;
+
+    margin-right: 7px;
+
+    font-size: 11px;
   }
 
-  .turma-titulo h2 {
+
+  .nome {
+
+    font-size: 11.5px;
+
+    line-height: 1.25;
+  }
+
+
+  .turma-nome {
+
     font-size: 18px;
   }
 
-  .contador {
-    font-size: 12px;
+  .turma-info {
+
+    font-size: 11px;
   }
 
-  .resumo {
-    flex-wrap: wrap;
-    gap: 10px 18px;
-    padding: 12px;
+
+  .resumo-topo {
+
+    padding: 10px 12px;
   }
 
-  .fila-item {
-    gap: 10px;
-    align-items: flex-start;
+
+  .salvar-box {
+
+    padding: 10px;
   }
 
-  .fila-info {
-    min-width: 0;
-  }
+  .btn-salvar {
 
-  .fila-info strong {
-    font-size: 14px;
-  }
+    padding: 0 17px;
 
-  .fila-info span {
-    font-size: 12px;
-  }
-
-  .btn-perigo {
-    padding: 0 12px;
-    font-size: 12px;
-    flex-shrink: 0;
-  }
-
-  .acoes-finais {
-    justify-content: stretch;
-  }
-
-  .acoes-finais button {
-    width: 100%;
+    font-size: 13px;
   }
 
 }
 
-/* ==================================================
-   CELULARES MUITO PEQUENOS
-   TAMBÉM DUAS COLUNAS
-================================================== */
 
-@media screen and (max-width: 380px) {
+/* =========================================================
+   CELULARES PEQUENOS
+========================================================= */
+
+@media screen and (max-width: 400px) {
 
   .app {
-    width: 100%;
+
     padding: 8px;
   }
 
+
   .estudantes {
-    display: grid !important;
 
     grid-template-columns:
       minmax(0, 1fr)
       minmax(0, 1fr) !important;
 
     gap: 5px !important;
-
-    width: 100% !important;
   }
+
 
   .estudante {
-    width: 100% !important;
-    min-width: 0 !important;
 
-    padding: 10px 8px;
+    min-height: 48px;
 
-    min-height: 52px;
+    padding: 7px 6px;
   }
 
+
+  .indicador {
+
+    width: 18px;
+    height: 18px;
+
+    min-width: 18px;
+
+    margin-right: 6px;
+  }
+
+
   .nome {
-    width: 100%;
+
+    font-size: 10.5px;
+  }
+
+
+  .salvar-info {
+
     font-size: 11px;
   }
 
+
+  .btn-salvar {
+
+    height: 44px;
+
+    padding: 0 13px;
+
+    font-size: 12px;
+  }
+
 }
 
-/* ==================================================
-   GARANTIA FINAL
-================================================== */
 
-.estudantes,
-.estudantes * {
-  box-sizing: border-box;
+/* =========================================================
+   CELULARES MUITO PEQUENOS
+========================================================= */
+
+@media screen and (max-width: 330px) {
+
+  .estudante {
+
+    padding: 6px 5px;
+  }
+
+  .nome {
+
+    font-size: 9.5px;
+  }
+
+  .indicador {
+
+    width: 17px;
+    height: 17px;
+
+    min-width: 17px;
+
+    margin-right: 5px;
+  }
+
 }
+
+
+/* =========================================================
+   GARANTIA DE DUAS COLUNAS
+========================================================= */
 
 .estudantes {
+
   grid-auto-flow: row;
+
+  grid-auto-columns: auto;
+
 }
 
 </style>
@@ -620,33 +864,39 @@ button:disabled {
 
 <div class="app">
 
-  <!-- ================================
+  <!-- =====================================================
        CABEÇALHO
-  ================================= -->
+  ====================================================== -->
 
   <div class="header">
 
+```
+<div class="header-top">
 
-<h1>Chamada Escolar</h1>
+  <h1>
+    Chamada Escolar
+  </h1>
+
+</div>
 
 <p>
-  Registro diário de frequência dos estudantes.
+  Toque no nome do estudante para registrar a falta.
 </p>
-
+```
 
   </div>
 
-  <!-- ================================
+  <!-- =====================================================
        CONTROLES
-  ================================= -->
+  ====================================================== -->
 
   <div class="controles">
 
-
+```
 <div class="campo">
 
   <label for="data">
-    Data
+    DATA
   </label>
 
   <input
@@ -660,7 +910,7 @@ button:disabled {
 <div class="campo">
 
   <label for="turma">
-    Turma
+    TURMA
   </label>
 
   <select id="turma">
@@ -681,64 +931,65 @@ button:disabled {
 >
   Adicionar à chamada
 </button>
-
+```
 
   </div>
 
-  <!-- ================================
+  <!-- =====================================================
        STATUS
-  ================================= -->
+  ====================================================== -->
 
   <div
     id="status"
     class="status"
   ></div>
 
-  <!-- ================================
+  <!-- =====================================================
        ESTUDANTES
-  ================================= -->
+  ====================================================== -->
 
   <div
     id="areaEstudantes"
   ></div>
 
-  <!-- ================================
-       FILA
-  ================================= -->
+  <!-- =====================================================
+       ÁREA DE SALVAMENTO
+  ====================================================== -->
 
-  <div class="fila">
-
-
-<div class="fila-header">
-
-  <h2>
-    Chamada
-  </h2>
-
-  <button
-    class="btn-secundario"
-    onclick="limparFila()"
+  <div
+    class="salvar-area"
+    id="salvarArea"
+    style="display:none;"
   >
-    Limpar
-  </button>
 
-</div>
+```
+<div class="salvar-box">
 
+  <div class="salvar-info">
 
-<div id="fila"></div>
+    <strong id="salvarQuantidade">
+      0 faltas
+    </strong>
 
+    <br>
 
-<div class="acoes-finais">
+    <span>
+      selecionadas nesta turma
+    </span>
+
+  </div>
+
 
   <button
-    class="btn-principal"
-    onclick="salvarTodas()"
+    class="btn-salvar"
+    id="btnSalvarDireto"
+    onclick="adicionarESalvar()"
   >
     Salvar chamada
   </button>
 
 </div>
-
+```
 
   </div>
 
@@ -746,17 +997,17 @@ button:disabled {
 
 <script>
 
-/* ==================================================
+/* =========================================================
    API
-================================================== */
+========================================================= */
 
 const API_URL =
   'https://script.google.com/macros/s/AKfycbzThUzCIL-flrxxXbssTVkti4zm3F7W6xZQW_J7Nw9igoflgzFQ27tjPaMtJk4Jcs9o/exec';
 
 
-/* ==================================================
+/* =========================================================
    VARIÁVEIS
-================================================== */
+========================================================= */
 
 let estudantesAtuais = [];
 
@@ -765,48 +1016,61 @@ let turmaAtual = '';
 let filaChamadas = [];
 
 
-/* ==================================================
+/* =========================================================
    INICIALIZAÇÃO
-================================================== */
+========================================================= */
 
 document.addEventListener(
   'DOMContentLoaded',
   function () {
 
-    const hoje =
-      new Date();
-
-    const ano =
-      hoje.getFullYear();
-
-    const mes =
-      String(
-        hoje.getMonth() + 1
-      ).padStart(2, '0');
-
-    const dia =
-      String(
-        hoje.getDate()
-      ).padStart(2, '0');
-
-    document.getElementById(
-      'data'
-    ).value =
-      ano +
-      '-' +
-      mes +
-      '-' +
-      dia;
+    definirDataAtual();
 
     carregarTurmas();
+
+    renderizarFila();
 
   }
 );
 
 
-/* ==================================================
+/* =========================================================
+   DATA ATUAL
+========================================================= */
+
+function definirDataAtual() {
+
+  const hoje =
+    new Date();
+
+  const ano =
+    hoje.getFullYear();
+
+  const mes =
+    String(
+      hoje.getMonth() + 1
+    ).padStart(2, '0');
+
+  const dia =
+    String(
+      hoje.getDate()
+    ).padStart(2, '0');
+
+  document.getElementById(
+    'data'
+  ).value =
+    ano +
+    '-' +
+    mes +
+    '-' +
+    dia;
+
+}
+
+
+/* =========================================================
    CARREGAR TURMAS
-================================================== */
+========================================================= */
 
 async function carregarTurmas() {
 
@@ -831,6 +1095,7 @@ async function carregarTurmas() {
 
     select.innerHTML =
       '<option value="">Selecione a turma</option>';
+
 
     if (
       dados &&
@@ -881,9 +1146,9 @@ async function carregarTurmas() {
 }
 
 
-/* ==================================================
-   TROCA DE TURMA
-================================================== */
+/* =========================================================
+   EVENTO TURMA
+========================================================= */
 
 document
   .getElementById('turma')
@@ -907,6 +1172,11 @@ document
         ).innerHTML =
           '';
 
+        document.getElementById(
+          'salvarArea'
+        ).style.display =
+          'none';
+
         return;
 
       }
@@ -919,9 +1189,9 @@ document
   );
 
 
-/* ==================================================
-   TROCA DE DATA
-================================================== */
+/* =========================================================
+   EVENTO DATA
+========================================================= */
 
 document
   .getElementById('data')
@@ -941,9 +1211,9 @@ document
   );
 
 
-/* ==================================================
+/* =========================================================
    CARREGAR ESTUDANTES
-================================================== */
+========================================================= */
 
 async function carregarEstudantes(
   turma
@@ -954,6 +1224,7 @@ async function carregarEstudantes(
       'data'
     ).value;
 
+
   if (
     !turma ||
     !data
@@ -963,18 +1234,28 @@ async function carregarEstudantes(
 
   }
 
+
   turmaAtual =
     turma;
+
 
   const area =
     document.getElementById(
       'areaEstudantes'
     );
 
+
   area.innerHTML =
     '<div class="carregando">' +
     'Carregando estudantes...' +
     '</div>';
+
+
+  document.getElementById(
+    'salvarArea'
+  ).style.display =
+    'none';
+
 
   try {
 
@@ -990,13 +1271,16 @@ async function carregarEstudantes(
         data
       );
 
+
     const resposta =
       await fetch(
         url
       );
 
+
     const dados =
       await resposta.json();
+
 
     if (
       !dados ||
@@ -1011,6 +1295,7 @@ async function carregarEstudantes(
 
     }
 
+
     estudantesAtuais =
       dados.estudantes.map(
         function (estudante) {
@@ -1023,11 +1308,6 @@ async function carregarEstudantes(
             .trim()
             .toUpperCase();
 
-          /*
-           * A = atestado
-           * C = comparecimento
-           * F = falta
-           */
 
           if (
             status !== 'A' &&
@@ -1039,6 +1319,7 @@ async function carregarEstudantes(
               '';
 
           }
+
 
           return {
 
@@ -1053,11 +1334,6 @@ async function carregarEstudantes(
             statusExistente:
               status,
 
-            /*
-             * C permanece apenas
-             * internamente.
-             */
-
             presenca:
               status === 'F'
                 ? 'F'
@@ -1068,6 +1344,7 @@ async function carregarEstudantes(
         }
       );
 
+
     renderizarEstudantes();
 
   } catch (erro) {
@@ -1077,10 +1354,12 @@ async function carregarEstudantes(
       'Não foi possível carregar os estudantes.' +
       '</div>';
 
+
     mostrarStatus(
       'Erro ao carregar os estudantes.',
       'erro'
     );
+
 
     console.error(
       erro
@@ -1091,9 +1370,9 @@ async function carregarEstudantes(
 }
 
 
-/* ==================================================
+/* =========================================================
    RENDERIZAR ESTUDANTES
-================================================== */
+========================================================= */
 
 function renderizarEstudantes() {
 
@@ -1101,6 +1380,7 @@ function renderizarEstudantes() {
     document.getElementById(
       'areaEstudantes'
     );
+
 
   if (
     !estudantesAtuais.length
@@ -1111,39 +1391,80 @@ function renderizarEstudantes() {
       'Nenhum estudante encontrado.' +
       '</div>';
 
+    document.getElementById(
+      'salvarArea'
+    ).style.display =
+      'none';
+
     return;
 
   }
 
+
   let html =
     '';
 
-  html +=
-    '<div class="turma-titulo">';
+
+  /* CABEÇALHO DA TURMA */
 
   html +=
-    '<h2>' +
+    '<div class="turma-area">';
+
+
+  html +=
+    '<div class="turma-cabecalho">';
+
+
+  html +=
+    '<div class="turma-nome">' +
     escaparHTML(
       turmaAtual
     ) +
-    '</h2>';
+    '</div>';
+
 
   html +=
-    '<div class="contador">' +
+    '<div class="turma-info">' +
     estudantesAtuais.length +
     ' estudantes' +
     '</div>';
 
+
   html +=
     '</div>';
 
 
-  /*
-   * IMPORTANTE:
-   * A classe estudantes possui
-   * CSS !important garantindo
-   * duas colunas.
-   */
+  /* RESUMO */
+
+  const faltas =
+    contarFaltasSelecionadas();
+
+
+  html +=
+    '<div class="resumo-topo">';
+
+
+  html +=
+    '<div class="resumo-esquerda">' +
+    '<strong>Frequência</strong>' +
+    ' · toque nos nomes para marcar falta' +
+    '</div>';
+
+
+  html +=
+    '<div class="resumo-faltas">' +
+    'Faltas' +
+    '<span class="falta-numero">' +
+    faltas +
+    '</span>' +
+    '</div>';
+
+
+  html +=
+    '</div>';
+
+
+  /* LISTA */
 
   html +=
     '<div class="estudantes">';
@@ -1158,6 +1479,7 @@ function renderizarEstudantes() {
       const existente =
         estudante.statusExistente;
 
+
       const falta =
         !existente &&
         estudante.presenca === 'F';
@@ -1168,44 +1490,56 @@ function renderizarEstudantes() {
 
         (
           existente
-            ? 'bloqueado'
+            ? 'bloqueado '
             : ''
         ) +
 
         (
           falta
-            ? ' ausente'
+            ? 'ausente'
             : ''
         ) +
 
         '"' +
 
+
         (
           existente
             ? ''
-            : ' onclick="registrarFalta(' +
+            : ' onclick="alternarFalta(' +
               index +
               ')"'
         ) +
 
+
         '>';
 
 
+      /* INDICADOR */
+
       html +=
-        '<div class="nome ' +
+        '<div class="indicador">';
 
-        (
-          falta
-            ? 'nome-falta'
-            : ''
-        ) +
 
-        '">' +
+      if (falta) {
 
+        html +=
+          '✓';
+
+      }
+
+
+      html +=
+        '</div>';
+
+
+      /* NOME */
+
+      html +=
+        '<div class="nome">' +
         escaparHTML(
           estudante.nome
         ) +
-
         '</div>';
 
 
@@ -1221,31 +1555,36 @@ function renderizarEstudantes() {
 
 
   html +=
-    criarResumo();
+    '</div>';
 
 
   area.innerHTML =
     html;
 
+
+  atualizarAreaSalvar();
+
 }
 
 
-/* ==================================================
-   REGISTRAR / REMOVER FALTA
-================================================== */
+/* =========================================================
+   ALTERNAR FALTA
+========================================================= */
 
-function registrarFalta(index) {
+function alternarFalta(index) {
 
   const estudante =
     estudantesAtuais[index];
+
 
   if (!estudante) {
     return;
   }
 
+
   /*
-   * Se já existe A, C ou F,
-   * não altera.
+   * Não permite alterar registros
+   * que já estavam gravados.
    */
 
   if (
@@ -1256,14 +1595,6 @@ function registrarFalta(index) {
 
   }
 
-
-  /*
-   * Primeiro clique:
-   * C -> F
-   *
-   * Segundo clique:
-   * F -> C
-   */
 
   if (
     estudante.presenca === 'F'
@@ -1279,105 +1610,83 @@ function registrarFalta(index) {
 
   }
 
+
   renderizarEstudantes();
 
 }
 
 
-/* ==================================================
-   RESUMO
-================================================== */
+/* =========================================================
+   CONTAR FALTAS
+========================================================= */
 
-function criarResumo() {
+function contarFaltasSelecionadas() {
 
-  let presentes =
-    0;
-
-  let faltas =
-    0;
-
-  let atestados =
-    0;
-
-  let pendentes =
-    0;
-
-
-  estudantesAtuais.forEach(
+  return estudantesAtuais.filter(
     function (estudante) {
 
-      const status =
-        estudante.statusExistente;
-
-
-      if (
-        status === 'A'
-      ) {
-
-        atestados++;
-
-      } else if (
-        status === 'C'
-      ) {
-
-        presentes++;
-
-      } else if (
-        status === 'F'
-      ) {
-
-        faltas++;
-
-      } else if (
+      return (
+        !estudante.statusExistente &&
         estudante.presenca === 'F'
-      ) {
-
-        faltas++;
-
-      } else {
-
-        presentes++;
-
-      }
+      );
 
     }
-  );
-
-
-  return `
-
-    <div class="resumo">
-
-      <div>
-        <span>Presentes:</span>
-        <strong>${presentes}</strong>
-      </div>
-
-      <div>
-        <span>Faltas:</span>
-        <strong>${faltas}</strong>
-      </div>
-
-      <div>
-        <span>Atestados:</span>
-        <strong>${atestados}</strong>
-      </div>
-
-      <div>
-        <span>Pendentes:</span>
-        <strong>${pendentes}</strong>
-      </div>
-
-    </div>
-
-  `;
+  ).length;
 
 }
 
 
-/* ==================================================
-   ADICIONAR TURMA
-================================================== */
+/* =========================================================
+   ATUALIZAR ÁREA SALVAR
+========================================================= */
+
+function atualizarAreaSalvar() {
+
+  const area =
+    document.getElementById(
+      'salvarArea'
+    );
+
+
+  if (
+    !estudantesAtuais.length
+  ) {
+
+    area.style.display =
+      'none';
+
+    return;
+
+  }
+
+
+  const faltas =
+    contarFaltasSelecionadas();
+
+
+  document.getElementById(
+    'salvarQuantidade'
+  ).innerHTML =
+    '<strong>' +
+    faltas +
+    (
+      faltas === 1
+        ? ' falta'
+        : ' faltas'
+    ) +
+    '</strong><br>' +
+    '<span>selecionadas nesta turma</span>';
+
+
+  area.style.display =
+    'block';
+
+}
+
+
+/* =========================================================
+   ADICIONAR À FILA
+========================================================= */
 
 function adicionarTurma() {
 
@@ -1385,6 +1694,7 @@ function adicionarTurma() {
     document.getElementById(
       'turma'
     ).value;
+
 
   const data =
     document.getElementById(
@@ -1430,6 +1740,38 @@ function adicionarTurma() {
   }
 
 
+  const chamada = {
+
+    turma:
+      turma,
+
+    data:
+      data,
+
+    estudantes:
+      estudantesAtuais.map(
+        function (estudante) {
+
+          return {
+
+            id:
+              estudante.id,
+
+            nome:
+              estudante.nome,
+
+            presenca:
+              estudante.statusExistente ||
+              estudante.presenca
+
+          };
+
+        }
+      )
+
+  };
+
+
   const existente =
     filaChamadas.findIndex(
       function (item) {
@@ -1441,6 +1783,89 @@ function adicionarTurma() {
 
       }
     );
+
+
+  if (
+    existente >= 0
+  ) {
+
+    filaChamadas[
+      existente
+    ] =
+      chamada;
+
+  } else {
+
+    filaChamadas.push(
+      chamada
+    );
+
+  }
+
+
+  mostrarStatus(
+    turma +
+    ' adicionada à chamada.',
+    'sucesso'
+  );
+
+}
+
+
+/* =========================================================
+   ADICIONAR E SALVAR
+========================================================= */
+
+async function adicionarESalvar() {
+
+  const turma =
+    document.getElementById(
+      'turma'
+    ).value;
+
+
+  const data =
+    document.getElementById(
+      'data'
+    ).value;
+
+
+  if (!turma) {
+
+    mostrarStatus(
+      'Selecione uma turma.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  if (!data) {
+
+    mostrarStatus(
+      'Selecione uma data.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  if (
+    !estudantesAtuais.length
+  ) {
+
+    mostrarStatus(
+      'Não há estudantes para salvar.',
+      'erro'
+    );
+
+    return;
+
+  }
 
 
   const chamada = {
@@ -1475,195 +1900,18 @@ function adicionarTurma() {
   };
 
 
-  if (
-    existente >= 0
-  ) {
-
-    filaChamadas[
-      existente
-    ] =
-      chamada;
-
-  } else {
-
-    filaChamadas.push(
-      chamada
-    );
-
-  }
-
-
-  renderizarFila();
-
-
-  mostrarStatus(
-    turma +
-    ' adicionada à chamada.',
-    'sucesso'
-  );
-
-}
-
-
-/* ==================================================
-   RENDERIZAR FILA
-================================================== */
-
-function renderizarFila() {
-
-  const area =
-    document.getElementById(
-      'fila'
-    );
-
-
-  if (
-    !filaChamadas.length
-  ) {
-
-    area.innerHTML =
-      '<div class="fila-vazia">' +
-      'Nenhuma turma adicionada à chamada.' +
-      '</div>';
-
-    return;
-
-  }
-
-
-  let html =
-    '';
-
-
-  filaChamadas.forEach(
-    function (
-      item,
-      index
-    ) {
-
-      const total =
-        item.estudantes.length;
-
-
-      const faltas =
-        item.estudantes.filter(
-          function (
-            estudante
-          ) {
-
-            return (
-              estudante.presenca === 'F'
-            );
-
-          }
-        ).length;
-
-
-      html +=
-        '<div class="fila-item">';
-
-
-      html +=
-        '<div class="fila-info">';
-
-
-      html +=
-        '<strong>' +
-        escaparHTML(
-          item.turma
-        ) +
-        '</strong>';
-
-
-      html +=
-        '<span>' +
-        formatarData(
-          item.data
-        ) +
-        ' · ' +
-        total +
-        ' estudantes · ' +
-        faltas +
-        ' faltas' +
-        '</span>';
-
-
-      html +=
-        '</div>';
-
-
-      html +=
-        '<button ' +
-        'class="btn-perigo" ' +
-        'onclick="removerDaFila(' +
-        index +
-        ')">' +
-        'Remover' +
-        '</button>';
-
-
-      html +=
-        '</div>';
-
-    }
-  );
-
-
-  area.innerHTML =
-    html;
-
-}
-
-
-/* ==================================================
-   REMOVER DA FILA
-================================================== */
-
-function removerDaFila(index) {
-
-  filaChamadas.splice(
-    index,
-    1
-  );
-
-  renderizarFila();
-
-}
-
-
-/* ==================================================
-   LIMPAR FILA
-================================================== */
-
-function limparFila() {
-
-  if (
-    !filaChamadas.length
-  ) {
-
-    return;
-
-  }
-
-
   filaChamadas =
-    [];
+    [chamada];
 
 
-  renderizarFila();
-
-
-  mostrarStatus(
-    'Fila limpa.',
-    'sucesso'
-  );
+  await salvarTodas();
 
 }
 
 
-/* ==================================================
-   SALVAR CHAMADA
-================================================== */
+/* =========================================================
+   SALVAR TODAS
+========================================================= */
 
 async function salvarTodas() {
 
@@ -1672,7 +1920,7 @@ async function salvarTodas() {
   ) {
 
     mostrarStatus(
-      'Adicione pelo menos uma turma à chamada.',
+      'Não há chamada para salvar.',
       'erro'
     );
 
@@ -1794,26 +2042,25 @@ async function salvarTodas() {
     }
 
 
+    const turmaSalva =
+      turmaAtual;
+
+
     filaChamadas =
       [];
 
 
-    renderizarFila();
-
-
     mostrarStatus(
-      'Chamada salva com sucesso.',
+      'Chamada de ' +
+      turmaSalva +
+      ' salva com sucesso.',
       'sucesso'
     );
 
 
-    if (turmaAtual) {
-
-      await carregarEstudantes(
-        turmaAtual
-      );
-
-    }
+    await carregarEstudantes(
+      turmaSalva
+    );
 
 
   } catch (erro) {
@@ -1823,6 +2070,7 @@ async function salvarTodas() {
       erro.message,
       'erro'
     );
+
 
     console.error(
       erro
@@ -1845,9 +2093,24 @@ async function salvarTodas() {
 }
 
 
-/* ==================================================
+/* =========================================================
+   FILA
+========================================================= */
+
+function renderizarFila() {
+
+  /*
+   * A fila continua disponível internamente
+   * para manter compatibilidade com a lógica
+   * anterior, mas não ocupa espaço na tela.
+   */
+
+}
+
+
+/* =========================================================
    STATUS
-================================================== */
+========================================================= */
 
 function mostrarStatus(
   mensagem,
@@ -1888,79 +2151,42 @@ function mostrarStatus(
 }
 
 
-/* ==================================================
-   FORMATAR DATA
-================================================== */
-
-function formatarData(data) {
-
-  if (!data) {
-    return '';
-  }
-
-
-  const partes =
-    data.split('-');
-
-
-  if (
-    partes.length !== 3
-  ) {
-
-    return data;
-
-  }
-
-
-  return (
-    partes[2] +
-    '/' +
-    partes[1] +
-    '/' +
-    partes[0]
-  );
-
-}
-
-
-/* ==================================================
+/* =========================================================
    SEGURANÇA HTML
-================================================== */
+========================================================= */
 
 function escaparHTML(valor) {
 
   return String(
     valor || ''
   )
+
     .replace(
       /&/g,
       '&amp;'
     )
+
     .replace(
       /</g,
       '&lt;'
     )
+
     .replace(
       />/g,
       '&gt;'
     )
+
     .replace(
       /"/g,
       '&quot;'
     )
+
     .replace(
       /'/g,
       '&#039;'
     );
 
 }
-
-
-/* ==================================================
-   INICIAR FILA
-================================================== */
-
-renderizarFila();
 
 </script>
 
