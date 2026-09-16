@@ -1,25 +1,13 @@
 <!DOCTYPE html>
 
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Chamada Escolar</title>
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
 * {
   box-sizing: border-box;
 }
@@ -30,832 +18,450 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f7fa;
+  color: #202124;
 }
 
 body {
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-  background: #f8f9fa;
-  color: #202124;
+  padding-bottom: 90px;
 }
 
-
-/* =========================================================
-   APLICAÇÃO
-========================================================= */
+/* APP */
 
 .app {
   width: 100%;
-  max-width: 1000px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 18px 14px 30px;
 }
 
+/* CABEÇALHO */
 
-/* =========================================================
-   CABEÇALHO
-========================================================= */
-
-.header {
-  margin-bottom: 20px;
+.cabecalho {
+  margin-bottom: 18px;
 }
 
-.header-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-}
-
-.header h1 {
+.titulo {
   margin: 0;
-  font-size: 27px;
-  font-weight: 600;
-  letter-spacing: -.3px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #202124;
 }
 
-.header p {
-  margin: 6px 0 0;
-  color: #5f6368;
+.subtitulo {
+  margin: 5px 0 0;
   font-size: 14px;
+  color: #5f6368;
 }
 
-
-/* =========================================================
-   PAINEL DE CONTROLES
-========================================================= */
+/* CONTROLES */
 
 .controles {
-  background: #fff;
-
-  border: 1px solid #dadce0;
-  border-radius: 14px;
-
-  padding: 18px;
-
-  display: grid;
-
-  grid-template-columns:
-    170px
-    minmax(180px, 1fr)
-    auto;
-
-  gap: 14px;
-
-  align-items: end;
-
-  margin-bottom: 18px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
 }
 
 .campo {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-
-  min-width: 0;
+  flex: 1;
 }
 
 .campo label {
+  display: block;
   font-size: 12px;
   font-weight: 600;
   color: #5f6368;
+  margin-bottom: 5px;
 }
 
-input,
-select {
+select,
+input[type="date"] {
   width: 100%;
   height: 44px;
-
-  border: 1px solid #dadce0;
-  border-radius: 9px;
-
   padding: 0 12px;
-
+  border: 1px solid #dadce0;
+  border-radius: 10px;
   background: #fff;
-
   color: #202124;
-
-  font-size: 14px;
-
+  font-size: 15px;
   outline: none;
 }
 
-input:focus,
-select:focus {
+select:focus,
+input[type="date"]:focus {
   border-color: #1a73e8;
-
-  box-shadow:
-    0 0 0 3px
-    rgba(26,115,232,.10);
 }
 
-
-/* =========================================================
-   BOTÕES
-========================================================= */
-
-button {
-  border: 0;
-
-  border-radius: 9px;
-
-  height: 44px;
-
-  padding: 0 18px;
-
-  font-size: 14px;
-
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition:
-    background .15s,
-    transform .08s,
-    opacity .15s;
-
-  -webkit-tap-highlight-color: transparent;
-}
-
-button:active {
-  transform: scale(.98);
-}
-
-button:disabled {
-  opacity: .55;
-  cursor: not-allowed;
-}
-
-.btn-principal {
-  background: #1a73e8;
-  color: #fff;
-}
-
-.btn-principal:hover {
-  background: #1769d1;
-}
-
-.btn-secundario {
-  background: #f1f3f4;
-  color: #202124;
-}
-
-.btn-secundario:hover {
-  background: #e8eaed;
-}
-
-.btn-perigo {
-  background: #d93025;
-  color: #fff;
-}
-
-
-/* =========================================================
-   STATUS
-========================================================= */
+/* STATUS */
 
 .status {
-  display: none;
-
-  width: 100%;
-
-  padding: 12px 15px;
-
-  margin-bottom: 18px;
-
-  border-radius: 10px;
-
-  font-size: 14px;
-}
-
-.status.sucesso {
-  display: block;
-
-  background: #e6f4ea;
-
-  color: #137333;
-
-  border: 1px solid #b7dfb9;
-}
-
-.status.erro {
-  display: block;
-
-  background: #fce8e6;
-
-  color: #c5221f;
-
-  border: 1px solid #f5aaa5;
-}
-
-
-/* =========================================================
-   ÁREA DA TURMA
-========================================================= */
-
-.turma-area {
-  width: 100%;
-}
-
-.turma-cabecalho {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  gap: 15px;
-
+  min-height: 20px;
   margin-bottom: 12px;
+  font-size: 13px;
+  color: #5f6368;
+}
+
+/* TURMA */
+
+.turma-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .turma-nome {
-  font-size: 21px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
 }
 
-.turma-info {
-  color: #5f6368;
+.turma-total {
   font-size: 13px;
-}
-
-
-/* =========================================================
-   BARRA DE RESUMO
-========================================================= */
-
-.resumo-topo {
-
-  background: #fff;
-
-  border: 1px solid #dadce0;
-
-  border-radius: 12px;
-
-  padding: 13px 16px;
-
-  margin-bottom: 12px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  gap: 15px;
-}
-
-.resumo-esquerda {
   color: #5f6368;
-  font-size: 13px;
 }
 
-.resumo-esquerda strong {
-  color: #202124;
-}
-
-.resumo-faltas {
-  display: flex;
-
-  align-items: center;
-
-  gap: 7px;
-
-  font-size: 14px;
-
-  font-weight: 600;
-}
-
-.falta-numero {
-  display: inline-flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  min-width: 30px;
-  height: 30px;
-
-  padding: 0 8px;
-
-  border-radius: 15px;
-
-  background: #fce8e6;
-
-  color: #c5221f;
-}
-
-
-/* =========================================================
-   LISTA DE ESTUDANTES
-========================================================= */
-
-/*
-   DUAS COLUNAS REAIS.
-   Não depende de largura mínima dos cartões.
-*/
+/* LISTA */
 
 .estudantes {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
-  gap: 8px;
-
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
 }
 
-
-/* =========================================================
-   ITEM DO ESTUDANTE
-========================================================= */
+/* ESTUDANTE */
 
 .estudante {
-
-  position: relative;
-
   width: 100%;
-  min-width: 0;
-
-  min-height: 52px;
-
-  background: #fff;
-
-  border: 1px solid #dadce0;
-
-  border-radius: 9px;
-
-  padding: 9px 12px;
-
+  min-height: 54px;
   display: flex;
-
   align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 10px 14px;
+
+  background: #ffffff;
+  border: 1px solid #e0e3e7;
+  border-radius: 10px;
 
   cursor: pointer;
-
   user-select: none;
 
   transition:
-    background .12s,
-    border-color .12s,
-    transform .08s;
-
-  -webkit-tap-highlight-color: transparent;
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.08s ease;
 }
 
-.estudante:hover:not(.bloqueado) {
-  border-color: #1a73e8;
-  background: #f8fbff;
+.estudante:active {
+  transform: scale(0.99);
 }
 
-.estudante:active:not(.bloqueado) {
-  transform: scale(.99);
+.estudante:hover {
+  border-color: #c8ccd1;
 }
 
+/* NOME */
 
-/* =========================================================
-   INDICADOR
-========================================================= */
+.nome-estudante {
+  flex: 1;
+  min-width: 0;
+
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* INDICADOR */
 
 .indicador {
+  width: 30px;
+  height: 30px;
 
-  width: 22px;
-  height: 22px;
+  flex-shrink: 0;
 
-  min-width: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   border-radius: 50%;
 
-  border: 2px solid #bdc1c6;
+  background: #f1f3f4;
+  color: #80868b;
 
-  margin-right: 9px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  font-size: 12px;
-
-  font-weight: bold;
-
-  color: transparent;
-
-  transition: .12s;
+  font-size: 15px;
+  font-weight: 700;
 }
 
-
-/* =========================================================
-   NOME
-========================================================= */
-
-.nome {
-
-  width: 100%;
-  min-width: 0;
-
-  font-size: 13px;
-
-  line-height: 1.25;
-
-  font-weight: 600;
-
-  color: #202124;
-
-  overflow-wrap: anywhere;
-}
-
-
-/* =========================================================
-   FALTA
-========================================================= */
+/* FALTA SELECIONADA */
 
 .estudante.ausente {
-
   background: #fce8e6;
+  border-color: #f5b7b1;
+}
 
-  border-color: #f5aaa5;
+.estudante.ausente .nome-estudante {
+  color: #b3261e;
 }
 
 .estudante.ausente .indicador {
-
   background: #d93025;
-
-  border-color: #d93025;
-
   color: #fff;
 }
 
-.estudante.ausente .nome {
-  color: #c5221f;
-}
-
-
-/* =========================================================
-   REGISTRO JÁ EXISTENTE
-========================================================= */
+/* REGISTRO EXISTENTE / BLOQUEADO */
 
 .estudante.bloqueado {
-
   background: #f8f9fa;
-
+  border-color: #e5e7eb;
   cursor: default;
+}
 
-  border-color: #e0e0e0;
+.estudante.bloqueado .nome-estudante {
+  color: #5f6368;
 }
 
 .estudante.bloqueado .indicador {
-
-  border-color: #dadce0;
-
-  background: #f1f3f4;
-}
-
-.estudante.bloqueado .nome {
-
+  background: #e8eaed;
   color: #80868b;
 }
 
+/* RESUMO */
 
-/* =========================================================
-   CARREGANDO / VAZIO
-========================================================= */
-
-.carregando,
-.vazio {
+.resumo {
+  margin-top: 14px;
+  padding: 10px 14px;
 
   background: #fff;
-
-  border: 1px solid #dadce0;
-
-  border-radius: 12px;
-
-  padding: 35px 20px;
-
-  text-align: center;
-
-  color: #5f6368;
+  border: 1px solid #e0e3e7;
+  border-radius: 10px;
 
   font-size: 14px;
-}
-
-
-/* =========================================================
-   ÁREA DE SALVAMENTO
-========================================================= */
-
-.salvar-area {
-
-  position: sticky;
-
-  bottom: 0;
-
-  z-index: 10;
-
-  margin-top: 18px;
-
-  padding-top: 10px;
-
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(248,249,250,0),
-      #f8f9fa 20%
-    );
-}
-
-.salvar-box {
-
-  background: #fff;
-
-  border: 1px solid #dadce0;
-
-  border-radius: 12px;
-
-  padding: 12px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  gap: 12px;
-
-  box-shadow:
-    0 2px 8px rgba(60,64,67,.10);
-}
-
-.salvar-info {
-
-  font-size: 13px;
-
   color: #5f6368;
 }
 
-.salvar-info strong {
-
+.resumo strong {
   color: #202124;
+}
 
-  font-size: 15px;
+/* BOTÃO FIXO */
+
+.barra-salvar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 100;
+
+  padding: 10px 14px;
+
+  background: rgba(255, 255, 255, 0.97);
+  border-top: 1px solid #dadce0;
+}
+
+.barra-salvar-conteudo {
+  max-width: 760px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contador {
+  flex: 1;
+  font-size: 13px;
+  color: #5f6368;
+}
+
+.contador strong {
+  color: #202124;
 }
 
 .btn-salvar {
+  height: 44px;
+  padding: 0 22px;
 
-  height: 46px;
-
-  padding: 0 24px;
+  border: 0;
+  border-radius: 10px;
 
   background: #1a73e8;
+  color: white;
 
-  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
 
-  white-space: nowrap;
+  cursor: pointer;
 }
 
 .btn-salvar:hover {
   background: #1769d1;
 }
 
+.btn-salvar:disabled {
+  background: #c4c7c5;
+  cursor: not-allowed;
+}
 
-/* =========================================================
-   RESPONSIVIDADE
-========================================================= */
+/* CARREGANDO */
 
-@media screen and (max-width: 750px) {
+.carregando {
+  padding: 30px 10px;
+  text-align: center;
+  color: #5f6368;
+  font-size: 14px;
+}
+
+/* POP-UP */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(32, 33, 36, 0.45);
+}
+
+.overlay.visivel {
+  display: flex;
+}
+
+.popup {
+  width: 100%;
+  max-width: 380px;
+
+  padding: 24px;
+
+  background: #fff;
+  border-radius: 16px;
+
+  text-align: center;
+
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.18);
+}
+
+.popup-icone {
+  width: 52px;
+  height: 52px;
+
+  margin: 0 auto 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #e6f4ea;
+  color: #137333;
+
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.popup-titulo {
+  margin: 0 0 7px;
+
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.popup-texto {
+  margin: 0 0 20px;
+
+  font-size: 14px;
+  line-height: 1.5;
+  color: #5f6368;
+}
+
+.btn-popup {
+  width: 100%;
+  height: 44px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: #1a73e8;
+  color: #fff;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
 
   .app {
-
-    width: 100%;
-
-    max-width: none;
-
-    padding: 12px;
+    padding: 15px 10px 25px;
   }
 
-  .header {
-
-    margin-bottom: 15px;
+  .titulo {
+    font-size: 21px;
   }
 
-  .header h1 {
-
-    font-size: 23px;
-  }
-
-  .header p {
-
+  .subtitulo {
     font-size: 13px;
   }
-
-
-  /* CONTROLES */
 
   .controles {
-
-    grid-template-columns: 1fr;
-
-    gap: 10px;
-
-    padding: 13px;
-
-    border-radius: 12px;
+    gap: 8px;
   }
 
-
-  /* =====================================================
-     DUAS COLUNAS NO CELULAR
-  ===================================================== */
-
-  .estudantes {
-
-    display: grid !important;
-
-    grid-template-columns:
-      minmax(0, 1fr)
-      minmax(0, 1fr) !important;
-
-    gap: 6px !important;
-
-    width: 100% !important;
+  .campo label {
+    font-size: 11px;
   }
 
+  select,
+  input[type="date"] {
+    height: 42px;
+    font-size: 14px;
+  }
 
   .estudante {
-
-    min-height: 50px;
-
-    padding: 8px 8px;
-
-    border-radius: 8px;
+    min-height: 52px;
+    padding: 9px 12px;
   }
 
+  .nome-estudante {
+    font-size: 14px;
+  }
 
   .indicador {
-
-    width: 20px;
-    height: 20px;
-
-    min-width: 20px;
-
-    margin-right: 7px;
-
-    font-size: 11px;
+    width: 28px;
+    height: 28px;
   }
 
-
-  .nome {
-
-    font-size: 11.5px;
-
-    line-height: 1.25;
+  .barra-salvar {
+    padding: 9px 10px;
   }
 
-
-  .turma-nome {
-
-    font-size: 18px;
-  }
-
-  .turma-info {
-
-    font-size: 11px;
-  }
-
-
-  .resumo-topo {
-
-    padding: 10px 12px;
-  }
-
-
-  .salvar-box {
-
-    padding: 10px;
+  .barra-salvar-conteudo {
+    gap: 8px;
   }
 
   .btn-salvar {
-
-    padding: 0 17px;
-
-    font-size: 13px;
+    height: 42px;
+    padding: 0 16px;
+    font-size: 14px;
   }
 
-}
-
-
-/* =========================================================
-   CELULARES PEQUENOS
-========================================================= */
-
-@media screen and (max-width: 400px) {
-
-  .app {
-
-    padding: 8px;
-  }
-
-
-  .estudantes {
-
-    grid-template-columns:
-      minmax(0, 1fr)
-      minmax(0, 1fr) !important;
-
-    gap: 5px !important;
-  }
-
-
-  .estudante {
-
-    min-height: 48px;
-
-    padding: 7px 6px;
-  }
-
-
-  .indicador {
-
-    width: 18px;
-    height: 18px;
-
-    min-width: 18px;
-
-    margin-right: 6px;
-  }
-
-
-  .nome {
-
-    font-size: 10.5px;
-  }
-
-
-  .salvar-info {
-
-    font-size: 11px;
-  }
-
-
-  .btn-salvar {
-
-    height: 44px;
-
-    padding: 0 13px;
-
+  .contador {
     font-size: 12px;
   }
-
 }
-
-
-/* =========================================================
-   CELULARES MUITO PEQUENOS
-========================================================= */
-
-@media screen and (max-width: 330px) {
-
-  .estudante {
-
-    padding: 6px 5px;
-  }
-
-  .nome {
-
-    font-size: 9.5px;
-  }
-
-  .indicador {
-
-    width: 17px;
-    height: 17px;
-
-    min-width: 17px;
-
-    margin-right: 5px;
-  }
-
-}
-
-
-/* =========================================================
-   GARANTIA DE DUAS COLUNAS
-========================================================= */
-
-.estudantes {
-
-  grid-auto-flow: row;
-
-  grid-auto-columns: auto;
-
-}
-
 </style>
 
 </head>
@@ -864,132 +470,99 @@ button:disabled {
 
 <div class="app">
 
-  <!-- =====================================================
-       CABEÇALHO
-  ====================================================== -->
+  <header class="cabecalho">
+    <h1 class="titulo">Chamada Escolar</h1>
+    <p class="subtitulo">Toque no nome para registrar a falta.</p>
+  </header>
 
-  <div class="header">
+  <section class="controles">
 
-```
-<div class="header-top">
 
-  <h1>
-    Chamada Escolar
-  </h1>
-
+<div class="campo">
+  <label for="data">Data</label>
+  <input type="date" id="data">
 </div>
 
-<p>
-  Toque no nome do estudante para registrar a falta.
-</p>
-```
+<div class="campo">
+  <label for="turma">Turma</label>
+  <select id="turma">
+    <option value="">Selecione</option>
+  </select>
+</div>
+
+
+  </section>
+
+  <div id="status" class="status"></div>
+
+  <div id="areaChamada" style="display:none;">
+
+
+<div class="turma-info">
+  <div id="turmaNome" class="turma-nome"></div>
+  <div id="turmaTotal" class="turma-total"></div>
+</div>
+
+<div id="estudantes" class="estudantes"></div>
+
+<div class="resumo">
+  Faltas selecionadas: <strong id="totalFaltas">0</strong>
+</div>
+
 
   </div>
 
-  <!-- =====================================================
-       CONTROLES
-  ====================================================== -->
-
-  <div class="controles">
-
-```
-<div class="campo">
-
-  <label for="data">
-    DATA
-  </label>
-
-  <input
-    type="date"
-    id="data"
-  >
-
 </div>
 
+<!-- BARRA DE SALVAMENTO -->
 
-<div class="campo">
+<div class="barra-salvar">
 
-  <label for="turma">
-    TURMA
-  </label>
+  <div class="barra-salvar-conteudo">
 
-  <select id="turma">
 
-    <option value="">
-      Selecione a turma
-    </option>
-
-  </select>
-
+<div class="contador">
+  <strong id="contadorFaltas">0</strong> falta(s)
 </div>
-
 
 <button
-  class="btn-principal"
-  id="btnAdicionar"
-  onclick="adicionarTurma()"
+  id="btnSalvar"
+  class="btn-salvar"
+  onclick="salvarChamada()"
+  disabled
 >
-  Adicionar à chamada
+  Salvar chamada
 </button>
-```
+
 
   </div>
-
-  <!-- =====================================================
-       STATUS
-  ====================================================== -->
-
-  <div
-    id="status"
-    class="status"
-  ></div>
-
-  <!-- =====================================================
-       ESTUDANTES
-  ====================================================== -->
-
-  <div
-    id="areaEstudantes"
-  ></div>
-
-  <!-- =====================================================
-       ÁREA DE SALVAMENTO
-  ====================================================== -->
-
-  <div
-    class="salvar-area"
-    id="salvarArea"
-    style="display:none;"
-  >
-
-```
-<div class="salvar-box">
-
-  <div class="salvar-info">
-
-    <strong id="salvarQuantidade">
-      0 faltas
-    </strong>
-
-    <br>
-
-    <span>
-      selecionadas nesta turma
-    </span>
-
-  </div>
-
-
-  <button
-    class="btn-salvar"
-    id="btnSalvarDireto"
-    onclick="adicionarESalvar()"
-  >
-    Salvar chamada
-  </button>
 
 </div>
-```
+
+<!-- POP-UP -->
+
+<div id="overlaySucesso" class="overlay">
+
+  <div class="popup">
+
+
+<div class="popup-icone">✓</div>
+
+<h2 class="popup-titulo">
+  Chamada gravada
+</h2>
+
+<p class="popup-texto">
+  A chamada foi gravada com sucesso.
+</p>
+
+<button
+  class="btn-popup"
+  onclick="fecharPopup()"
+>
+  OK
+</button>
+
 
   </div>
 
@@ -997,1199 +570,559 @@ button:disabled {
 
 <script>
 
-/* =========================================================
-   API
-========================================================= */
-
-const API_URL =
+const URL_SCRIPT =
   'https://script.google.com/macros/s/AKfycbzThUzCIL-flrxxXbssTVkti4zm3F7W6xZQW_J7Nw9igoflgzFQ27tjPaMtJk4Jcs9o/exec';
 
-
-/* =========================================================
-   VARIÁVEIS
-========================================================= */
-
-let estudantesAtuais = [];
-
+let estudantes = [];
 let turmaAtual = '';
+let dataAtual = '';
 
-let filaChamadas = [];
-
-
-/* =========================================================
+/* =========================
    INICIALIZAÇÃO
-========================================================= */
+========================= */
 
-document.addEventListener(
-  'DOMContentLoaded',
-  function () {
+document.addEventListener('DOMContentLoaded', () => {
 
-    definirDataAtual();
+  definirDataAtual();
 
-    carregarTurmas();
+  carregarTurmas();
 
-    renderizarFila();
+  document
+    .getElementById('turma')
+    .addEventListener('change', () => {
 
-  }
-);
+      turmaAtual =
+        document.getElementById('turma').value;
 
+      if (turmaAtual) {
+        carregarEstudantes();
+      } else {
+        limparChamada();
+      }
 
-/* =========================================================
+    });
+
+  document
+    .getElementById('data')
+    .addEventListener('change', () => {
+
+      dataAtual =
+        document.getElementById('data').value;
+
+      if (turmaAtual) {
+        carregarEstudantes();
+      }
+
+    });
+
+});
+
+/* =========================
    DATA ATUAL
-========================================================= */
+========================= */
 
 function definirDataAtual() {
 
-  const hoje =
-    new Date();
+  const agora = new Date();
 
-  const ano =
-    hoje.getFullYear();
+  const ano = agora.getFullYear();
 
-  const mes =
-    String(
-      hoje.getMonth() + 1
-    ).padStart(2, '0');
+  const mes = String(
+    agora.getMonth() + 1
+  ).padStart(2, '0');
 
-  const dia =
-    String(
-      hoje.getDate()
-    ).padStart(2, '0');
+  const dia = String(
+    agora.getDate()
+  ).padStart(2, '0');
 
-  document.getElementById(
-    'data'
-  ).value =
-    ano +
-    '-' +
-    mes +
-    '-' +
-    dia;
+  dataAtual =
+    `${ano}-${mes}-${dia}`;
 
+  document.getElementById('data').value =
+    dataAtual;
 }
 
-
-/* =========================================================
+/* =========================
    CARREGAR TURMAS
-========================================================= */
+========================= */
 
 async function carregarTurmas() {
 
-  const select =
-    document.getElementById(
-      'turma'
-    );
-
-  select.innerHTML =
-    '<option value="">Carregando turmas...</option>';
+  mostrarStatus('Carregando turmas...');
 
   try {
 
-    const resposta =
-      await fetch(
-        API_URL +
-        '?acao=turmas'
-      );
+    const resposta = await fetch(
+      `${URL_SCRIPT}?acao=turmas`
+    );
 
-    const dados =
-      await resposta.json();
+    const dados = await resposta.json();
+
+    const select =
+      document.getElementById('turma');
 
     select.innerHTML =
-      '<option value="">Selecione a turma</option>';
+      '<option value="">Selecione</option>';
 
+    if (Array.isArray(dados)) {
 
-    if (
-      dados &&
-      Array.isArray(
-        dados.turmas
-      )
-    ) {
+      dados.forEach(turma => {
 
-      dados.turmas.forEach(
-        function (turma) {
+        const option =
+          document.createElement('option');
 
-          const option =
-            document.createElement(
-              'option'
-            );
+        option.value = turma;
+        option.textContent = turma;
 
-          option.value =
-            turma;
+        select.appendChild(option);
 
-          option.textContent =
-            turma;
-
-          select.appendChild(
-            option
-          );
-
-        }
-      );
+      });
 
     }
 
+    mostrarStatus('');
+
   } catch (erro) {
 
-    select.innerHTML =
-      '<option value="">Erro ao carregar turmas</option>';
+    console.error(erro);
 
     mostrarStatus(
-      'Erro ao carregar as turmas.',
-      'erro'
-    );
-
-    console.error(
-      erro
+      'Não foi possível carregar as turmas.'
     );
 
   }
 
 }
 
-
-/* =========================================================
-   EVENTO TURMA
-========================================================= */
-
-document
-  .getElementById('turma')
-  .addEventListener(
-    'change',
-    function () {
-
-      const turma =
-        this.value;
-
-      if (!turma) {
-
-        turmaAtual =
-          '';
-
-        estudantesAtuais =
-          [];
-
-        document.getElementById(
-          'areaEstudantes'
-        ).innerHTML =
-          '';
-
-        document.getElementById(
-          'salvarArea'
-        ).style.display =
-          'none';
-
-        return;
-
-      }
-
-      carregarEstudantes(
-        turma
-      );
-
-    }
-  );
-
-
-/* =========================================================
-   EVENTO DATA
-========================================================= */
-
-document
-  .getElementById('data')
-  .addEventListener(
-    'change',
-    function () {
-
-      if (turmaAtual) {
-
-        carregarEstudantes(
-          turmaAtual
-        );
-
-      }
-
-    }
-  );
-
-
-/* =========================================================
+/* =========================
    CARREGAR ESTUDANTES
-========================================================= */
+========================= */
 
-async function carregarEstudantes(
-  turma
-) {
+async function carregarEstudantes() {
 
-  const data =
-    document.getElementById(
-      'data'
-    ).value;
-
-
-  if (
-    !turma ||
-    !data
-  ) {
-
+  if (!turmaAtual || !dataAtual) {
     return;
-
   }
 
-
-  turmaAtual =
-    turma;
-
-
   const area =
-    document.getElementById(
-      'areaEstudantes'
-    );
+    document.getElementById('areaChamada');
 
+  const lista =
+    document.getElementById('estudantes');
 
-  area.innerHTML =
-    '<div class="carregando">' +
-    'Carregando estudantes...' +
-    '</div>';
+  area.style.display = 'block';
 
+  lista.innerHTML =
+    '<div class="carregando">Carregando estudantes...</div>';
 
-  document.getElementById(
-    'salvarArea'
-  ).style.display =
-    'none';
+  mostrarStatus('');
 
+  document.getElementById('btnSalvar').disabled = true;
 
   try {
 
     const url =
-      API_URL +
-      '?acao=estudantes' +
-      '&turma=' +
-      encodeURIComponent(
-        turma
-      ) +
-      '&data=' +
-      encodeURIComponent(
-        data
-      );
-
+      `${URL_SCRIPT}?acao=estudantes` +
+      `&turma=${encodeURIComponent(turmaAtual)}` +
+      `&data=${encodeURIComponent(dataAtual)}`;
 
     const resposta =
-      await fetch(
-        url
-      );
-
+      await fetch(url);
 
     const dados =
       await resposta.json();
 
-
-    if (
-      !dados ||
-      !Array.isArray(
-        dados.estudantes
-      )
-    ) {
+    if (!Array.isArray(dados)) {
 
       throw new Error(
-        'Formato de resposta inválido.'
+        'Dados dos estudantes inválidos.'
       );
 
     }
 
+    estudantes =
+      dados.map(estudante => {
 
-    estudantesAtuais =
-      dados.estudantes.map(
-        function (estudante) {
+        return {
 
-          let status =
+          nome:
+            estudante.nome ||
+            estudante.estudante ||
+            '',
+
+          status:
             String(
-              estudante.statusExistente ||
-              ''
-            )
-            .trim()
-            .toUpperCase();
+              estudante.status || 'C'
+            ).toUpperCase()
 
+        };
 
-          if (
-            status !== 'A' &&
-            status !== 'C' &&
-            status !== 'F'
-          ) {
+      });
 
-            status =
-              '';
+    document.getElementById('turmaNome')
+      .textContent = turmaAtual;
 
-          }
-
-
-          return {
-
-            id:
-              estudante.id ||
-              '',
-
-            nome:
-              estudante.nome ||
-              '',
-
-            statusExistente:
-              status,
-
-            presenca:
-              status === 'F'
-                ? 'F'
-                : 'C'
-
-          };
-
-        }
-      );
-
+    document.getElementById('turmaTotal')
+      .textContent =
+      `${estudantes.length} estudante(s)`;
 
     renderizarEstudantes();
 
   } catch (erro) {
 
-    area.innerHTML =
-      '<div class="vazio">' +
-      'Não foi possível carregar os estudantes.' +
-      '</div>';
+    console.error(erro);
 
+    lista.innerHTML = '';
 
     mostrarStatus(
-      'Erro ao carregar os estudantes.',
-      'erro'
-    );
-
-
-    console.error(
-      erro
+      'Não foi possível carregar os estudantes.'
     );
 
   }
 
 }
 
-
-/* =========================================================
+/* =========================
    RENDERIZAR ESTUDANTES
-========================================================= */
+========================= */
 
 function renderizarEstudantes() {
 
-  const area =
-    document.getElementById(
-      'areaEstudantes'
-    );
+  const lista =
+    document.getElementById('estudantes');
 
+  lista.innerHTML = '';
 
-  if (
-    !estudantesAtuais.length
-  ) {
+  estudantes.forEach((estudante, indice) => {
 
-    area.innerHTML =
-      '<div class="vazio">' +
-      'Nenhum estudante encontrado.' +
-      '</div>';
+    const item =
+      document.createElement('div');
 
-    document.getElementById(
-      'salvarArea'
-    ).style.display =
-      'none';
+    item.className = 'estudante';
 
-    return;
+    /*
+      A = atestado
+      F = falta
+      C = registro interno / disponível
+    */
 
-  }
-
-
-  let html =
-    '';
-
-
-  /* CABEÇALHO DA TURMA */
-
-  html +=
-    '<div class="turma-area">';
-
-
-  html +=
-    '<div class="turma-cabecalho">';
-
-
-  html +=
-    '<div class="turma-nome">' +
-    escaparHTML(
-      turmaAtual
-    ) +
-    '</div>';
-
-
-  html +=
-    '<div class="turma-info">' +
-    estudantesAtuais.length +
-    ' estudantes' +
-    '</div>';
-
-
-  html +=
-    '</div>';
-
-
-  /* RESUMO */
-
-  const faltas =
-    contarFaltasSelecionadas();
-
-
-  html +=
-    '<div class="resumo-topo">';
-
-
-  html +=
-    '<div class="resumo-esquerda">' +
-    '<strong>Frequência</strong>' +
-    ' · toque nos nomes para marcar falta' +
-    '</div>';
-
-
-  html +=
-    '<div class="resumo-faltas">' +
-    'Faltas' +
-    '<span class="falta-numero">' +
-    faltas +
-    '</span>' +
-    '</div>';
-
-
-  html +=
-    '</div>';
-
-
-  /* LISTA */
-
-  html +=
-    '<div class="estudantes">';
-
-
-  estudantesAtuais.forEach(
-    function (
-      estudante,
-      index
+    if (
+      estudante.status === 'A'
     ) {
 
-      const existente =
-        estudante.statusExistente;
+      item.classList.add('bloqueado');
 
+      item.innerHTML = `
+        <span class="nome-estudante">
+          ${escaparHTML(estudante.nome)}
+        </span>
 
-      const falta =
-        !existente &&
-        estudante.presenca === 'F';
+        <span class="indicador">
+          A
+        </span>
+      `;
 
+    } else if (
+      estudante.status === 'F'
+    ) {
 
-      html +=
-        '<div class="estudante ' +
+      item.classList.add('ausente');
 
-        (
-          existente
-            ? 'bloqueado '
-            : ''
-        ) +
+      item.onclick = () =>
+        alternarFalta(indice);
 
-        (
-          falta
-            ? 'ausente'
-            : ''
-        ) +
+      item.innerHTML = `
+        <span class="nome-estudante">
+          ${escaparHTML(estudante.nome)}
+        </span>
 
-        '"' +
+        <span class="indicador">
+          ✓
+        </span>
+      `;
 
+    } else {
 
-        (
-          existente
-            ? ''
-            : ' onclick="alternarFalta(' +
-              index +
-              ')"'
-        ) +
+      item.onclick = () =>
+        alternarFalta(indice);
 
+      item.innerHTML = `
+        <span class="nome-estudante">
+          ${escaparHTML(estudante.nome)}
+        </span>
 
-        '>';
-
-
-      /* INDICADOR */
-
-      html +=
-        '<div class="indicador">';
-
-
-      if (falta) {
-
-        html +=
-          '✓';
-
-      }
-
-
-      html +=
-        '</div>';
-
-
-      /* NOME */
-
-      html +=
-        '<div class="nome">' +
-        escaparHTML(
-          estudante.nome
-        ) +
-        '</div>';
-
-
-      html +=
-        '</div>';
+        <span class="indicador">
+        </span>
+      `;
 
     }
-  );
 
+    lista.appendChild(item);
 
-  html +=
-    '</div>';
+  });
 
-
-  html +=
-    '</div>';
-
-
-  area.innerHTML =
-    html;
-
-
-  atualizarAreaSalvar();
+  atualizarContadores();
 
 }
 
-
-/* =========================================================
+/* =========================
    ALTERNAR FALTA
-========================================================= */
+========================= */
 
-function alternarFalta(index) {
+function alternarFalta(indice) {
 
   const estudante =
-    estudantesAtuais[index];
-
-
-  if (!estudante) {
-    return;
-  }
-
+    estudantes[indice];
 
   /*
-   * Não permite alterar registros
-   * que já estavam gravados.
-   */
+    Registros A são protegidos.
+  */
 
-  if (
-    estudante.statusExistente
-  ) {
-
+  if (estudante.status === 'A') {
     return;
-
   }
 
+  /*
+    C <-> F
+  */
 
-  if (
-    estudante.presenca === 'F'
-  ) {
+  if (estudante.status === 'F') {
 
-    estudante.presenca =
-      'C';
+    estudante.status = 'C';
 
   } else {
 
-    estudante.presenca =
-      'F';
+    estudante.status = 'F';
 
   }
-
 
   renderizarEstudantes();
 
 }
 
+/* =========================
+   CONTADORES
+========================= */
 
-/* =========================================================
-   CONTAR FALTAS
-========================================================= */
-
-function contarFaltasSelecionadas() {
-
-  return estudantesAtuais.filter(
-    function (estudante) {
-
-      return (
-        !estudante.statusExistente &&
-        estudante.presenca === 'F'
-      );
-
-    }
-  ).length;
-
-}
-
-
-/* =========================================================
-   ATUALIZAR ÁREA SALVAR
-========================================================= */
-
-function atualizarAreaSalvar() {
-
-  const area =
-    document.getElementById(
-      'salvarArea'
-    );
-
-
-  if (
-    !estudantesAtuais.length
-  ) {
-
-    area.style.display =
-      'none';
-
-    return;
-
-  }
-
+function atualizarContadores() {
 
   const faltas =
-    contarFaltasSelecionadas();
-
+    estudantes.filter(
+      estudante =>
+        estudante.status === 'F'
+    ).length;
 
   document.getElementById(
-    'salvarQuantidade'
-  ).innerHTML =
-    '<strong>' +
-    faltas +
-    (
-      faltas === 1
-        ? ' falta'
-        : ' faltas'
-    ) +
-    '</strong><br>' +
-    '<span>selecionadas nesta turma</span>';
+    'totalFaltas'
+  ).textContent = faltas;
 
+  document.getElementById(
+    'contadorFaltas'
+  ).textContent = faltas;
 
-  area.style.display =
-    'block';
+  document.getElementById(
+    'btnSalvar'
+  ).disabled =
+    !turmaAtual ||
+    !dataAtual;
 
 }
 
+/* =========================
+   SALVAR CHAMADA
+========================= */
 
-/* =========================================================
-   ADICIONAR À FILA
-========================================================= */
+async function salvarChamada() {
 
-function adicionarTurma() {
-
-  const turma =
-    document.getElementById(
-      'turma'
-    ).value;
-
-
-  const data =
-    document.getElementById(
-      'data'
-    ).value;
-
-
-  if (!turma) {
+  if (!turmaAtual || !dataAtual) {
 
     mostrarStatus(
-      'Selecione uma turma.',
-      'erro'
+      'Selecione a turma e a data.'
     );
 
     return;
 
   }
 
+  const botao =
+    document.getElementById('btnSalvar');
 
-  if (!data) {
+  botao.disabled = true;
 
-    mostrarStatus(
-      'Selecione uma data.',
-      'erro'
-    );
-
-    return;
-
-  }
-
-
-  if (
-    !estudantesAtuais.length
-  ) {
-
-    mostrarStatus(
-      'Não há estudantes para adicionar.',
-      'erro'
-    );
-
-    return;
-
-  }
-
-
-  const chamada = {
-
-    turma:
-      turma,
-
-    data:
-      data,
-
-    estudantes:
-      estudantesAtuais.map(
-        function (estudante) {
-
-          return {
-
-            id:
-              estudante.id,
-
-            nome:
-              estudante.nome,
-
-            presenca:
-              estudante.statusExistente ||
-              estudante.presenca
-
-          };
-
-        }
-      )
-
-  };
-
-
-  const existente =
-    filaChamadas.findIndex(
-      function (item) {
-
-        return (
-          item.turma === turma &&
-          item.data === data
-        );
-
-      }
-    );
-
-
-  if (
-    existente >= 0
-  ) {
-
-    filaChamadas[
-      existente
-    ] =
-      chamada;
-
-  } else {
-
-    filaChamadas.push(
-      chamada
-    );
-
-  }
-
+  botao.textContent =
+    'Salvando...';
 
   mostrarStatus(
-    turma +
-    ' adicionada à chamada.',
-    'sucesso'
+    'Gravando chamada...'
   );
-
-}
-
-
-/* =========================================================
-   ADICIONAR E SALVAR
-========================================================= */
-
-async function adicionarESalvar() {
-
-  const turma =
-    document.getElementById(
-      'turma'
-    ).value;
-
-
-  const data =
-    document.getElementById(
-      'data'
-    ).value;
-
-
-  if (!turma) {
-
-    mostrarStatus(
-      'Selecione uma turma.',
-      'erro'
-    );
-
-    return;
-
-  }
-
-
-  if (!data) {
-
-    mostrarStatus(
-      'Selecione uma data.',
-      'erro'
-    );
-
-    return;
-
-  }
-
-
-  if (
-    !estudantesAtuais.length
-  ) {
-
-    mostrarStatus(
-      'Não há estudantes para salvar.',
-      'erro'
-    );
-
-    return;
-
-  }
-
-
-  const chamada = {
-
-    turma:
-      turma,
-
-    data:
-      data,
-
-    estudantes:
-      estudantesAtuais.map(
-        function (estudante) {
-
-          return {
-
-            id:
-              estudante.id,
-
-            nome:
-              estudante.nome,
-
-            presenca:
-              estudante.statusExistente ||
-              estudante.presenca
-
-          };
-
-        }
-      )
-
-  };
-
-
-  filaChamadas =
-    [chamada];
-
-
-  await salvarTodas();
-
-}
-
-
-/* =========================================================
-   SALVAR TODAS
-========================================================= */
-
-async function salvarTodas() {
-
-  if (
-    !filaChamadas.length
-  ) {
-
-    mostrarStatus(
-      'Não há chamada para salvar.',
-      'erro'
-    );
-
-    return;
-
-  }
-
-
-  const botoes =
-    document.querySelectorAll(
-      'button'
-    );
-
-
-  botoes.forEach(
-    function (botao) {
-
-      botao.disabled =
-        true;
-
-    }
-  );
-
-
-  mostrarStatus(
-    'Salvando chamada...',
-    'sucesso'
-  );
-
 
   try {
 
-    for (
-      let i = 0;
-      i < filaChamadas.length;
-      i++
+    /*
+      Envia todos os estudantes.
+      O Code.gs continua responsável
+      por gravar corretamente.
+    */
+
+    const dadosEnvio = {
+
+      acao: 'salvarChamada',
+
+      data: dataAtual,
+
+      turma: turmaAtual,
+
+      estudantes:
+        estudantes.map(estudante => ({
+          nome: estudante.nome,
+          status: estudante.status
+        }))
+
+    };
+
+    const resposta =
+      await fetch(
+        URL_SCRIPT,
+        {
+          method: 'POST',
+
+          headers: {
+            'Content-Type':
+              'text/plain;charset=utf-8'
+          },
+
+          body:
+            JSON.stringify(dadosEnvio)
+        }
+      );
+
+    const resultado =
+      await resposta.json();
+
+    if (
+      resultado &&
+      resultado.sucesso === false
     ) {
 
-      const chamada =
-        filaChamadas[i];
-
-
-      const payload = {
-
-        acao:
-          'salvarChamada',
-
-        data:
-          chamada.data,
-
-        turma:
-          chamada.turma,
-
-        estudantes:
-          chamada.estudantes
-
-      };
-
-
-      const resposta =
-        await fetch(
-          API_URL,
-          {
-
-            method:
-              'POST',
-
-            headers: {
-
-              'Content-Type':
-                'text/plain;charset=utf-8'
-
-            },
-
-            body:
-              JSON.stringify(
-                payload
-              )
-
-          }
-        );
-
-
-      const texto =
-        await resposta.text();
-
-
-      let resultado;
-
-
-      try {
-
-        resultado =
-          JSON.parse(
-            texto
-          );
-
-      } catch (e) {
-
-        resultado = {
-          sucesso: true
-        };
-
-      }
-
-
-      if (
-        resultado &&
-        resultado.sucesso === false
-      ) {
-
-        throw new Error(
-          resultado.mensagem ||
-          'Erro ao salvar a chamada.'
-        );
-
-      }
+      throw new Error(
+        resultado.mensagem ||
+        'Erro ao gravar a chamada.'
+      );
 
     }
 
+    /*
+      Mostra confirmação.
+    */
 
-    const turmaSalva =
-      turmaAtual;
+    mostrarPopupSucesso();
 
+    mostrarStatus('');
 
-    filaChamadas =
-      [];
+    /*
+      Recarrega os dados depois da gravação
+      para manter a tela sincronizada.
+    */
 
-
-    mostrarStatus(
-      'Chamada de ' +
-      turmaSalva +
-      ' salva com sucesso.',
-      'sucesso'
+    setTimeout(
+      () => carregarEstudantes(),
+      500
     );
-
-
-    await carregarEstudantes(
-      turmaSalva
-    );
-
 
   } catch (erro) {
 
+    console.error(erro);
+
     mostrarStatus(
-      'Erro ao salvar: ' +
-      erro.message,
-      'erro'
+      erro.message ||
+      'Não foi possível gravar a chamada.'
     );
-
-
-    console.error(
-      erro
-    );
-
 
   } finally {
 
-    botoes.forEach(
-      function (botao) {
+    botao.disabled = false;
 
-        botao.disabled =
-          false;
-
-      }
-    );
+    botao.textContent =
+      'Salvar chamada';
 
   }
 
 }
 
+/* =========================
+   POP-UP
+========================= */
 
-/* =========================================================
-   FILA
-========================================================= */
+function mostrarPopupSucesso() {
 
-function renderizarFila() {
-
-  /*
-   * A fila continua disponível internamente
-   * para manter compatibilidade com a lógica
-   * anterior, mas não ocupa espaço na tela.
-   */
+  document
+    .getElementById('overlaySucesso')
+    .classList.add('visivel');
 
 }
 
+function fecharPopup() {
 
-/* =========================================================
+  document
+    .getElementById('overlaySucesso')
+    .classList.remove('visivel');
+
+}
+
+/* =========================
+   LIMPAR
+========================= */
+
+function limparChamada() {
+
+  turmaAtual = '';
+
+  estudantes = [];
+
+  document.getElementById(
+    'areaChamada'
+  ).style.display = 'none';
+
+  document.getElementById(
+    'estudantes'
+  ).innerHTML = '';
+
+  document.getElementById(
+    'btnSalvar'
+  ).disabled = true;
+
+  atualizarContadores();
+
+}
+
+/* =========================
    STATUS
-========================================================= */
+========================= */
 
-function mostrarStatus(
-  mensagem,
-  tipo
-) {
+function mostrarStatus(texto) {
 
-  const status =
-    document.getElementById(
-      'status'
-    );
-
-
-  status.textContent =
-    mensagem;
-
-
-  status.className =
-    'status ' +
-    tipo;
-
-
-  clearTimeout(
-    window.timerStatus
-  );
-
-
-  window.timerStatus =
-    setTimeout(
-      function () {
-
-        status.className =
-          'status';
-
-      },
-      5000
-    );
+  document.getElementById(
+    'status'
+  ).textContent = texto || '';
 
 }
 
-
-/* =========================================================
+/* =========================
    SEGURANÇA HTML
-========================================================= */
+========================= */
 
 function escaparHTML(valor) {
 
-  return String(
-    valor || ''
-  )
-
-    .replace(
-      /&/g,
-      '&amp;'
-    )
-
-    .replace(
-      /</g,
-      '&lt;'
-    )
-
-    .replace(
-      />/g,
-      '&gt;'
-    )
-
-    .replace(
-      /"/g,
-      '&quot;'
-    )
-
-    .replace(
-      /'/g,
-      '&#039;'
-    );
+  return String(valor)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 
 }
 
 </script>
 
 </body>
-
 </html>
