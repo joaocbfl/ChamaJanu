@@ -1,1271 +1,1739 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chamada Escolar</title>
 
-  <title>Chamada Escolar</title>
+<style>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f8f9fa;
-      color: #202124;
-    }
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
 
-    .app {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 24px;
-    }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f8f9fa;
+  color: #202124;
+}
 
-    .header {
-      margin-bottom: 22px;
-    }
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
 
-    .header h1 {
-      margin: 0 0 6px;
-      font-size: 28px;
-      font-weight: 600;
-      color: #202124;
-    }
+.header {
+  margin-bottom: 22px;
+}
 
-    .header p {
-      margin: 0;
-      color: #5f6368;
-      font-size: 14px;
-    }
+.header h1 {
+  margin: 0 0 6px;
+  font-size: 28px;
+  font-weight: 600;
+}
 
-    .controles {
-      background: #fff;
-      border: 1px solid #dadce0;
-      border-radius: 12px;
-      padding: 18px;
-      display: grid;
-      grid-template-columns: 180px 1fr auto;
-      gap: 14px;
-      align-items: end;
-      margin-bottom: 20px;
-    }
+.header p {
+  margin: 0;
+  color: #5f6368;
+  font-size: 14px;
+}
 
-    .campo {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
+.controles {
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 12px;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 180px 1fr auto;
+  gap: 14px;
+  align-items: end;
+  margin-bottom: 20px;
+}
 
-    .campo label {
-      font-size: 13px;
-      font-weight: 600;
-      color: #5f6368;
-    }
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
 
-    input,
-    select {
-      width: 100%;
-      height: 42px;
-      border: 1px solid #dadce0;
-      border-radius: 8px;
-      padding: 0 12px;
-      font-size: 14px;
-      background: #fff;
-      color: #202124;
-      outline: none;
-    }
+.campo label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #5f6368;
+}
 
-    input:focus,
-    select:focus {
-      border-color: #1a73e8;
-      box-shadow: 0 0 0 2px rgba(26, 115, 232, .12);
-    }
+input,
+select {
+  width: 100%;
+  height: 42px;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 14px;
+  background: #fff;
+  color: #202124;
+  outline: none;
+}
 
-    button {
-      border: 0;
-      border-radius: 8px;
-      height: 42px;
-      padding: 0 18px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: .15s;
-    }
+input:focus,
+select:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, .12);
+}
 
-    button:hover {
-      opacity: .92;
-    }
+button {
+  border: 0;
+  border-radius: 8px;
+  height: 42px;
+  padding: 0 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .15s;
+}
 
-    .btn-principal {
-      background: #1a73e8;
-      color: #fff;
-    }
+button:hover {
+  opacity: .92;
+}
 
-    .btn-secundario {
-      background: #f1f3f4;
-      color: #202124;
-    }
+button:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
 
-    .btn-perigo {
-      background: #d93025;
-      color: #fff;
-    }
+.btn-principal {
+  background: #1a73e8;
+  color: #fff;
+}
 
-    .status {
-      display: none;
-      background: #fff;
-      border: 1px solid #dadce0;
-      border-radius: 10px;
-      padding: 12px 15px;
-      margin-bottom: 18px;
-      font-size: 14px;
-    }
+.btn-secundario {
+  background: #f1f3f4;
+  color: #202124;
+}
 
-    .status.sucesso {
-      display: block;
-      border-color: #b7dfb9;
-      background: #f1f8f1;
-      color: #137333;
-    }
+.btn-perigo {
+  background: #d93025;
+  color: #fff;
+}
 
-    .status.erro {
-      display: block;
-      border-color: #f1b7b3;
-      background: #fce8e6;
-      color: #c5221f;
-    }
+.status {
+  display: none;
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+  padding: 12px 15px;
+  margin-bottom: 18px;
+  font-size: 14px;
+}
 
-    .turma-titulo {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
+.status.sucesso {
+  display: block;
+  border-color: #b7dfb9;
+  background: #f1f8f1;
+  color: #137333;
+}
 
-    .turma-titulo h2 {
-      margin: 0;
-      font-size: 21px;
-      font-weight: 600;
-    }
+.status.erro {
+  display: block;
+  border-color: #f1b7b3;
+  background: #fce8e6;
+  color: #c5221f;
+}
 
-    .contador {
-      color: #5f6368;
-      font-size: 13px;
-    }
+.turma-titulo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
 
-    .estudantes {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
+.turma-titulo h2 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 600;
+}
 
-    .estudante {
-      background: #fff;
-      border: 1px solid #dadce0;
-      border-radius: 10px;
-      padding: 12px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 60px;
-      transition: .15s;
-    }
+.contador {
+  color: #5f6368;
+  font-size: 13px;
+}
 
-    .estudante:hover:not(.bloqueado) {
-      border-color: #a8c7fa;
-    }
+/* DUAS COLUNAS */
 
-    .nome {
-      font-size: 14px;
-      font-weight: 600;
-      padding-right: 12px;
-      line-height: 1.35;
-    }
+.estudantes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
 
-    .acoes {
-      display: flex;
-      gap: 7px;
-      flex-shrink: 0;
-    }
+/* NOME CLICÁVEL */
 
-    .btn-frequencia {
-      width: 40px;
-      height: 36px;
-      padding: 0;
-      border: 1px solid #dadce0;
-      background: #fff;
-      color: #5f6368;
-      font-weight: 700;
-      border-radius: 7px;
-    }
+.estudante {
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+  padding: 14px 16px;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  transition: .15s;
+  cursor: pointer;
+  user-select: none;
+}
 
-    .btn-frequencia.ativo-c {
-      background: #e6f4ea;
-      color: #137333;
-      border-color: #a8dab5;
-    }
+.estudante:hover:not(.bloqueado) {
+  border-color: #1a73e8;
+  background: #f8fbff;
+}
 
-    .btn-frequencia.ativo-f {
-      background: #fce8e6;
-      color: #c5221f;
-      border-color: #f5aaa5;
-    }
+/* ESTUDANTE MARCADO COMO FALTA */
 
-    .bloqueado {
-      background: #f8f9fa;
-      cursor: default;
-    }
+.estudante.ausente {
+  background: #fce8e6;
+  border-color: #f5aaa5;
+}
 
-    .bloqueado .nome {
-      color: #5f6368;
-    }
+.estudante.ausente:hover {
+  background: #fce8e6;
+  border-color: #d93025;
+}
 
-    .badge-existente {
-      min-width: 38px;
-      height: 34px;
-      padding: 0 10px;
-      border-radius: 7px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-    }
+.nome {
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #202124;
+}
 
-    .badge-a {
-      background: #f1f3f4;
-      color: #5f6368;
-    }
+.nome-falta {
+  color: #c5221f;
+}
 
-    .badge-c {
-      background: #e6f4ea;
-      color: #137333;
-    }
+/* JÁ PREENCHIDO NA PLANILHA */
 
-    .badge-f {
-      background: #fce8e6;
-      color: #c5221f;
-    }
+.bloqueado {
+  cursor: default;
+  background: #f8f9fa;
+}
 
-    .resumo {
-      margin-top: 20px;
-      background: #fff;
-      border: 1px solid #dadce0;
-      border-radius: 10px;
-      padding: 14px 16px;
-      display: flex;
-      gap: 25px;
-      font-size: 14px;
-    }
+.bloqueado .nome {
+  color: #5f6368;
+}
 
-    .resumo span {
-      color: #5f6368;
-    }
+.resumo {
+  margin-top: 20px;
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 25px;
+  font-size: 14px;
+}
 
-    .resumo strong {
-      color: #202124;
-    }
+.resumo span {
+  color: #5f6368;
+}
 
-    .fila {
-      margin-top: 25px;
-    }
+.resumo strong {
+  color: #202124;
+}
 
-    .fila-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
+.fila {
+  margin-top: 25px;
+}
 
-    .fila-header h2 {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 600;
-    }
+.fila-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
 
-    .fila-vazia {
-      background: #fff;
-      border: 1px dashed #dadce0;
-      border-radius: 10px;
-      padding: 24px;
-      text-align: center;
-      color: #80868b;
-      font-size: 14px;
-    }
+.fila-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
 
-    .fila-item {
-      background: #fff;
-      border: 1px solid #dadce0;
-      border-radius: 10px;
-      padding: 13px 15px;
-      margin-bottom: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.fila-vazia {
+  background: #fff;
+  border: 1px dashed #dadce0;
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+  color: #80868b;
+  font-size: 14px;
+}
 
-    .fila-info strong {
-      display: block;
-      margin-bottom: 4px;
-    }
+.fila-item {
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+  padding: 13px 15px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    .fila-info span {
-      font-size: 13px;
-      color: #5f6368;
-    }
+.fila-info strong {
+  display: block;
+  margin-bottom: 4px;
+}
 
-    .acoes-finais {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-top: 18px;
-    }
+.fila-info span {
+  font-size: 13px;
+  color: #5f6368;
+}
 
-    .carregando {
-      padding: 35px;
-      text-align: center;
-      color: #5f6368;
-      font-size: 14px;
-    }
+.acoes-finais {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
 
-    .vazio {
-      padding: 35px;
-      text-align: center;
-      color: #5f6368;
-      background: #fff;
-      border: 1px solid #dadce0;
-      border-radius: 10px;
-    }
+.carregando {
+  padding: 35px;
+  text-align: center;
+  color: #5f6368;
+  font-size: 14px;
+}
 
-    @media (max-width: 750px) {
-      .app {
-        padding: 14px;
-      }
+.vazio {
+  padding: 35px;
+  text-align: center;
+  color: #5f6368;
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+}
 
-      .controles {
-        grid-template-columns: 1fr;
-      }
+@media (max-width: 750px) {
 
-      .estudantes {
-        grid-template-columns: 1fr;
-      }
+  .app {
+    padding: 14px;
+  }
 
-      .resumo {
-        flex-wrap: wrap;
-        gap: 12px 20px;
-      }
+  .controles {
+    grid-template-columns: 1fr;
+  }
 
-      .fila-item {
-        gap: 10px;
-        align-items: flex-start;
-      }
-    }
-  </style>
+  .estudantes {
+    grid-template-columns: 1fr;
+  }
+
+  .resumo {
+    flex-wrap: wrap;
+    gap: 12px 20px;
+  }
+
+  .fila-item {
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-  <div class="app">
+<div class="app">
 
-    <div class="header">
-      <h1>Chamada Escolar</h1>
-      <p>Registro diário de frequência dos estudantes.</p>
-    </div>
+  <div class="header">
 
-    <div class="controles">
+```
+<h1>Chamada Escolar</h1>
 
-      <div class="campo">
-        <label for="data">Data</label>
-        <input type="date" id="data">
-      </div>
-
-      <div class="campo">
-        <label for="turma">Turma</label>
-        <select id="turma">
-          <option value="">Selecione a turma</option>
-        </select>
-      </div>
-
-      <button
-        class="btn-principal"
-        id="btnAdicionar"
-        onclick="adicionarTurma()"
-      >
-        Adicionar à chamada
-      </button>
-
-    </div>
-
-    <div id="status" class="status"></div>
-
-    <div id="areaEstudantes"></div>
-
-    <div class="fila">
-
-      <div class="fila-header">
-        <h2>Chamada</h2>
-
-        <button
-          class="btn-secundario"
-          onclick="limparFila()"
-        >
-          Limpar
-        </button>
-      </div>
-
-      <div id="fila"></div>
-
-      <div class="acoes-finais">
-        <button
-          class="btn-principal"
-          onclick="salvarTodas()"
-        >
-          Salvar chamada
-        </button>
-      </div>
-
-    </div>
+<p>
+  Registro diário de frequência dos estudantes.
+</p>
+```
 
   </div>
 
-  <script>
+  <div class="controles">
 
-    const API_URL =
-      'https://script.google.com/macros/s/AKfycbzThUzCIL-flrxxXbssTVkti4zm3F7W6xZQW_J7Nw9igoflgzFQ27tjPaMtJk4Jcs9o/exec';
+```
+<div class="campo">
 
-    let estudantesAtuais = [];
-    let turmaAtual = '';
-    let filaChamadas = [];
+  <label for="data">
+    Data
+  </label>
 
-    document.addEventListener('DOMContentLoaded', function () {
+  <input
+    type="date"
+    id="data"
+  >
 
-      const hoje = new Date();
-
-      const ano = hoje.getFullYear();
-      const mes = String(hoje.getMonth() + 1).padStart(2, '0');
-      const dia = String(hoje.getDate()).padStart(2, '0');
-
-      document.getElementById('data').value =
-        ano + '-' + mes + '-' + dia;
-
-      carregarTurmas();
-
-      document
-        .getElementById('data')
-        .addEventListener('change', function () {
-
-          if (turmaAtual) {
-            carregarEstudantes(turmaAtual);
-          }
-
-        });
-
-    });
+</div>
 
 
-    async function carregarTurmas() {
+<div class="campo">
 
-      const select = document.getElementById('turma');
+  <label for="turma">
+    Turma
+  </label>
 
-      select.innerHTML =
-        '<option value="">Carregando turmas...</option>';
+  <select id="turma">
 
-      try {
+    <option value="">
+      Selecione a turma
+    </option>
 
-        const resposta = await fetch(
-          API_URL + '?acao=turmas'
-        );
+  </select>
 
-        const dados = await resposta.json();
-
-        select.innerHTML =
-          '<option value="">Selecione a turma</option>';
-
-        if (
-          dados &&
-          Array.isArray(dados.turmas)
-        ) {
-
-          dados.turmas.forEach(function (turma) {
-
-            const option =
-              document.createElement('option');
-
-            option.value = turma;
-            option.textContent = turma;
-
-            select.appendChild(option);
-
-          });
-
-        }
-
-      } catch (erro) {
-
-        select.innerHTML =
-          '<option value="">Erro ao carregar turmas</option>';
-
-        mostrarStatus(
-          'Erro ao carregar as turmas.',
-          'erro'
-        );
-
-        console.error(erro);
-
-      }
-
-    }
+</div>
 
 
-    async function carregarEstudantes(turma) {
+<button
+  class="btn-principal"
+  id="btnAdicionar"
+  onclick="adicionarTurma()"
+>
+  Adicionar à chamada
+</button>
+```
 
-      const data =
-        document.getElementById('data').value;
+  </div>
 
-      if (!turma || !data) {
-        return;
-      }
+  <div
+    id="status"
+    class="status"
+  ></div>
 
-      turmaAtual = turma;
+  <div
+    id="areaEstudantes"
+  ></div>
 
-      const area =
-        document.getElementById('areaEstudantes');
+  <div class="fila">
 
-      area.innerHTML =
-        '<div class="carregando">Carregando estudantes...</div>';
+```
+<div class="fila-header">
 
-      try {
+  <h2>
+    Chamada
+  </h2>
 
-        const url =
-          API_URL +
-          '?acao=estudantes' +
-          '&turma=' + encodeURIComponent(turma) +
-          '&data=' + encodeURIComponent(data);
+  <button
+    class="btn-secundario"
+    onclick="limparFila()"
+  >
+    Limpar
+  </button>
 
-        const resposta = await fetch(url);
+</div>
 
-        const dados = await resposta.json();
 
-        if (
-          !dados ||
-          !Array.isArray(dados.estudantes)
-        ) {
+<div id="fila"></div>
 
-          throw new Error(
-            'Formato de resposta inválido.'
+
+<div class="acoes-finais">
+
+  <button
+    class="btn-principal"
+    onclick="salvarTodas()"
+  >
+    Salvar chamada
+  </button>
+
+</div>
+```
+
+  </div>
+
+</div>
+
+<script>
+
+const API_URL =
+  'https://script.google.com/macros/s/AKfycbzThUzCIL-flrxxXbssTVkti4zm3F7W6xZQW_J7Nw9igoflgzFQ27tjPaMtJk4Jcs9o/exec';
+
+
+let estudantesAtuais = [];
+
+let turmaAtual = '';
+
+let filaChamadas = [];
+
+
+/* ================================
+   INICIALIZAÇÃO
+================================ */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  function () {
+
+    const hoje =
+      new Date();
+
+    const ano =
+      hoje.getFullYear();
+
+    const mes =
+      String(
+        hoje.getMonth() + 1
+      ).padStart(2, '0');
+
+    const dia =
+      String(
+        hoje.getDate()
+      ).padStart(2, '0');
+
+    document.getElementById(
+      'data'
+    ).value =
+      ano +
+      '-' +
+      mes +
+      '-' +
+      dia;
+
+    carregarTurmas();
+
+  }
+);
+
+
+/* ================================
+   CARREGAR TURMAS
+================================ */
+
+async function carregarTurmas() {
+
+  const select =
+    document.getElementById(
+      'turma'
+    );
+
+  select.innerHTML =
+    '<option value="">Carregando turmas...</option>';
+
+  try {
+
+    const resposta =
+      await fetch(
+        API_URL +
+        '?acao=turmas'
+      );
+
+    const dados =
+      await resposta.json();
+
+    select.innerHTML =
+      '<option value="">Selecione a turma</option>';
+
+    if (
+      dados &&
+      Array.isArray(
+        dados.turmas
+      )
+    ) {
+
+      dados.turmas.forEach(
+        function (turma) {
+
+          const option =
+            document.createElement(
+              'option'
+            );
+
+          option.value =
+            turma;
+
+          option.textContent =
+            turma;
+
+          select.appendChild(
+            option
           );
 
         }
-
-        estudantesAtuais =
-          dados.estudantes.map(function (estudante) {
-
-            let status =
-              String(
-                estudante.statusExistente || ''
-              ).trim().toUpperCase();
-
-            if (
-              status !== 'A' &&
-              status !== 'C' &&
-              status !== 'F'
-            ) {
-              status = '';
-            }
-
-            return {
-
-              id: estudante.id || '',
-
-              nome: estudante.nome || '',
-
-              statusExistente: status,
-
-              presenca:
-                status === 'F'
-                  ? 'F'
-                  : 'C'
-
-            };
-
-          });
-
-        renderizarEstudantes();
-
-      } catch (erro) {
-
-        area.innerHTML =
-          '<div class="vazio">' +
-          'Não foi possível carregar os estudantes.' +
-          '</div>';
-
-        mostrarStatus(
-          'Erro ao carregar os estudantes.',
-          'erro'
-        );
-
-        console.error(erro);
-
-      }
-
-    }
-
-
-    document
-      .getElementById('turma')
-      .addEventListener('change', function () {
-
-        const turma = this.value;
-
-        if (!turma) {
-
-          turmaAtual = '';
-          estudantesAtuais = [];
-
-          document.getElementById(
-            'areaEstudantes'
-          ).innerHTML = '';
-
-          return;
-
-        }
-
-        carregarEstudantes(turma);
-
-      });
-
-
-    function renderizarEstudantes() {
-
-      const area =
-        document.getElementById('areaEstudantes');
-
-      if (!estudantesAtuais.length) {
-
-        area.innerHTML =
-          '<div class="vazio">' +
-          'Nenhum estudante encontrado.' +
-          '</div>';
-
-        return;
-
-      }
-
-      let html = '';
-
-      html += '<div class="turma-titulo">';
-
-      html +=
-        '<h2>' +
-        escaparHTML(turmaAtual) +
-        '</h2>';
-
-      html +=
-        '<div class="contador">' +
-        estudantesAtuais.length +
-        ' estudantes' +
-        '</div>';
-
-      html += '</div>';
-
-      html += '<div class="estudantes">';
-
-      estudantesAtuais.forEach(
-        function (estudante, index) {
-
-          const existente =
-            estudante.statusExistente;
-
-          html +=
-            '<div class="estudante ' +
-            (existente ? 'bloqueado' : '') +
-            '">';
-
-          html +=
-            '<div class="nome">' +
-            escaparHTML(estudante.nome) +
-            '</div>';
-
-          html += '<div class="acoes">';
-
-          if (existente === 'A') {
-
-            html +=
-              '<div class="badge-existente badge-a">' +
-              'A' +
-              '</div>';
-
-          } else if (existente === 'C') {
-
-            html +=
-              '<div class="badge-existente badge-c">' +
-              'C' +
-              '</div>';
-
-          } else if (existente === 'F') {
-
-            html +=
-              '<div class="badge-existente badge-f">' +
-              'F' +
-              '</div>';
-
-          } else {
-
-            html +=
-              '<button ' +
-              'class="btn-frequencia ' +
-              (
-                estudante.presenca === 'C'
-                  ? 'ativo-c'
-                  : ''
-              ) +
-              '" ' +
-              'onclick="alternarFrequencia(' +
-              index +
-              ', \'C\')">' +
-              'C' +
-              '</button>';
-
-            html +=
-              '<button ' +
-              'class="btn-frequencia ' +
-              (
-                estudante.presenca === 'F'
-                  ? 'ativo-f'
-                  : ''
-              ) +
-              '" ' +
-              'onclick="alternarFrequencia(' +
-              index +
-              ', \'F\')">' +
-              'F' +
-              '</button>';
-
-          }
-
-          html += '</div>';
-          html += '</div>';
-
-        }
       );
 
-      html += '</div>';
-
-      html += criarResumo();
-
-      area.innerHTML = html;
-
     }
 
+  } catch (erro) {
 
-    function alternarFrequencia(index, valor) {
+    select.innerHTML =
+      '<option value="">Erro ao carregar turmas</option>';
 
-      const estudante =
-        estudantesAtuais[index];
+    mostrarStatus(
+      'Erro ao carregar as turmas.',
+      'erro'
+    );
 
-      if (!estudante) {
-        return;
-      }
+    console.error(
+      erro
+    );
 
-      if (estudante.statusExistente) {
-        return;
-      }
+  }
 
-      estudante.presenca = valor;
-
-      renderizarEstudantes();
-
-    }
+}
 
 
-    function criarResumo() {
+/* ================================
+   TROCA DE TURMA
+================================ */
 
-      let presentes = 0;
-      let faltas = 0;
-      let atestados = 0;
-      let pendentes = 0;
-
-      estudantesAtuais.forEach(
-        function (estudante) {
-
-          const status =
-            estudante.statusExistente;
-
-          if (status === 'A') {
-
-            atestados++;
-
-          } else if (status === 'C') {
-
-            presentes++;
-
-          } else if (status === 'F') {
-
-            faltas++;
-
-          } else if (
-            estudante.presenca === 'F'
-          ) {
-
-            faltas++;
-
-          } else {
-
-            presentes++;
-
-          }
-
-        }
-      );
-
-      return `
-        <div class="resumo">
-          <div>
-            <span>Presentes:</span>
-            <strong>${presentes}</strong>
-          </div>
-
-          <div>
-            <span>Faltas:</span>
-            <strong>${faltas}</strong>
-          </div>
-
-          <div>
-            <span>Atestados:</span>
-            <strong>${atestados}</strong>
-          </div>
-
-          <div>
-            <span>Pendentes:</span>
-            <strong>${pendentes}</strong>
-          </div>
-        </div>
-      `;
-
-    }
-
-
-    function adicionarTurma() {
+document
+  .getElementById('turma')
+  .addEventListener(
+    'change',
+    function () {
 
       const turma =
-        document.getElementById('turma').value;
-
-      const data =
-        document.getElementById('data').value;
+        this.value;
 
       if (!turma) {
 
-        mostrarStatus(
-          'Selecione uma turma.',
-          'erro'
-        );
+        turmaAtual =
+          '';
+
+        estudantesAtuais =
+          [];
+
+        document.getElementById(
+          'areaEstudantes'
+        ).innerHTML =
+          '';
 
         return;
 
       }
 
-      if (!data) {
+      carregarEstudantes(
+        turma
+      );
 
-        mostrarStatus(
-          'Selecione uma data.',
-          'erro'
+    }
+  );
+
+
+/* ================================
+   TROCA DE DATA
+================================ */
+
+document
+  .getElementById('data')
+  .addEventListener(
+    'change',
+    function () {
+
+      if (turmaAtual) {
+
+        carregarEstudantes(
+          turmaAtual
         );
-
-        return;
 
       }
 
-      if (!estudantesAtuais.length) {
+    }
+  );
 
-        mostrarStatus(
-          'Não há estudantes para adicionar.',
-          'erro'
-        );
 
-        return;
+/* ================================
+   CARREGAR ESTUDANTES
+================================ */
 
-      }
+async function carregarEstudantes(
+  turma
+) {
 
-      const existente =
-        filaChamadas.findIndex(
-          function (item) {
+  const data =
+    document.getElementById(
+      'data'
+    ).value;
 
-            return (
-              item.turma === turma &&
-              item.data === data
-            );
+  if (
+    !turma ||
+    !data
+  ) {
+
+    return;
+
+  }
+
+  turmaAtual =
+    turma;
+
+  const area =
+    document.getElementById(
+      'areaEstudantes'
+    );
+
+  area.innerHTML =
+    '<div class="carregando">' +
+    'Carregando estudantes...' +
+    '</div>';
+
+  try {
+
+    const url =
+      API_URL +
+      '?acao=estudantes' +
+      '&turma=' +
+      encodeURIComponent(
+        turma
+      ) +
+      '&data=' +
+      encodeURIComponent(
+        data
+      );
+
+    const resposta =
+      await fetch(
+        url
+      );
+
+    const dados =
+      await resposta.json();
+
+    if (
+      !dados ||
+      !Array.isArray(
+        dados.estudantes
+      )
+    ) {
+
+      throw new Error(
+        'Formato de resposta inválido.'
+      );
+
+    }
+
+
+    estudantesAtuais =
+      dados.estudantes.map(
+        function (estudante) {
+
+          let status =
+            String(
+              estudante.statusExistente ||
+              ''
+            )
+            .trim()
+            .toUpperCase();
+
+
+          /*
+           * RESPEITA O REGISTRO
+           * JÁ EXISTENTE.
+           *
+           * A = atestado
+           * C = comparecimento
+           * F = falta
+           */
+
+          if (
+            status !== 'A' &&
+            status !== 'C' &&
+            status !== 'F'
+          ) {
+
+            status =
+              '';
 
           }
-        );
 
-      const chamada = {
 
-        turma: turma,
+          return {
 
-        data: data,
+            id:
+              estudante.id ||
+              '',
 
-        estudantes:
-          estudantesAtuais.map(
-            function (estudante) {
+            nome:
+              estudante.nome ||
+              '',
 
-              return {
+            statusExistente:
+              status,
 
-                id: estudante.id,
+            /*
+             * Internamente C significa
+             * que o aluno ainda não foi
+             * marcado como falta.
+             *
+             * A interface NÃO mostra C.
+             */
 
-                nome: estudante.nome,
-
-                presenca:
-                  estudante.statusExistente ||
-                  estudante.presenca
-
-              };
-
-            }
-          )
-
-      };
-
-      if (existente >= 0) {
-
-        filaChamadas[existente] =
-          chamada;
-
-      } else {
-
-        filaChamadas.push(chamada);
-
-      }
-
-      renderizarFila();
-
-      mostrarStatus(
-        turma + ' adicionada à chamada.',
-        'sucesso'
-      );
-
-    }
-
-
-    function renderizarFila() {
-
-      const area =
-        document.getElementById('fila');
-
-      if (!filaChamadas.length) {
-
-        area.innerHTML =
-          '<div class="fila-vazia">' +
-          'Nenhuma turma adicionada à chamada.' +
-          '</div>';
-
-        return;
-
-      }
-
-      let html = '';
-
-      filaChamadas.forEach(
-        function (item, index) {
-
-          const total =
-            item.estudantes.length;
-
-          const faltas =
-            item.estudantes.filter(
-              function (estudante) {
-
-                return estudante.presenca === 'F';
-
-              }
-            ).length;
-
-          html +=
-            '<div class="fila-item">';
-
-          html +=
-            '<div class="fila-info">';
-
-          html +=
-            '<strong>' +
-            escaparHTML(item.turma) +
-            '</strong>';
-
-          html +=
-            '<span>' +
-            formatarData(item.data) +
-            ' · ' +
-            total +
-            ' estudantes · ' +
-            faltas +
-            ' faltas' +
-            '</span>';
-
-          html +=
-            '</div>';
-
-          html +=
-            '<button ' +
-            'class="btn-perigo" ' +
-            'onclick="removerDaFila(' +
-            index +
-            ')">' +
-            'Remover' +
-            '</button>';
-
-          html +=
-            '</div>';
-
-        }
-      );
-
-      area.innerHTML = html;
-
-    }
-
-
-    function removerDaFila(index) {
-
-      filaChamadas.splice(index, 1);
-
-      renderizarFila();
-
-    }
-
-
-    function limparFila() {
-
-      if (!filaChamadas.length) {
-        return;
-      }
-
-      filaChamadas = [];
-
-      renderizarFila();
-
-      mostrarStatus(
-        'Fila limpa.',
-        'sucesso'
-      );
-
-    }
-
-
-    async function salvarTodas() {
-
-      if (!filaChamadas.length) {
-
-        mostrarStatus(
-          'Adicione pelo menos uma turma à chamada.',
-          'erro'
-        );
-
-        return;
-
-      }
-
-      const botoes =
-        document.querySelectorAll(
-          'button'
-        );
-
-      botoes.forEach(
-        function (botao) {
-
-          botao.disabled = true;
-
-        }
-      );
-
-      mostrarStatus(
-        'Salvando chamada...',
-        'sucesso'
-      );
-
-      try {
-
-        for (
-          let i = 0;
-          i < filaChamadas.length;
-          i++
-        ) {
-
-          const chamada =
-            filaChamadas[i];
-
-          const payload = {
-
-            acao: 'salvarChamada',
-
-            data: chamada.data,
-
-            turma: chamada.turma,
-
-            estudantes:
-              chamada.estudantes
+            presenca:
+              status === 'F'
+                ? 'F'
+                : 'C'
 
           };
 
-          const resposta =
-            await fetch(
-              API_URL,
-              {
-                method: 'POST',
-
-                headers: {
-                  'Content-Type':
-                    'text/plain;charset=utf-8'
-                },
-
-                body:
-                  JSON.stringify(payload)
-              }
-            );
-
-          const texto =
-            await resposta.text();
-
-          let resultado;
-
-          try {
-
-            resultado =
-              JSON.parse(texto);
-
-          } catch (e) {
-
-            resultado = {
-              sucesso: true
-            };
-
-          }
-
-          if (
-            resultado &&
-            resultado.sucesso === false
-          ) {
-
-            throw new Error(
-              resultado.mensagem ||
-              'Erro ao salvar a chamada.'
-            );
-
-          }
-
         }
+      );
 
-        filaChamadas = [];
 
-        renderizarFila();
+    renderizarEstudantes();
 
-        mostrarStatus(
-          'Chamada salva com sucesso.',
-          'sucesso'
-        );
+  } catch (erro) {
 
-        if (turmaAtual) {
+    area.innerHTML =
+      '<div class="vazio">' +
+      'Não foi possível carregar os estudantes.' +
+      '</div>';
 
-          await carregarEstudantes(
-            turmaAtual
-          );
+    mostrarStatus(
+      'Erro ao carregar os estudantes.',
+      'erro'
+    );
 
-        }
+    console.error(
+      erro
+    );
 
-      } catch (erro) {
+  }
 
-        mostrarStatus(
-          'Erro ao salvar: ' +
-          erro.message,
-          'erro'
-        );
+}
 
-        console.error(erro);
 
-      } finally {
+/* ================================
+   RENDERIZAR ESTUDANTES
+================================ */
 
-        botoes.forEach(
-          function (botao) {
+function renderizarEstudantes() {
 
-            botao.disabled = false;
+  const area =
+    document.getElementById(
+      'areaEstudantes'
+    );
 
-          }
-        );
 
-      }
+  if (
+    !estudantesAtuais.length
+  ) {
+
+    area.innerHTML =
+      '<div class="vazio">' +
+      'Nenhum estudante encontrado.' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  let html =
+    '';
+
+
+  html +=
+    '<div class="turma-titulo">';
+
+
+  html +=
+    '<h2>' +
+    escaparHTML(
+      turmaAtual
+    ) +
+    '</h2>';
+
+
+  html +=
+    '<div class="contador">' +
+    estudantesAtuais.length +
+    ' estudantes' +
+    '</div>';
+
+
+  html +=
+    '</div>';
+
+
+  /*
+   * DUAS COLUNAS
+   */
+
+  html +=
+    '<div class="estudantes">';
+
+
+  estudantesAtuais.forEach(
+    function (
+      estudante,
+      index
+    ) {
+
+      const existente =
+        estudante.statusExistente;
+
+
+      /*
+       * Só é falta nova quando
+       * não havia registro anterior.
+       */
+
+      const falta =
+        !existente &&
+        estudante.presenca === 'F';
+
+
+      html +=
+        '<div class="estudante ' +
+        (
+          existente
+            ? 'bloqueado'
+            : ''
+        ) +
+        (
+          falta
+            ? ' ausente'
+            : ''
+        ) +
+        '"' +
+
+
+        /*
+         * Se A, C ou F já existe:
+         * não permite clique.
+         */
+
+        (
+          existente
+            ? ''
+            : ' onclick="registrarFalta(' +
+              index +
+              ')"'
+        ) +
+
+
+        '>';
+
+
+      html +=
+        '<div class="nome ' +
+        (
+          falta
+            ? 'nome-falta'
+            : ''
+        ) +
+        '">' +
+
+
+        escaparHTML(
+          estudante.nome
+        ) +
+
+
+        '</div>';
+
+
+      html +=
+        '</div>';
 
     }
+  );
 
 
-    function mostrarStatus(mensagem, tipo) {
+  html +=
+    '</div>';
+
+
+  html +=
+    criarResumo();
+
+
+  area.innerHTML =
+    html;
+
+}
+
+
+/* ================================
+   REGISTRAR FALTA
+================================ */
+
+function registrarFalta(
+  index
+) {
+
+  const estudante =
+    estudantesAtuais[index];
+
+
+  if (!estudante) {
+
+    return;
+
+  }
+
+
+  /*
+   * SEGURANÇA:
+   *
+   * Se já existe A, C ou F
+   * vindo da planilha,
+   * não altera.
+   */
+
+  if (
+    estudante.statusExistente
+  ) {
+
+    return;
+
+  }
+
+
+  /*
+   * Marca como falta.
+   */
+
+  estudante.presenca =
+    'F';
+
+
+  /*
+   * Atualiza a tela
+   * e o contador.
+   */
+
+  renderizarEstudantes();
+
+}
+
+
+/* ================================
+   RESUMO
+================================ */
+
+function criarResumo() {
+
+  let presentes =
+    0;
+
+  let faltas =
+    0;
+
+  let atestados =
+    0;
+
+  let pendentes =
+    0;
+
+
+  estudantesAtuais.forEach(
+    function (estudante) {
 
       const status =
-        document.getElementById('status');
+        estudante.statusExistente;
 
-      status.textContent = mensagem;
 
-      status.className =
-        'status ' + tipo;
+      if (
+        status === 'A'
+      ) {
 
-      clearTimeout(
-        window.timerStatus
-      );
+        atestados++;
 
-      window.timerStatus =
-        setTimeout(
-          function () {
 
-            status.className =
-              'status';
+      } else if (
+        status === 'C'
+      ) {
 
-          },
-          5000
+        presentes++;
+
+
+      } else if (
+        status === 'F'
+      ) {
+
+        faltas++;
+
+
+      } else if (
+        estudante.presenca === 'F'
+      ) {
+
+        faltas++;
+
+
+      } else {
+
+        presentes++;
+
+      }
+
+    }
+  );
+
+
+  return `
+
+    <div class="resumo">
+
+      <div>
+        <span>Presentes:</span>
+        <strong>
+          ${presentes}
+        </strong>
+      </div>
+
+      <div>
+        <span>Faltas:</span>
+        <strong>
+          ${faltas}
+        </strong>
+      </div>
+
+      <div>
+        <span>Atestados:</span>
+        <strong>
+          ${atestados}
+        </strong>
+      </div>
+
+      <div>
+        <span>Pendentes:</span>
+        <strong>
+          ${pendentes}
+        </strong>
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ================================
+   ADICIONAR TURMA
+================================ */
+
+function adicionarTurma() {
+
+  const turma =
+    document.getElementById(
+      'turma'
+    ).value;
+
+
+  const data =
+    document.getElementById(
+      'data'
+    ).value;
+
+
+  if (!turma) {
+
+    mostrarStatus(
+      'Selecione uma turma.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  if (!data) {
+
+    mostrarStatus(
+      'Selecione uma data.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  if (
+    !estudantesAtuais.length
+  ) {
+
+    mostrarStatus(
+      'Não há estudantes para adicionar.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  const existente =
+    filaChamadas.findIndex(
+      function (item) {
+
+        return (
+          item.turma === turma &&
+          item.data === data
         );
 
+      }
+    );
+
+
+  const chamada = {
+
+    turma:
+      turma,
+
+    data:
+      data,
+
+    estudantes:
+      estudantesAtuais.map(
+        function (estudante) {
+
+          return {
+
+            id:
+              estudante.id,
+
+            nome:
+              estudante.nome,
+
+            /*
+             * Se já existe A/C/F,
+             * mantém o valor.
+             *
+             * Caso contrário,
+             * envia C ou F conforme
+             * a marcação realizada.
+             */
+
+            presenca:
+              estudante.statusExistente ||
+              estudante.presenca
+
+          };
+
+        }
+      )
+
+  };
+
+
+  if (
+    existente >= 0
+  ) {
+
+    filaChamadas[
+      existente
+    ] =
+      chamada;
+
+  } else {
+
+    filaChamadas.push(
+      chamada
+    );
+
+  }
+
+
+  renderizarFila();
+
+
+  mostrarStatus(
+    turma +
+    ' adicionada à chamada.',
+    'sucesso'
+  );
+
+}
+
+
+/* ================================
+   RENDERIZAR FILA
+================================ */
+
+function renderizarFila() {
+
+  const area =
+    document.getElementById(
+      'fila'
+    );
+
+
+  if (
+    !filaChamadas.length
+  ) {
+
+    area.innerHTML =
+      '<div class="fila-vazia">' +
+      'Nenhuma turma adicionada à chamada.' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  let html =
+    '';
+
+
+  filaChamadas.forEach(
+    function (
+      item,
+      index
+    ) {
+
+      const total =
+        item.estudantes.length;
+
+
+      const faltas =
+        item.estudantes.filter(
+          function (
+            estudante
+          ) {
+
+            return (
+              estudante.presenca === 'F'
+            );
+
+          }
+        ).length;
+
+
+      html +=
+        '<div class="fila-item">';
+
+
+      html +=
+        '<div class="fila-info">';
+
+
+      html +=
+        '<strong>' +
+        escaparHTML(
+          item.turma
+        ) +
+        '</strong>';
+
+
+      html +=
+        '<span>' +
+        formatarData(
+          item.data
+        ) +
+        ' · ' +
+        total +
+        ' estudantes · ' +
+        faltas +
+        ' faltas' +
+        '</span>';
+
+
+      html +=
+        '</div>';
+
+
+      html +=
+        '<button ' +
+        'class="btn-perigo" ' +
+        'onclick="removerDaFila(' +
+        index +
+        ')">' +
+        'Remover' +
+        '</button>';
+
+
+      html +=
+        '</div>';
+
     }
+  );
 
 
-    function formatarData(data) {
+  area.innerHTML =
+    html;
 
-      if (!data) {
-        return '';
+}
+
+
+/* ================================
+   REMOVER DA FILA
+================================ */
+
+function removerDaFila(
+  index
+) {
+
+  filaChamadas.splice(
+    index,
+    1
+  );
+
+  renderizarFila();
+
+}
+
+
+/* ================================
+   LIMPAR FILA
+================================ */
+
+function limparFila() {
+
+  if (
+    !filaChamadas.length
+  ) {
+
+    return;
+
+  }
+
+
+  filaChamadas =
+    [];
+
+
+  renderizarFila();
+
+
+  mostrarStatus(
+    'Fila limpa.',
+    'sucesso'
+  );
+
+}
+
+
+/* ================================
+   SALVAR CHAMADA
+================================ */
+
+async function salvarTodas() {
+
+  if (
+    !filaChamadas.length
+  ) {
+
+    mostrarStatus(
+      'Adicione pelo menos uma turma à chamada.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  const botoes =
+    document.querySelectorAll(
+      'button'
+    );
+
+
+  botoes.forEach(
+    function (botao) {
+
+      botao.disabled =
+        true;
+
+    }
+  );
+
+
+  mostrarStatus(
+    'Salvando chamada...',
+    'sucesso'
+  );
+
+
+  try {
+
+    for (
+      let i = 0;
+      i < filaChamadas.length;
+      i++
+    ) {
+
+      const chamada =
+        filaChamadas[i];
+
+
+      const payload = {
+
+        acao:
+          'salvarChamada',
+
+        data:
+          chamada.data,
+
+        turma:
+          chamada.turma,
+
+        estudantes:
+          chamada.estudantes
+
+      };
+
+
+      const resposta =
+        await fetch(
+          API_URL,
+          {
+            method:
+              'POST',
+
+            headers: {
+              'Content-Type':
+                'text/plain;charset=utf-8'
+            },
+
+            body:
+              JSON.stringify(
+                payload
+              )
+
+          }
+        );
+
+
+      const texto =
+        await resposta.text();
+
+
+      let resultado;
+
+
+      try {
+
+        resultado =
+          JSON.parse(
+            texto
+          );
+
+      } catch (e) {
+
+        resultado = {
+          sucesso: true
+        };
+
       }
 
-      const partes =
-        data.split('-');
 
-      if (partes.length !== 3) {
-        return data;
+      if (
+        resultado &&
+        resultado.sucesso === false
+      ) {
+
+        throw new Error(
+          resultado.mensagem ||
+          'Erro ao salvar a chamada.'
+        );
+
       }
 
-      return (
-        partes[2] +
-        '/' +
-        partes[1] +
-        '/' +
-        partes[0]
-      );
-
     }
 
 
-    function escaparHTML(valor) {
+    /*
+     * Limpa a fila.
+     */
 
-      return String(valor || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-
-    }
+    filaChamadas =
+      [];
 
 
     renderizarFila();
 
-  </script>
+
+    mostrarStatus(
+      'Chamada salva com sucesso.',
+      'sucesso'
+    );
+
+
+    /*
+     * Recarrega os estudantes.
+     *
+     * Isso faz com que os registros
+     * recém-salvos passem a ser
+     * considerados preenchidos.
+     */
+
+    if (turmaAtual) {
+
+      await carregarEstudantes(
+        turmaAtual
+      );
+
+    }
+
+
+  } catch (erro) {
+
+    mostrarStatus(
+      'Erro ao salvar: ' +
+      erro.message,
+      'erro'
+    );
+
+    console.error(
+      erro
+    );
+
+
+  } finally {
+
+    botoes.forEach(
+      function (botao) {
+
+        botao.disabled =
+          false;
+
+      }
+    );
+
+  }
+
+}
+
+
+/* ================================
+   STATUS
+================================ */
+
+function mostrarStatus(
+  mensagem,
+  tipo
+) {
+
+  const status =
+    document.getElementById(
+      'status'
+    );
+
+
+  status.textContent =
+    mensagem;
+
+
+  status.className =
+    'status ' +
+    tipo;
+
+
+  clearTimeout(
+    window.timerStatus
+  );
+
+
+  window.timerStatus =
+    setTimeout(
+      function () {
+
+        status.className =
+          'status';
+
+      },
+      5000
+    );
+
+}
+
+
+/* ================================
+   FORMATAR DATA
+================================ */
+
+function formatarData(
+  data
+) {
+
+  if (!data) {
+
+    return '';
+
+  }
+
+
+  const partes =
+    data.split('-');
+
+
+  if (
+    partes.length !== 3
+  ) {
+
+    return data;
+
+  }
+
+
+  return (
+    partes[2] +
+    '/' +
+    partes[1] +
+    '/' +
+    partes[0]
+  );
+
+}
+
+
+/* ================================
+   SEGURANÇA HTML
+================================ */
+
+function escaparHTML(
+  valor
+) {
+
+  return String(
+    valor || ''
+  )
+    .replace(
+      /&/g,
+      '&amp;'
+    )
+    .replace(
+      /</g,
+      '&lt;'
+    )
+    .replace(
+      />/g,
+      '&gt;'
+    )
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+    .replace(
+      /'/g,
+      '&#039;'
+    );
+
+}
+
+
+/* ================================
+   INICIAR FILA
+================================ */
+
+renderizarFila();
+
+</script>
 
 </body>
+
 </html>
