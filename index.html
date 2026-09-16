@@ -2,397 +2,84 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema de Chamada Rápida</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>Chamada Escolar</title>
   <style>
-    :root {
-      --primary: #1a73e8;
-      --success: #188038;
-      --danger: #d93025;
-      --bg: #f8f9fa;
-      --surface: #ffffff;
-      --border: #dadce0;
-      --text: #202124;
-      --text-secondary: #5f6368;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      padding-bottom: 80px; /* Espaço para o botão flutuante */
-    }
-
-    .header {
-      background: var(--surface);
-      padding: 16px 20px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .turma-selector {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 16px;
-      background-color: var(--bg);
-      outline: none;
-      cursor: pointer;
-    }
-
-    .turma-selector:focus {
-      border-color: var(--primary);
-    }
-
-    .estatisticas {
-      font-size: 14px;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    .lista-container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 0 16px;
-      display: grid;
-      gap: 10px;
-    }
-
-    /* Cartão do Estudante (Botão de Toggle) */
-    .aluno-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.2s ease;
-    }
-
-    /* Estado: Presente (Padrão) */
-    .aluno-card {
-      border-left: 6px solid var(--success);
-    }
-    
-    /* Estado: Faltou */
-    .aluno-card.faltou {
-      background-color: #fce8e6;
-      border-color: #fad2cf;
-      border-left: 6px solid var(--danger);
-    }
-
-    .aluno-info h3 {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .aluno-status {
-      font-size: 13px;
-      color: var(--success);
-      font-weight: 500;
-    }
-
-    .aluno-card.faltou .aluno-status {
-      color: var(--danger);
-    }
-
-    /* Botão Flutuante de Salvar */
-    .fab-salvar {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 14px 32px;
-      border-radius: 30px;
-      font-size: 16px;
-      font-weight: 600;
-      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.4);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: transform 0.2s, background 0.2s;
-      z-index: 100;
-    }
-
-    .fab-salvar:hover {
-      background: #1557b0;
-      transform: translateX(-50%) scale(1.05);
-    }
-    
-    .fab-salvar:disabled {
-      background: var(--text-secondary);
-      cursor: not-allowed;
-      transform: translateX(-50%);
-    }
-
-    /* Toast Notification (Pop-up) */
-    .toast {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #323232;
-      color: white;
-      padding: 16px 24px;
-      border-radius: 8px;
-      font-size: 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      opacity: 0;
-      transform: translateY(-20px);
-      transition: all 0.3s ease;
-      z-index: 1000;
-      pointer-events: none;
-    }
-
-    .toast.visivel {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Loader */
-    .loader-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(255,255,255,0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-    .loader-overlay.ativo {
-      visibility: visible;
-      opacity: 1;
-    }
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid var(--border);
-      border-top-color: var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    :root{--azul:#2563eb;--azul2:#1d4ed8;--texto:#0f172a;--muted:#64748b;--borda:#e2e8f0;--fundo:#f8fafc;--branco:#fff;--vermelho:#e11d48;--vermelho-bg:#fff1f2;--verde:#15803d;--verde-bg:#f0fdf4;--amarelo:#a16207;--amarelo-bg:#fefce8}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html{background:var(--fundo)}
+    body{margin:0;min-height:100dvh;background:var(--fundo);color:var(--texto);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:104px}
+    button,input,select{font:inherit}
+    button{touch-action:manipulation}
+    .topo{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);border-bottom:1px solid var(--borda);backdrop-filter:blur(12px)}
+    .largura{width:min(100%,620px);margin:auto;padding:16px}
+    h1{font-size:21px;line-height:1.2;margin:0;font-weight:800;letter-spacing:-.02em}
+    .subtitulo{font-size:14px;color:var(--muted);margin:5px 0 0}
+    main{width:min(100%,620px);margin:auto;padding:14px 16px 24px}
+    .filtros{background:var(--branco);border:1px solid var(--borda);border-radius:18px;padding:14px;box-shadow:0 1px 2px rgba(15,23,42,.04);display:grid;gap:13px}
+    label{display:grid;gap:6px;font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+    select,input[type=date]{width:100%;height:50px;border:1px solid #cbd5e1;border-radius:13px;background:#fff;color:var(--texto);padding:0 13px;font-size:16px;font-weight:650;outline:none}
+    select:focus,input:focus{border-color:var(--azul);box-shadow:0 0 0 3px rgba(37,99,235,.13)}
+    .cabecalho-lista{display:flex;align-items:end;justify-content:space-between;gap:10px;padding:17px 2px 10px}
+    .cabecalho-lista h2{font-size:17px;margin:0;font-weight:800}.quantidade{font-size:13px;color:var(--muted);margin-top:3px}
+    .badge{flex:none;border-radius:999px;padding:7px 10px;font-size:13px;font-weight:800;background:var(--verde-bg);color:var(--verde)}
+    .badge.com-faltas{background:var(--vermelho-bg);color:var(--vermelho)}
+    .lista{display:grid;gap:9px}
+    .aluno{width:100%;min-height:76px;border:1px solid var(--borda);border-radius:17px;background:#fff;padding:12px;display:flex;align-items:center;gap:12px;text-align:left;color:var(--texto);box-shadow:0 1px 2px rgba(15,23,42,.04);transition:transform .08s,background .15s,border-color .15s}
+    .aluno:active:not(:disabled){transform:scale(.985)}
+    .aluno.faltou{background:var(--vermelho-bg);border-color:#fda4af}
+    .aluno.registrado{opacity:.72;background:#f8fafc;cursor:default}
+    .avatar{width:44px;height:44px;flex:0 0 44px;border-radius:50%;display:grid;place-items:center;background:#dbeafe;color:#1d4ed8;font-size:13px;font-weight:850}
+    .faltou .avatar{background:#fecdd3;color:#9f1239}
+    .dados{min-width:0;flex:1}.nome{display:block;font-size:16px;font-weight:750;line-height:1.25}.instrucao{display:block;font-size:13px;color:var(--muted);margin-top:4px;line-height:1.2}.faltou .instrucao{color:#be123c;font-weight:700}
+    .marcador{width:36px;height:36px;flex:0 0 36px;border:2px solid #cbd5e1;border-radius:50%;display:grid;place-items:center;color:transparent;font-weight:900}.faltou .marcador{border-color:var(--vermelho);background:var(--vermelho);color:white}
+    .estado{padding:34px 18px;text-align:center;color:var(--muted);font-size:14px}.spinner{width:28px;height:28px;border:3px solid #dbe3ed;border-top-color:var(--azul);border-radius:50%;animation:girar .75s linear infinite;margin:0 auto 12px}@keyframes girar{to{transform:rotate(360deg)}}
+    .rodape{position:fixed;z-index:30;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);border-top:1px solid var(--borda);padding:11px 14px max(11px,env(safe-area-inset-bottom));backdrop-filter:blur(12px)}
+    .rodape-interno{width:min(100%,592px);margin:auto;display:flex;align-items:center;gap:12px}.resumo{min-width:0;flex:1}.resumo strong,.resumo span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.resumo strong{font-size:14px}.resumo span{font-size:12px;color:var(--muted);margin-top:3px}
+    .salvar{height:50px;border:0;border-radius:13px;background:var(--azul);color:#fff;padding:0 21px;font-size:16px;font-weight:800;cursor:pointer}.salvar:active{background:var(--azul2)}.salvar:disabled{background:#cbd5e1;color:#64748b;cursor:not-allowed}
+    .toast{position:fixed;z-index:60;left:16px;right:16px;bottom:91px;max-width:480px;margin:auto;padding:14px 16px;background:#0f172a;color:white;border-radius:15px;font-size:14px;font-weight:650;box-shadow:0 14px 30px rgba(15,23,42,.25);display:none}.toast.visivel{display:block;animation:subir .2s ease-out}.toast.erro{background:#991b1b}@keyframes subir{from{opacity:0;transform:translateY(10px)}}
+    .modal-fundo{position:fixed;z-index:50;inset:0;background:rgba(15,23,42,.48);display:none;align-items:flex-end;padding:12px}.modal-fundo.visivel{display:flex}.modal{width:min(100%,440px);margin:0 auto;background:white;border-radius:24px;padding:20px;box-shadow:0 24px 50px rgba(15,23,42,.3)}.modal-icone{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--amarelo-bg);color:var(--amarelo);font-size:25px}.modal h3{font-size:19px;margin:14px 0 7px}.modal p{font-size:14px;line-height:1.55;color:var(--muted);margin:0}.modal-acoes{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:20px}.modal button{height:48px;border-radius:12px;font-weight:800;border:1px solid var(--borda);background:white}.modal .confirmar{border:0;background:var(--azul);color:white}
+    @media(min-width:560px){.filtros{grid-template-columns:1fr 190px}.modal-fundo{align-items:center}}
   </style>
 </head>
 <body>
-
-  <!-- Cabeçalho -->
-  <header class="header">
-    <select class="turma-selector" id="selectTurma" onchange="carregarTurma()">
-      <option value="" disabled selected>Selecione a Turma...</option>
-      <option value="9A">9º Ano A</option>
-      <option value="9B">9º Ano B</option>
-      <option value="1M">1º Ano Médio</option>
-    </select>
-    <div class="estatisticas" id="contador">0/0 Presentes</div>
-  </header>
-
-  <!-- Lista de Estudantes -->
-  <main class="lista-container" id="listaEstudantes">
-    <!-- Renderizado via JS -->
+  <header class="topo"><div class="largura"><h1>Chamada escolar</h1><p class="subtitulo">Toque somente nos estudantes que faltaram.</p></div></header>
+  <main>
+    <section class="filtros" aria-label="Seleção da chamada">
+      <label>Turma<select id="turma"><option value="">Carregando turmas...</option></select></label>
+      <label>Data<input id="data" type="date"></label>
+    </section>
+    <div class="cabecalho-lista"><div><h2>Estudantes</h2><div class="quantidade" id="quantidade">Aguardando...</div></div><div class="badge" id="badge">Nenhuma falta</div></div>
+    <section class="lista" id="lista" aria-live="polite"><div class="estado"><div class="spinner"></div>Carregando dados...</div></section>
   </main>
-
-  <!-- Botão de Salvar -->
-  <button class="fab-salvar" id="btnSalvar" onclick="salvarChamada()" disabled>
-    💾 Salvar Chamada
-  </button>
-
-  <!-- Pop-up de Aviso -->
-  <div class="toast" id="toast">Mensagem aqui</div>
-
-  <!-- Tela de Carregamento -->
-  <div class="loader-overlay" id="loader">
-    <div class="spinner"></div>
+  <footer class="rodape"><div class="rodape-interno"><div class="resumo"><strong id="situacao">Chamada não salva</strong><span id="resumo">Selecione uma turma</span></div><button class="salvar" id="salvar" disabled>Salvar</button></div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-fundo" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+    <div class="modal"><div class="modal-icone">!</div><h3 id="modalTitulo">Todos estão presentes?</h3><p id="modalTexto">Nenhum estudante foi marcado como faltante. Confirme antes de salvar.</p><div class="modal-acoes"><button id="revisar">Revisar</button><button class="confirmar" id="confirmar">Confirmar</button></div></div>
   </div>
-
-  <script>
-    // ESTADO DA APLICAÇÃO (Single Source of Truth)
-    let turmaAtual = '';
-    let alunos = [];
-    let faltantes = new Set(); // Guarda apenas os IDs de quem faltou para acesso rápido
-
-    // DADOS FALSOS PARA SIMULAÇÃO (Você substituirá pelo fetch() do seu banco)
-    const bancoDeDadosSimulado = {
-      "9A": [
-        { id: "A1", nome: "Ana Carolina Santos", telefone: "1199999999" },
-        { id: "A2", nome: "Bruno Ferreira", telefone: "1188888888" },
-        { id: "A3", nome: "Carlos Eduardo", telefone: "" }
-      ],
-      "9B": [
-        { id: "B1", nome: "Daniela Costa", telefone: "1177777777" },
-        { id: "B2", nome: "Eduardo Silva", telefone: "1166666666" }
-      ]
-    };
-
-    // 1. CARREGAR DADOS DA TURMA
-    async function carregarTurma() {
-      const select = document.getElementById('selectTurma');
-      turmaAtual = select.value;
-      
-      if (!turmaAtual) return;
-
-      mostrarLoader(true);
-      document.getElementById('btnSalvar').disabled = true;
-
-      try {
-        // SIMULAÇÃO DE REQUISIÇÃO (Substitua por fetch() para o Apps Script)
-        // const response = await fetch(`SUA_URL_DO_GAS?turma=${turmaAtual}`);
-        // alunos = await response.json();
-        
-        // Simulação de tempo de internet (500ms)
-        await new Promise(r => setTimeout(r, 500));
-        alunos = bancoDeDadosSimulado[turmaAtual] || [];
-        
-        // Limpa a seleção anterior
-        faltantes.clear();
-        
-        renderizarLista();
-        document.getElementById('btnSalvar').disabled = false;
-      } catch (erro) {
-        mostrarToast("Erro ao carregar turma!");
-      } finally {
-        mostrarLoader(false);
-      }
-    }
-
-    // 2. RENDERIZAR A LISTA NA TELA
-    function renderizarLista() {
-      const container = document.getElementById('listaEstudantes');
-      
-      if (alunos.length === 0) {
-        container.innerHTML = `<div style="text-align:center; padding: 40px; color:#5f6368;">Nenhum aluno encontrado nesta turma.</div>`;
-        atualizarContador();
-        return;
-      }
-
-      container.innerHTML = alunos.map(aluno => {
-        const isFalta = faltantes.has(aluno.id);
-        return `
-          <div class="aluno-card ${isFalta ? 'faltou' : ''}" 
-               id="card-${aluno.id}" 
-               onclick="alternarPresenca('${aluno.id}')">
-            <div class="aluno-info">
-              <h3>${aluno.nome}</h3>
-              <span class="aluno-status" id="status-${aluno.id}">
-                ${isFalta ? '❌ Faltou' : '✅ Presente'}
-              </span>
-            </div>
-          </div>
-        `;
-      }).join('');
-      
-      atualizarContador();
-    }
-
-    // 3. LÓGICA DE TOGGLE (Clicar para dar falta)
-    function alternarPresenca(alunoId) {
-      const card = document.getElementById(`card-${alunoId}`);
-      const statusText = document.getElementById(`status-${alunoId}`);
-
-      if (faltantes.has(alunoId)) {
-        // Estava com falta, agora está presente
-        faltantes.delete(alunoId);
-        card.classList.remove('faltou');
-        statusText.innerHTML = '✅ Presente';
-      } else {
-        // Estava presente, agora tem falta
-        faltantes.add(alunoId);
-        card.classList.add('faltou');
-        statusText.innerHTML = '❌ Faltou';
-      }
-      
-      atualizarContador();
-    }
-
-    // 4. ATUALIZAR NÚMEROS NO CABEÇALHO
-    function atualizarContador() {
-      const total = alunos.length;
-      const presentes = total - faltantes.size;
-      document.getElementById('contador').innerText = `${presentes}/${total} Presentes`;
-    }
-
-    // 5. SALVAR A CHAMADA (E engatilhar os WhatsApps no backend)
-    async function salvarChamada() {
-      if (!turmaAtual) return;
-
-      const alunosQueFaltaram = alunos.filter(a => faltantes.has(a.id));
-      
-      // Aqui nós preparamos os dados exatos que seu backend precisa
-      const payload = {
-        turma: turmaAtual,
-        data: new Date().toISOString(),
-        faltantes: alunosQueFaltaram
-      };
-
-      mostrarLoader(true);
-
-      try {
-        /* COMO FAZER NO VERCEL: 
-        const response = await fetch('URL_DO_SEU_WEB_APP_APPS_SCRIPT', {
-          method: 'POST',
-          body: JSON.stringify(payload),
-          headers: { 'Content-Type': 'application/json' }
-        });
-        */
-
-        // Simulando envio para o servidor
-        console.log("Enviando para o servidor:", payload);
-        await new Promise(r => setTimeout(r, 1200));
-
-        mostrarToast(`Chamada salva! ${faltantes.size} faltas registradas.`);
-        
-        // Limpa a tela após salvar com sucesso
-        document.getElementById('selectTurma').value = "";
-        document.getElementById('listaEstudantes').innerHTML = "";
-        document.getElementById('contador').innerText = "0/0 Presentes";
-        document.getElementById('btnSalvar').disabled = true;
-        turmaAtual = "";
-        faltantes.clear();
-
-      } catch (erro) {
-        mostrarToast("Erro ao salvar a chamada. Tente novamente.");
-      } finally {
-        mostrarLoader(false);
-      }
-    }
-
-    // --- FUNÇÕES DE INTERFACE (UTILITÁRIOS) ---
-    let toastTimeout;
-    function mostrarToast(mensagem) {
-      const toast = document.getElementById('toast');
-      toast.innerText = mensagem;
-      toast.classList.add('visivel');
-      
-      clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => {
-        toast.classList.remove('visivel');
-      }, 3500);
-    }
-
-    function mostrarLoader(mostrar) {
-      const loader = document.getElementById('loader');
-      if (mostrar) loader.classList.add('ativo');
-      else loader.classList.remove('ativo');
-    }
-  </script>
+<script>
+'use strict';
+const API_URL='https://script.google.com/macros/s/AKfycbzThUzCIL-flrxxXbssTVkti4zm3F7W6xZQW_J7Nw9igoflgzFQ27tjPaMtJk4Jcs9o/exec';
+const estado={turmas:[],turma:'',data:'',estudantes:[],faltantes:new Set(),carregando:false,salvando:false,alterada:false,controle:0};
+const $=id=>document.getElementById(id);
+const el={turma:$('turma'),data:$('data'),lista:$('lista'),quantidade:$('quantidade'),badge:$('badge'),salvar:$('salvar'),situacao:$('situacao'),resumo:$('resumo'),toast:$('toast'),modal:$('modal'),modalTexto:$('modalTexto')};
+function dataLocal(){const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)}
+function mostrarToast(texto,erro=false){el.toast.textContent=texto;el.toast.className='toast visivel'+(erro?' erro':'');clearTimeout(window.__toast);window.__toast=setTimeout(()=>el.toast.className='toast',3600)}
+function mensagemErro(erro){return erro&&erro.message?erro.message:'Não foi possível concluir a operação.'}
+async function obterJSON(url,opcoes={}){const controle=new AbortController();const timer=setTimeout(()=>controle.abort(),20000);try{const resposta=await fetch(url,{...opcoes,signal:controle.signal,redirect:'follow'});if(!resposta.ok)throw new Error('Servidor respondeu com erro '+resposta.status+'.');const texto=await resposta.text();try{return JSON.parse(texto)}catch(_){throw new Error('O servidor não retornou um JSON válido. Verifique a implantação do Apps Script.')}}catch(erro){if(erro.name==='AbortError')throw new Error('A conexão demorou demais. Tente novamente.');throw erro}finally{clearTimeout(timer)}}
+function iniciais(nome){return String(nome).trim().split(/\s+/).slice(0,2).map(p=>p.charAt(0)).join('').toUpperCase()}
+function definirCarregando(texto){el.lista.replaceChildren();const caixa=document.createElement('div');caixa.className='estado';const spin=document.createElement('div');spin.className='spinner';caixa.append(spin,document.createTextNode(texto));el.lista.append(caixa)}
+function definirVazio(texto){el.lista.replaceChildren();const caixa=document.createElement('div');caixa.className='estado';caixa.textContent=texto;el.lista.append(caixa)}
+function atualizarResumo(){const n=estado.faltantes.size;el.badge.textContent=n===0?'Nenhuma falta':n+' falta'+(n===1?'':'s');el.badge.classList.toggle('com-faltas',n>0);el.situacao.textContent=estado.alterada?'Chamada não salva':'Chamada carregada';el.resumo.textContent=(estado.turma||'Sem turma')+' • '+n+' falta'+(n===1?'':'s');el.salvar.disabled=estado.carregando||estado.salvando||!estado.estudantes.length||!estado.alterada;el.salvar.textContent=estado.salvando?'Salvando...':'Salvar'}
+function renderizar(){el.lista.replaceChildren();el.quantidade.textContent=estado.estudantes.length+' estudante'+(estado.estudantes.length===1?'':'s')+' na turma';if(!estado.estudantes.length){definirVazio('Nenhum estudante encontrado nesta turma.');atualizarResumo();return}estado.estudantes.forEach(estudante=>{const existente=String(estudante.statusExistente||'').toUpperCase();const faltou=estado.faltantes.has(estudante.id);const bloqueado=existente==='A'||existente==='C'||existente==='F';const botao=document.createElement('button');botao.type='button';botao.className='aluno'+(faltou?' faltou':'')+(bloqueado?' registrado':'');botao.disabled=bloqueado;botao.setAttribute('aria-pressed',String(faltou));const avatar=document.createElement('span');avatar.className='avatar';avatar.textContent=iniciais(estudante.nome);const dados=document.createElement('span');dados.className='dados';const nome=document.createElement('span');nome.className='nome';nome.textContent=estudante.nome;const instrucao=document.createElement('span');instrucao.className='instrucao';if(bloqueado){instrucao.textContent=existente==='F'?'Falta já registrada':existente==='A'?'Ausência justificada já registrada':'Presença já registrada'}else{instrucao.textContent=faltou?'Faltou • toque para desfazer':'Toque para marcar falta'}dados.append(nome,instrucao);const marcador=document.createElement('span');marcador.className='marcador';marcador.textContent=faltou?'−':'✓';botao.append(avatar,dados,marcador);if(!bloqueado)botao.addEventListener('click',()=>alternarFalta(estudante.id));el.lista.append(botao)});atualizarResumo()}
+function alternarFalta(id){estado.faltantes.has(id)?estado.faltantes.delete(id):estado.faltantes.add(id);estado.alterada=true;renderizar()}
+async function carregarTurmas(){estado.carregando=true;atualizarResumo();try{const dados=await obterJSON(API_URL+'?acao=turmas&_='+Date.now());if(!dados.sucesso)throw new Error(dados.mensagem||'Erro ao carregar turmas.');estado.turmas=dados.turmas||[];el.turma.replaceChildren();if(!estado.turmas.length){const o=document.createElement('option');o.textContent='Nenhuma turma encontrada';o.value='';el.turma.append(o);definirVazio('Nenhuma turma foi encontrada na planilha.');return}estado.turmas.forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;el.turma.append(o)});estado.turma=estado.turmas[0];el.turma.value=estado.turma;await carregarEstudantes()}catch(erro){definirVazio('Não foi possível carregar as turmas.');mostrarToast(mensagemErro(erro),true)}finally{estado.carregando=false;atualizarResumo()}}
+async function carregarEstudantes(){if(!estado.turma||!estado.data)return;const requisicao=++estado.controle;estado.carregando=true;estado.alterada=false;estado.estudantes=[];estado.faltantes.clear();definirCarregando('Carregando estudantes...');atualizarResumo();try{const url=API_URL+'?acao=estudantes&turma='+encodeURIComponent(estado.turma)+'&data='+encodeURIComponent(estado.data)+'&_='+Date.now();const dados=await obterJSON(url);if(requisicao!==estado.controle)return;if(!dados.sucesso)throw new Error(dados.mensagem||'Erro ao carregar estudantes.');estado.estudantes=(dados.estudantes||[]).map((item,i)=>({...item,id:String(item.id||item.nome||i)}));estado.faltantes=new Set(estado.estudantes.filter(e=>String(e.statusExistente).toUpperCase()==='F').map(e=>e.id));estado.alterada=estado.estudantes.some(e=>!String(e.statusExistente||'').trim());renderizar()}catch(erro){if(requisicao!==estado.controle)return;definirVazio('Não foi possível carregar os estudantes.');mostrarToast(mensagemErro(erro),true)}finally{if(requisicao===estado.controle){estado.carregando=false;atualizarResumo()}}}
+function solicitarSalvar(){if(estado.faltantes.size===0){el.modalTexto.textContent='Nenhum estudante foi marcado como faltante no '+estado.turma+'. Confirme antes de salvar.';el.modal.classList.add('visivel')}else salvarChamada()}
+async function salvarChamada(){el.modal.classList.remove('visivel');if(estado.salvando)return;estado.salvando=true;atualizarResumo();try{const estudantes=estado.estudantes.map(e=>({id:e.id,nome:e.nome,presenca:estado.faltantes.has(e.id)?'F':'C'}));const dados=await obterJSON(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({acao:'salvarChamada',turma:estado.turma,data:estado.data,estudantes})});if(!dados.sucesso)throw new Error(dados.mensagem||'Erro ao salvar a chamada.');estado.alterada=false;mostrarToast(dados.mensagem||'Chamada salva com sucesso.');await carregarEstudantes()}catch(erro){mostrarToast(mensagemErro(erro),true)}finally{estado.salvando=false;atualizarResumo()}}
+el.turma.addEventListener('change',()=>{estado.turma=el.turma.value;carregarEstudantes()});el.data.addEventListener('change',()=>{estado.data=el.data.value;carregarEstudantes()});el.salvar.addEventListener('click',solicitarSalvar);$('revisar').addEventListener('click',()=>el.modal.classList.remove('visivel'));$('confirmar').addEventListener('click',salvarChamada);el.modal.addEventListener('click',e=>{if(e.target===el.modal)el.modal.classList.remove('visivel')});
+el.data.value=dataLocal();el.data.max=dataLocal();estado.data=el.data.value;carregarTurmas();
+</script>
 </body>
 </html>
