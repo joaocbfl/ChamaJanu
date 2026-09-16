@@ -3,500 +3,430 @@
 
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Chamada Escolar</title>
 
   <style>
-
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      background: #f5f7fa;
       font-family: Arial, Helvetica, sans-serif;
+      background: #f8f9fa;
       color: #202124;
     }
 
-    .container {
-      width: 100%;
-      max-width: 620px;
+    .app {
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 18px;
+      padding: 24px;
     }
 
     .header {
-      margin-bottom: 18px;
+      margin-bottom: 22px;
     }
 
     .header h1 {
-      margin: 0;
-      font-size: 24px;
+      margin: 0 0 6px;
+      font-size: 28px;
       font-weight: 600;
+      color: #202124;
     }
 
     .header p {
-      margin: 5px 0 0;
+      margin: 0;
       color: #5f6368;
       font-size: 14px;
     }
 
-    .card {
-      background: #ffffff;
-      border-radius: 14px;
+    .controles {
+      background: #fff;
+      border: 1px solid #dadce0;
+      border-radius: 12px;
       padding: 18px;
-      margin-bottom: 14px;
-      box-shadow:
-        0 1px 3px rgba(60, 64, 67, .15),
-        0 2px 8px rgba(60, 64, 67, .08);
+      display: grid;
+      grid-template-columns: 180px 1fr auto;
+      gap: 14px;
+      align-items: end;
+      margin-bottom: 20px;
     }
 
-    label {
-      display: block;
+    .campo {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .campo label {
       font-size: 13px;
       font-weight: 600;
       color: #5f6368;
-      margin-bottom: 7px;
     }
 
-    select,
-    input[type="date"] {
+    input,
+    select {
       width: 100%;
-      height: 46px;
+      height: 42px;
       border: 1px solid #dadce0;
-      border-radius: 10px;
+      border-radius: 8px;
       padding: 0 12px;
+      font-size: 14px;
       background: #fff;
       color: #202124;
-      font-size: 15px;
       outline: none;
     }
 
-    select:focus,
-    input[type="date"]:focus {
+    input:focus,
+    select:focus {
       border-color: #1a73e8;
       box-shadow: 0 0 0 2px rgba(26, 115, 232, .12);
     }
 
-    .campo {
-      margin-bottom: 15px;
-    }
-
     button {
-      border: none;
-      border-radius: 10px;
-      height: 44px;
+      border: 0;
+      border-radius: 8px;
+      height: 42px;
       padding: 0 18px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
+      transition: .15s;
     }
 
-    button:disabled {
-      opacity: .55;
-      cursor: not-allowed;
+    button:hover {
+      opacity: .92;
     }
 
-    .btn-adicionar {
-      width: 100%;
+    .btn-principal {
       background: #1a73e8;
-      color: white;
+      color: #fff;
     }
 
-    .btn-adicionar:hover {
-      background: #1769d2;
-    }
-
-    .btn-salvar {
-      width: 100%;
-      background: #188038;
-      color: white;
-      height: 48px;
-      font-size: 15px;
-    }
-
-    .btn-salvar:hover {
-      background: #137333;
-    }
-
-    .btn-limpar {
-      width: 100%;
-      margin-top: 9px;
+    .btn-secundario {
       background: #f1f3f4;
-      color: #3c4043;
+      color: #202124;
     }
 
-    .btn-limpar:hover {
-      background: #e8eaed;
+    .btn-perigo {
+      background: #d93025;
+      color: #fff;
     }
 
     .status {
       display: none;
-      padding: 12px 14px;
+      background: #fff;
+      border: 1px solid #dadce0;
       border-radius: 10px;
-      margin-bottom: 14px;
+      padding: 12px 15px;
+      margin-bottom: 18px;
       font-size: 14px;
-      line-height: 1.4;
     }
 
     .status.sucesso {
       display: block;
-      background: #e6f4ea;
+      border-color: #b7dfb9;
+      background: #f1f8f1;
       color: #137333;
     }
 
     .status.erro {
       display: block;
+      border-color: #f1b7b3;
       background: #fce8e6;
       color: #c5221f;
     }
 
-    .status.info {
-      display: block;
-      background: #e8f0fe;
-      color: #174ea6;
+    .turma-titulo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
     }
 
-    .resumo {
-      display: none;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .resumo-item {
-      background: #f8f9fa;
-      border-radius: 10px;
-      padding: 10px 5px;
-      text-align: center;
-    }
-
-    .resumo-numero {
-      font-size: 20px;
+    .turma-titulo h2 {
+      margin: 0;
+      font-size: 21px;
       font-weight: 600;
     }
 
-    .resumo-label {
-      font-size: 11px;
+    .contador {
       color: #5f6368;
-      margin-top: 2px;
+      font-size: 13px;
     }
 
-    .lista {
+    .estudantes {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 10px;
     }
 
-    .aluno {
+    .estudante {
+      background: #fff;
       border: 1px solid #dadce0;
       border-radius: 10px;
-      min-height: 54px;
+      padding: 12px 14px;
       display: flex;
       align-items: center;
-      padding: 8px 10px;
-      background: white;
-      cursor: pointer;
-      user-select: none;
-      transition: .12s;
+      justify-content: space-between;
+      min-height: 60px;
+      transition: .15s;
     }
 
-    .aluno:hover {
-      background: #f8f9fa;
+    .estudante:hover:not(.bloqueado) {
+      border-color: #a8c7fa;
     }
 
-    .aluno.falta {
+    .nome {
+      font-size: 14px;
+      font-weight: 600;
+      padding-right: 12px;
+      line-height: 1.35;
+    }
+
+    .acoes {
+      display: flex;
+      gap: 7px;
+      flex-shrink: 0;
+    }
+
+    .btn-frequencia {
+      width: 40px;
+      height: 36px;
+      padding: 0;
+      border: 1px solid #dadce0;
+      background: #fff;
+      color: #5f6368;
+      font-weight: 700;
+      border-radius: 7px;
+    }
+
+    .btn-frequencia.ativo-c {
+      background: #e6f4ea;
+      color: #137333;
+      border-color: #a8dab5;
+    }
+
+    .btn-frequencia.ativo-f {
       background: #fce8e6;
-      border-color: #ea4335;
+      color: #c5221f;
+      border-color: #f5aaa5;
     }
 
-    .aluno.atestado {
-      background: #f1f3f4;
-      border-color: #9aa0a6;
+    .bloqueado {
+      background: #f8f9fa;
       cursor: default;
     }
 
-    .aluno-info {
-      flex: 1;
-      min-width: 0;
+    .bloqueado .nome {
+      color: #5f6368;
     }
 
-    .aluno-nome {
-      font-size: 13px;
-      font-weight: 500;
-      line-height: 1.25;
-      word-break: break-word;
-    }
-
-    .aluno-status {
-      margin-left: 7px;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
+    .badge-existente {
+      min-width: 38px;
+      height: 34px;
+      padding: 0 10px;
+      border-radius: 7px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
-      flex-shrink: 0;
+    }
+
+    .badge-a {
+      background: #f1f3f4;
+      color: #5f6368;
+    }
+
+    .badge-c {
       background: #e6f4ea;
       color: #137333;
     }
 
-    .aluno.falta .aluno-status {
-      background: #ea4335;
-      color: white;
+    .badge-f {
+      background: #fce8e6;
+      color: #c5221f;
     }
 
-    .aluno.atestado .aluno-status {
-      background: #80868b;
-      color: white;
+    .resumo {
+      margin-top: 20px;
+      background: #fff;
+      border: 1px solid #dadce0;
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      gap: 25px;
+      font-size: 14px;
     }
 
-    .lista-vazia {
-      text-align: center;
+    .resumo span {
       color: #5f6368;
-      padding: 25px 10px;
-      font-size: 14px;
-      grid-column: 1 / -1;
     }
 
-    .fila-titulo {
-      font-size: 14px;
+    .resumo strong {
+      color: #202124;
+    }
+
+    .fila {
+      margin-top: 25px;
+    }
+
+    .fila-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .fila-header h2 {
+      margin: 0;
+      font-size: 20px;
       font-weight: 600;
-      margin-bottom: 10px;
+    }
+
+    .fila-vazia {
+      background: #fff;
+      border: 1px dashed #dadce0;
+      border-radius: 10px;
+      padding: 24px;
+      text-align: center;
+      color: #80868b;
+      font-size: 14px;
     }
 
     .fila-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 11px 12px;
+      background: #fff;
       border: 1px solid #dadce0;
       border-radius: 10px;
+      padding: 13px 15px;
       margin-bottom: 8px;
-      background: #fff;
-    }
-
-    .fila-item-info {
-      min-width: 0;
-    }
-
-    .fila-turma {
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .fila-detalhe {
-      font-size: 12px;
-      color: #5f6368;
-      margin-top: 3px;
-    }
-
-    .fila-direita {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 7px;
     }
 
-    .fila-status {
-      font-size: 11px;
-      font-weight: 600;
-      color: #1a73e8;
-      white-space: nowrap;
+    .fila-info strong {
+      display: block;
+      margin-bottom: 4px;
     }
 
-    .btn-remover {
-      height: 32px;
-      padding: 0 9px;
-      background: #f1f3f4;
+    .fila-info span {
+      font-size: 13px;
       color: #5f6368;
-      font-size: 12px;
     }
 
-    .btn-remover:hover {
-      background: #e8eaed;
-    }
-
-    .oculto {
-      display: none !important;
+    .acoes-finais {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 18px;
     }
 
     .carregando {
+      padding: 35px;
       text-align: center;
       color: #5f6368;
-      padding: 20px;
       font-size: 14px;
-      grid-column: 1 / -1;
     }
 
-    @media (max-width: 380px) {
-      .container {
-        padding: 12px;
+    .vazio {
+      padding: 35px;
+      text-align: center;
+      color: #5f6368;
+      background: #fff;
+      border: 1px solid #dadce0;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 750px) {
+      .app {
+        padding: 14px;
       }
 
-      .lista {
+      .controles {
         grid-template-columns: 1fr;
       }
 
-      .card {
-        padding: 14px;
+      .estudantes {
+        grid-template-columns: 1fr;
+      }
+
+      .resumo {
+        flex-wrap: wrap;
+        gap: 12px 20px;
+      }
+
+      .fila-item {
+        gap: 10px;
+        align-items: flex-start;
       }
     }
-
   </style>
 </head>
 
 <body>
 
-  <div class="container">
+  <div class="app">
 
     <div class="header">
       <h1>Chamada Escolar</h1>
-      <p>Registre a frequência dos estudantes</p>
+      <p>Registro diário de frequência dos estudantes.</p>
     </div>
 
-    <div id="status" class="status"></div>
-
-    <div class="card">
+    <div class="controles">
 
       <div class="campo">
-
-        <label for="data">
-          Data da chamada
-        </label>
-
-        <input
-          type="date"
-          id="data"
-        >
-
+        <label for="data">Data</label>
+        <input type="date" id="data">
       </div>
 
       <div class="campo">
-
-        <label for="turma">
-          Turma
-        </label>
-
+        <label for="turma">Turma</label>
         <select id="turma">
-
-          <option value="">
-            Selecione a turma
-          </option>
-
+          <option value="">Selecione a turma</option>
         </select>
-
       </div>
 
       <button
-        type="button"
+        class="btn-principal"
         id="btnAdicionar"
-        class="btn-adicionar"
-        disabled
+        onclick="adicionarTurma()"
       >
         Adicionar à chamada
       </button>
 
     </div>
 
-    <div
-      class="card oculto"
-      id="cardAlunos"
-    >
+    <div id="status" class="status"></div>
 
-      <div
-        id="listaAlunos"
-        class="lista"
-      ></div>
+    <div id="areaEstudantes"></div>
 
-      <div
-        id="resumo"
-        class="resumo"
-      >
+    <div class="fila">
 
-        <div class="resumo-item">
+      <div class="fila-header">
+        <h2>Chamada</h2>
 
-          <div
-            class="resumo-numero"
-            id="totalAlunos"
-          >
-            0
-          </div>
-
-          <div class="resumo-label">
-            Total
-          </div>
-
-        </div>
-
-        <div class="resumo-item">
-
-          <div
-            class="resumo-numero"
-            id="totalPresentes"
-          >
-            0
-          </div>
-
-          <div class="resumo-label">
-            Presentes
-          </div>
-
-        </div>
-
-        <div class="resumo-item">
-
-          <div
-            class="resumo-numero"
-            id="totalFaltas"
-          >
-            0
-          </div>
-
-          <div class="resumo-label">
-            Faltas
-          </div>
-
-        </div>
-
+        <button
+          class="btn-secundario"
+          onclick="limparFila()"
+        >
+          Limpar
+        </button>
       </div>
 
-    </div>
+      <div id="fila"></div>
 
-    <div
-      class="card oculto"
-      id="cardFila"
-    >
-
-      <div class="fila-titulo">
-        Chamadas preparadas
+      <div class="acoes-finais">
+        <button
+          class="btn-principal"
+          onclick="salvarTodas()"
+        >
+          Salvar chamada
+        </button>
       </div>
-
-      <div id="listaFila"></div>
-
-      <button
-        type="button"
-        id="btnSalvarTudo"
-        class="btn-salvar"
-      >
-        Salvar chamadas
-      </button>
-
-      <button
-        type="button"
-        id="btnLimparFila"
-        class="btn-limpar"
-      >
-        Limpar chamadas preparadas
-      </button>
 
     </div>
 
@@ -507,452 +437,377 @@
     const API_URL =
       'https://script.google.com/macros/s/AKfycbzThUzCIL-flrxxXbssTVkti4zm3F7W6xZQW_J7Nw9igoflgzFQ27tjPaMtJk4Jcs9o/exec';
 
-
-    const dataInput =
-      document.getElementById('data');
-
-    const turmaSelect =
-      document.getElementById('turma');
-
-    const btnAdicionar =
-      document.getElementById('btnAdicionar');
-
-    const btnSalvarTudo =
-      document.getElementById('btnSalvarTudo');
-
-    const btnLimparFila =
-      document.getElementById('btnLimparFila');
-
-    const cardAlunos =
-      document.getElementById('cardAlunos');
-
-    const listaAlunos =
-      document.getElementById('listaAlunos');
-
-    const resumo =
-      document.getElementById('resumo');
-
-    const cardFila =
-      document.getElementById('cardFila');
-
-    const listaFila =
-      document.getElementById('listaFila');
-
-    const statusDiv =
-      document.getElementById('status');
-
-    const totalAlunos =
-      document.getElementById('totalAlunos');
-
-    const totalPresentes =
-      document.getElementById('totalPresentes');
-
-    const totalFaltas =
-      document.getElementById('totalFaltas');
-
-
     let estudantesAtuais = [];
-
+    let turmaAtual = '';
     let filaChamadas = [];
 
+    document.addEventListener('DOMContentLoaded', function () {
 
-    function obterDataAtual() {
+      const hoje = new Date();
 
-      const agora = new Date();
+      const ano = hoje.getFullYear();
+      const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+      const dia = String(hoje.getDate()).padStart(2, '0');
 
-      const ano =
-        agora.getFullYear();
+      document.getElementById('data').value =
+        ano + '-' + mes + '-' + dia;
 
-      const mes =
-        String(
-          agora.getMonth() + 1
-        ).padStart(2, '0');
+      carregarTurmas();
 
-      const dia =
-        String(
-          agora.getDate()
-        ).padStart(2, '0');
+      document
+        .getElementById('data')
+        .addEventListener('change', function () {
 
-      return (
-        ano +
-        '-' +
-        mes +
-        '-' +
-        dia
-      );
-    }
+          if (turmaAtual) {
+            carregarEstudantes(turmaAtual);
+          }
 
+        });
 
-    dataInput.value =
-      obterDataAtual();
-
-
-    function mostrarStatus(
-      mensagem,
-      tipo
-    ) {
-
-      statusDiv.textContent =
-        mensagem;
-
-      statusDiv.className =
-        'status ' + tipo;
-    }
-
-
-    function limparStatus() {
-
-      statusDiv.textContent = '';
-
-      statusDiv.className =
-        'status';
-    }
+    });
 
 
     async function carregarTurmas() {
 
+      const select = document.getElementById('turma');
+
+      select.innerHTML =
+        '<option value="">Carregando turmas...</option>';
+
       try {
 
-        const resposta =
-          await fetch(
-            API_URL +
-            '?acao=turmas'
-          );
+        const resposta = await fetch(
+          API_URL + '?acao=turmas'
+        );
 
-        const dados =
-          await resposta.json();
+        const dados = await resposta.json();
 
-
-        if (!dados.sucesso) {
-
-          throw new Error(
-            dados.erro ||
-            'Erro ao carregar turmas.'
-          );
-        }
-
-
-        turmaSelect.innerHTML =
+        select.innerHTML =
           '<option value="">Selecione a turma</option>';
 
+        if (
+          dados &&
+          Array.isArray(dados.turmas)
+        ) {
 
-        dados.turmas.forEach(
-          function(turma) {
+          dados.turmas.forEach(function (turma) {
 
             const option =
-              document.createElement(
-                'option'
-              );
+              document.createElement('option');
 
             option.value = turma;
-
             option.textContent = turma;
 
-            turmaSelect.appendChild(
-              option
-            );
-          }
-        );
+            select.appendChild(option);
 
+          });
+
+        }
 
       } catch (erro) {
 
+        select.innerHTML =
+          '<option value="">Erro ao carregar turmas</option>';
+
         mostrarStatus(
-          erro.message,
+          'Erro ao carregar as turmas.',
           'erro'
         );
+
+        console.error(erro);
+
       }
+
     }
 
 
-    async function carregarEstudantes() {
+    async function carregarEstudantes(turma) {
 
-      const turma =
-        turmaSelect.value;
+      const data =
+        document.getElementById('data').value;
 
-
-      if (!turma) {
-
-        cardAlunos.classList.add(
-          'oculto'
-        );
-
-        btnAdicionar.disabled = true;
-
+      if (!turma || !data) {
         return;
       }
 
+      turmaAtual = turma;
 
-      limparStatus();
+      const area =
+        document.getElementById('areaEstudantes');
 
-
-      const chamadaExistente =
-        filaChamadas.find(
-          function(item) {
-
-            return (
-              item.turma === turma &&
-              item.data === dataInput.value
-            );
-          }
-        );
-
-
-      if (chamadaExistente) {
-
-        estudantesAtuais =
-          JSON.parse(
-            JSON.stringify(
-              chamadaExistente.estudantes
-            )
-          );
-
-        renderizarEstudantes();
-
-        btnAdicionar.textContent =
-          'Atualizar chamada';
-
-        btnAdicionar.disabled = false;
-
-        return;
-      }
-
-
-      cardAlunos.classList.remove(
-        'oculto'
-      );
-
-      listaAlunos.innerHTML =
+      area.innerHTML =
         '<div class="carregando">Carregando estudantes...</div>';
-
-      resumo.style.display =
-        'none';
-
 
       try {
 
-        const resposta =
-          await fetch(
-            API_URL +
-            '?acao=estudantes&turma=' +
-            encodeURIComponent(turma)
-          );
+        const url =
+          API_URL +
+          '?acao=estudantes' +
+          '&turma=' + encodeURIComponent(turma) +
+          '&data=' + encodeURIComponent(data);
 
+        const resposta = await fetch(url);
 
-        const dados =
-          await resposta.json();
+        const dados = await resposta.json();
 
-
-        if (!dados.sucesso) {
+        if (
+          !dados ||
+          !Array.isArray(dados.estudantes)
+        ) {
 
           throw new Error(
-            dados.erro ||
-            'Erro ao carregar estudantes.'
+            'Formato de resposta inválido.'
           );
+
         }
 
-
         estudantesAtuais =
-          dados.estudantes.map(
-            function(estudante) {
+          dados.estudantes.map(function (estudante) {
 
-              return {
-                id: estudante.id,
-                nome: estudante.nome,
-                presenca: 'C',
-                statusExistente: ''
-              };
+            let status =
+              String(
+                estudante.statusExistente || ''
+              ).trim().toUpperCase();
 
+            if (
+              status !== 'A' &&
+              status !== 'C' &&
+              status !== 'F'
+            ) {
+              status = '';
             }
-          );
 
+            return {
+
+              id: estudante.id || '',
+
+              nome: estudante.nome || '',
+
+              statusExistente: status,
+
+              presenca:
+                status === 'F'
+                  ? 'F'
+                  : 'C'
+
+            };
+
+          });
 
         renderizarEstudantes();
 
-
-        btnAdicionar.textContent =
-          'Adicionar à chamada';
-
-        btnAdicionar.disabled = false;
-
-
       } catch (erro) {
 
-        listaAlunos.innerHTML =
-          '<div class="lista-vazia">' +
-          erro.message +
+        area.innerHTML =
+          '<div class="vazio">' +
+          'Não foi possível carregar os estudantes.' +
           '</div>';
 
-        btnAdicionar.disabled = true;
+        mostrarStatus(
+          'Erro ao carregar os estudantes.',
+          'erro'
+        );
+
+        console.error(erro);
+
       }
+
     }
+
+
+    document
+      .getElementById('turma')
+      .addEventListener('change', function () {
+
+        const turma = this.value;
+
+        if (!turma) {
+
+          turmaAtual = '';
+          estudantesAtuais = [];
+
+          document.getElementById(
+            'areaEstudantes'
+          ).innerHTML = '';
+
+          return;
+
+        }
+
+        carregarEstudantes(turma);
+
+      });
 
 
     function renderizarEstudantes() {
 
-      cardAlunos.classList.remove(
-        'oculto'
-      );
+      const area =
+        document.getElementById('areaEstudantes');
 
+      if (!estudantesAtuais.length) {
 
-      listaAlunos.innerHTML = '';
-
-
-      if (
-        estudantesAtuais.length === 0
-      ) {
-
-        listaAlunos.innerHTML =
-          '<div class="lista-vazia">' +
+        area.innerHTML =
+          '<div class="vazio">' +
           'Nenhum estudante encontrado.' +
           '</div>';
 
-        resumo.style.display =
-          'none';
-
         return;
+
       }
 
+      let html = '';
+
+      html += '<div class="turma-titulo">';
+
+      html +=
+        '<h2>' +
+        escaparHTML(turmaAtual) +
+        '</h2>';
+
+      html +=
+        '<div class="contador">' +
+        estudantesAtuais.length +
+        ' estudantes' +
+        '</div>';
+
+      html += '</div>';
+
+      html += '<div class="estudantes">';
 
       estudantesAtuais.forEach(
-        function(estudante) {
+        function (estudante, index) {
 
-          const aluno =
-            document.createElement(
-              'div'
-            );
+          const existente =
+            estudante.statusExistente;
 
-          aluno.className =
-            'aluno';
+          html +=
+            '<div class="estudante ' +
+            (existente ? 'bloqueado' : '') +
+            '">';
 
+          html +=
+            '<div class="nome">' +
+            escaparHTML(estudante.nome) +
+            '</div>';
 
-          if (
-            estudante.statusExistente === 'A'
-          ) {
+          html += '<div class="acoes">';
 
-            aluno.classList.add(
-              'atestado'
-            );
+          if (existente === 'A') {
 
-          } else if (
-            estudante.presenca === 'F'
-          ) {
+            html +=
+              '<div class="badge-existente badge-a">' +
+              'A' +
+              '</div>';
 
-            aluno.classList.add(
-              'falta'
-            );
-          }
+          } else if (existente === 'C') {
 
+            html +=
+              '<div class="badge-existente badge-c">' +
+              'C' +
+              '</div>';
 
-          const info =
-            document.createElement(
-              'div'
-            );
+          } else if (existente === 'F') {
 
-          info.className =
-            'aluno-info';
-
-
-          const nome =
-            document.createElement(
-              'div'
-            );
-
-          nome.className =
-            'aluno-nome';
-
-          nome.textContent =
-            estudante.nome;
-
-
-          info.appendChild(nome);
-
-
-          const status =
-            document.createElement(
-              'div'
-            );
-
-          status.className =
-            'aluno-status';
-
-
-          if (
-            estudante.statusExistente === 'A'
-          ) {
-
-            status.textContent = 'A';
-
-          } else if (
-            estudante.presenca === 'F'
-          ) {
-
-            status.textContent = 'F';
+            html +=
+              '<div class="badge-existente badge-f">' +
+              'F' +
+              '</div>';
 
           } else {
 
-            status.textContent = 'C';
+            html +=
+              '<button ' +
+              'class="btn-frequencia ' +
+              (
+                estudante.presenca === 'C'
+                  ? 'ativo-c'
+                  : ''
+              ) +
+              '" ' +
+              'onclick="alternarFrequencia(' +
+              index +
+              ', \'C\')">' +
+              'C' +
+              '</button>';
+
+            html +=
+              '<button ' +
+              'class="btn-frequencia ' +
+              (
+                estudante.presenca === 'F'
+                  ? 'ativo-f'
+                  : ''
+              ) +
+              '" ' +
+              'onclick="alternarFrequencia(' +
+              index +
+              ', \'F\')">' +
+              'F' +
+              '</button>';
+
           }
 
-
-          aluno.appendChild(info);
-
-          aluno.appendChild(status);
-
-
-          if (
-            estudante.statusExistente !== 'A'
-          ) {
-
-            aluno.addEventListener(
-              'click',
-              function() {
-
-                if (
-                  estudante.presenca === 'C'
-                ) {
-
-                  estudante.presenca = 'F';
-
-                } else {
-
-                  estudante.presenca = 'C';
-                }
-
-                renderizarEstudantes();
-              }
-            );
-          }
-
-
-          listaAlunos.appendChild(aluno);
+          html += '</div>';
+          html += '</div>';
 
         }
       );
 
+      html += '</div>';
 
-      atualizarResumo();
+      html += criarResumo();
+
+      area.innerHTML = html;
+
     }
 
 
-    function atualizarResumo() {
+    function alternarFrequencia(index, valor) {
+
+      const estudante =
+        estudantesAtuais[index];
+
+      if (!estudante) {
+        return;
+      }
+
+      if (estudante.statusExistente) {
+        return;
+      }
+
+      estudante.presenca = valor;
+
+      renderizarEstudantes();
+
+    }
+
+
+    function criarResumo() {
 
       let presentes = 0;
-
       let faltas = 0;
-
+      let atestados = 0;
+      let pendentes = 0;
 
       estudantesAtuais.forEach(
-        function(estudante) {
+        function (estudante) {
 
-          if (
-            estudante.statusExistente === 'A'
-          ) {
-            return;
-          }
+          const status =
+            estudante.statusExistente;
 
+          if (status === 'A') {
 
-          if (
+            atestados++;
+
+          } else if (status === 'C') {
+
+            presentes++;
+
+          } else if (status === 'F') {
+
+            faltas++;
+
+          } else if (
             estudante.presenca === 'F'
           ) {
 
@@ -961,33 +816,46 @@
           } else {
 
             presentes++;
+
           }
+
         }
       );
 
+      return `
+        <div class="resumo">
+          <div>
+            <span>Presentes:</span>
+            <strong>${presentes}</strong>
+          </div>
 
-      totalAlunos.textContent =
-        estudantesAtuais.length;
+          <div>
+            <span>Faltas:</span>
+            <strong>${faltas}</strong>
+          </div>
 
-      totalPresentes.textContent =
-        presentes;
+          <div>
+            <span>Atestados:</span>
+            <strong>${atestados}</strong>
+          </div>
 
-      totalFaltas.textContent =
-        faltas;
+          <div>
+            <span>Pendentes:</span>
+            <strong>${pendentes}</strong>
+          </div>
+        </div>
+      `;
 
-      resumo.style.display =
-        'grid';
     }
 
 
-    function adicionarChamada() {
+    function adicionarTurma() {
 
       const turma =
-        turmaSelect.value;
+        document.getElementById('turma').value;
 
       const data =
-        dataInput.value;
-
+        document.getElementById('data').value;
 
       if (!turma) {
 
@@ -997,516 +865,407 @@
         );
 
         return;
-      }
 
+      }
 
       if (!data) {
 
         mostrarStatus(
-          'Selecione a data.',
+          'Selecione uma data.',
           'erro'
         );
 
         return;
+
       }
 
-
-      if (
-        estudantesAtuais.length === 0
-      ) {
+      if (!estudantesAtuais.length) {
 
         mostrarStatus(
-          'Nenhum estudante carregado.',
+          'Não há estudantes para adicionar.',
           'erro'
         );
 
         return;
+
       }
 
-
-      const estudantes =
-        JSON.parse(
-          JSON.stringify(
-            estudantesAtuais
-          )
-        );
-
-
-      const indice =
+      const existente =
         filaChamadas.findIndex(
-          function(item) {
+          function (item) {
 
             return (
               item.turma === turma &&
               item.data === data
             );
+
           }
         );
 
+      const chamada = {
 
-      const objeto = {
         turma: turma,
+
         data: data,
-        estudantes: estudantes
+
+        estudantes:
+          estudantesAtuais.map(
+            function (estudante) {
+
+              return {
+
+                id: estudante.id,
+
+                nome: estudante.nome,
+
+                presenca:
+                  estudante.statusExistente ||
+                  estudante.presenca
+
+              };
+
+            }
+          )
+
       };
 
+      if (existente >= 0) {
 
-      if (indice >= 0) {
-
-        filaChamadas[indice] =
-          objeto;
+        filaChamadas[existente] =
+          chamada;
 
       } else {
 
-        filaChamadas.push(
-          objeto
-        );
+        filaChamadas.push(chamada);
+
       }
 
-
-      atualizarFila();
-
+      renderizarFila();
 
       mostrarStatus(
-        'Turma ' +
-        turma +
-        ' preparada. Selecione outra turma.',
+        turma + ' adicionada à chamada.',
         'sucesso'
       );
 
-
-      estudantesAtuais = [];
-
-      listaAlunos.innerHTML = '';
-
-      cardAlunos.classList.add(
-        'oculto'
-      );
-
-      resumo.style.display =
-        'none';
-
-      turmaSelect.value = '';
-
-      btnAdicionar.disabled = true;
-
-      btnAdicionar.textContent =
-        'Adicionar à chamada';
     }
 
 
-    function atualizarFila() {
+    function renderizarFila() {
 
-      listaFila.innerHTML = '';
+      const area =
+        document.getElementById('fila');
 
+      if (!filaChamadas.length) {
 
-      if (
-        filaChamadas.length === 0
-      ) {
-
-        cardFila.classList.add(
-          'oculto'
-        );
+        area.innerHTML =
+          '<div class="fila-vazia">' +
+          'Nenhuma turma adicionada à chamada.' +
+          '</div>';
 
         return;
+
       }
 
-
-      cardFila.classList.remove(
-        'oculto'
-      );
-
+      let html = '';
 
       filaChamadas.forEach(
-        function(item, indice) {
+        function (item, index) {
 
-          let faltas = 0;
+          const total =
+            item.estudantes.length;
 
-          let atestados = 0;
+          const faltas =
+            item.estudantes.filter(
+              function (estudante) {
 
-          let presentes = 0;
+                return estudante.presenca === 'F';
 
-
-          item.estudantes.forEach(
-            function(estudante) {
-
-              if (
-                estudante.statusExistente === 'A'
-              ) {
-
-                atestados++;
-
-              } else if (
-                estudante.presenca === 'F'
-              ) {
-
-                faltas++;
-
-              } else {
-
-                presentes++;
               }
-            }
-          );
+            ).length;
 
+          html +=
+            '<div class="fila-item">';
 
-          const linha =
-            document.createElement(
-              'div'
-            );
+          html +=
+            '<div class="fila-info">';
 
-          linha.className =
-            'fila-item';
+          html +=
+            '<strong>' +
+            escaparHTML(item.turma) +
+            '</strong>';
 
-
-          const info =
-            document.createElement(
-              'div'
-            );
-
-          info.className =
-            'fila-item-info';
-
-
-          const turma =
-            document.createElement(
-              'div'
-            );
-
-          turma.className =
-            'fila-turma';
-
-          turma.textContent =
-            item.turma;
-
-
-          const detalhe =
-            document.createElement(
-              'div'
-            );
-
-          detalhe.className =
-            'fila-detalhe';
-
-          detalhe.textContent =
-            presentes +
-            ' presentes · ' +
+          html +=
+            '<span>' +
+            formatarData(item.data) +
+            ' · ' +
+            total +
+            ' estudantes · ' +
             faltas +
             ' faltas' +
-            (
-              atestados > 0
-                ? ' · ' +
-                  atestados +
-                  ' atestado(s)'
-                : ''
-            );
+            '</span>';
 
+          html +=
+            '</div>';
 
-          info.appendChild(turma);
+          html +=
+            '<button ' +
+            'class="btn-perigo" ' +
+            'onclick="removerDaFila(' +
+            index +
+            ')">' +
+            'Remover' +
+            '</button>';
 
-          info.appendChild(detalhe);
-
-
-          const direita =
-            document.createElement(
-              'div'
-            );
-
-          direita.className =
-            'fila-direita';
-
-
-          const status =
-            document.createElement(
-              'div'
-            );
-
-          status.className =
-            'fila-status';
-
-          status.textContent =
-            'Preparada';
-
-
-          const remover =
-            document.createElement(
-              'button'
-            );
-
-          remover.type =
-            'button';
-
-          remover.className =
-            'btn-remover';
-
-          remover.textContent =
-            'Remover';
-
-
-          remover.addEventListener(
-            'click',
-            function() {
-
-              filaChamadas.splice(
-                indice,
-                1
-              );
-
-              atualizarFila();
-
-              mostrarStatus(
-                'Turma ' +
-                item.turma +
-                ' removida da fila.',
-                'info'
-              );
-            }
-          );
-
-
-          direita.appendChild(status);
-
-          direita.appendChild(remover);
-
-
-          linha.appendChild(info);
-
-          linha.appendChild(direita);
-
-
-          listaFila.appendChild(linha);
+          html +=
+            '</div>';
 
         }
       );
+
+      area.innerHTML = html;
+
     }
 
 
-    async function salvarTodas() {
+    function removerDaFila(index) {
 
-      if (
-        filaChamadas.length === 0
-      ) {
+      filaChamadas.splice(index, 1);
 
-        mostrarStatus(
-          'Nenhuma chamada foi preparada.',
-          'erro'
-        );
+      renderizarFila();
 
-        return;
-      }
-
-
-      btnSalvarTudo.disabled = true;
-
-      btnLimparFila.disabled = true;
-
-
-      let salvas = 0;
-
-      let erros = [];
-
-
-      try {
-
-        const filaParaSalvar =
-          JSON.parse(
-            JSON.stringify(
-              filaChamadas
-            )
-          );
-
-
-        for (
-          const chamada of filaParaSalvar
-        ) {
-
-          try {
-
-            const resposta =
-              await fetch(
-                API_URL,
-                {
-                  method: 'POST',
-
-                  headers: {
-                    'Content-Type':
-                      'text/plain;charset=utf-8'
-                  },
-
-                  body:
-                    JSON.stringify({
-                      acao: 'salvar',
-                      turma:
-                        chamada.turma,
-                      data:
-                        chamada.data,
-                      estudantes:
-                        chamada.estudantes
-                    })
-                }
-              );
-
-
-            const resultado =
-              await resposta.json();
-
-
-            if (
-              !resultado.sucesso
-            ) {
-
-              throw new Error(
-                resultado.erro ||
-                'Erro ao salvar.'
-              );
-            }
-
-
-            salvas++;
-
-
-          } catch (erro) {
-
-            erros.push({
-              turma: chamada.turma,
-              mensagem: erro.message
-            });
-          }
-        }
-
-
-        /*
-         * Mantém na fila somente as chamadas
-         * que apresentaram erro.
-         */
-
-        if (salvas > 0) {
-
-          const turmasComErro =
-            erros.map(
-              function(item) {
-                return item.turma;
-              }
-            );
-
-
-          filaChamadas =
-            filaChamadas.filter(
-              function(item) {
-
-                return turmasComErro.includes(
-                  item.turma
-                );
-              }
-            );
-        }
-
-
-        atualizarFila();
-
-
-        if (
-          erros.length === 0
-        ) {
-
-          mostrarStatus(
-            salvas +
-            (
-              salvas === 1
-                ? ' turma salva com sucesso.'
-                : ' turmas salvas com sucesso.'
-            ),
-            'sucesso'
-          );
-
-
-          estudantesAtuais = [];
-
-          listaAlunos.innerHTML = '';
-
-          cardAlunos.classList.add(
-            'oculto'
-          );
-
-          resumo.style.display =
-            'none';
-
-          turmaSelect.value = '';
-
-
-        } else {
-
-          mostrarStatus(
-            salvas +
-            ' turma(s) salva(s). ' +
-            erros.length +
-            ' apresentou(aram) erro: ' +
-            erros.map(
-              function(item) {
-                return (
-                  item.turma +
-                  ': ' +
-                  item.mensagem
-                );
-              }
-            ).join(' | '),
-            'erro'
-          );
-        }
-
-
-      } finally {
-
-        btnSalvarTudo.disabled =
-          false;
-
-        btnLimparFila.disabled =
-          false;
-      }
     }
 
 
     function limparFila() {
 
+      if (!filaChamadas.length) {
+        return;
+      }
+
       filaChamadas = [];
 
-      atualizarFila();
+      renderizarFila();
 
       mostrarStatus(
-        'Chamadas preparadas removidas.',
-        'info'
+        'Fila limpa.',
+        'sucesso'
       );
+
     }
 
 
-    turmaSelect.addEventListener(
-      'change',
-      carregarEstudantes
-    );
+    async function salvarTodas() {
+
+      if (!filaChamadas.length) {
+
+        mostrarStatus(
+          'Adicione pelo menos uma turma à chamada.',
+          'erro'
+        );
+
+        return;
+
+      }
+
+      const botoes =
+        document.querySelectorAll(
+          'button'
+        );
+
+      botoes.forEach(
+        function (botao) {
+
+          botao.disabled = true;
+
+        }
+      );
+
+      mostrarStatus(
+        'Salvando chamada...',
+        'sucesso'
+      );
+
+      try {
+
+        for (
+          let i = 0;
+          i < filaChamadas.length;
+          i++
+        ) {
+
+          const chamada =
+            filaChamadas[i];
+
+          const payload = {
+
+            acao: 'salvarChamada',
+
+            data: chamada.data,
+
+            turma: chamada.turma,
+
+            estudantes:
+              chamada.estudantes
+
+          };
+
+          const resposta =
+            await fetch(
+              API_URL,
+              {
+                method: 'POST',
+
+                headers: {
+                  'Content-Type':
+                    'text/plain;charset=utf-8'
+                },
+
+                body:
+                  JSON.stringify(payload)
+              }
+            );
+
+          const texto =
+            await resposta.text();
+
+          let resultado;
+
+          try {
+
+            resultado =
+              JSON.parse(texto);
+
+          } catch (e) {
+
+            resultado = {
+              sucesso: true
+            };
+
+          }
+
+          if (
+            resultado &&
+            resultado.sucesso === false
+          ) {
+
+            throw new Error(
+              resultado.mensagem ||
+              'Erro ao salvar a chamada.'
+            );
+
+          }
+
+        }
+
+        filaChamadas = [];
+
+        renderizarFila();
+
+        mostrarStatus(
+          'Chamada salva com sucesso.',
+          'sucesso'
+        );
+
+        if (turmaAtual) {
+
+          await carregarEstudantes(
+            turmaAtual
+          );
+
+        }
+
+      } catch (erro) {
+
+        mostrarStatus(
+          'Erro ao salvar: ' +
+          erro.message,
+          'erro'
+        );
+
+        console.error(erro);
+
+      } finally {
+
+        botoes.forEach(
+          function (botao) {
+
+            botao.disabled = false;
+
+          }
+        );
+
+      }
+
+    }
 
 
-    btnAdicionar.addEventListener(
-      'click',
-      adicionarChamada
-    );
+    function mostrarStatus(mensagem, tipo) {
+
+      const status =
+        document.getElementById('status');
+
+      status.textContent = mensagem;
+
+      status.className =
+        'status ' + tipo;
+
+      clearTimeout(
+        window.timerStatus
+      );
+
+      window.timerStatus =
+        setTimeout(
+          function () {
+
+            status.className =
+              'status';
+
+          },
+          5000
+        );
+
+    }
 
 
-    btnSalvarTudo.addEventListener(
-      'click',
-      salvarTodas
-    );
+    function formatarData(data) {
+
+      if (!data) {
+        return '';
+      }
+
+      const partes =
+        data.split('-');
+
+      if (partes.length !== 3) {
+        return data;
+      }
+
+      return (
+        partes[2] +
+        '/' +
+        partes[1] +
+        '/' +
+        partes[0]
+      );
+
+    }
 
 
-    btnLimparFila.addEventListener(
-      'click',
-      limparFila
-    );
+    function escaparHTML(valor) {
+
+      return String(valor || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+
+    }
 
 
-    carregarTurmas();
+    renderizarFila();
 
   </script>
 
 </body>
-
 </html>
