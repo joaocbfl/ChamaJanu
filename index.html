@@ -1,1128 +1,398 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Chamada Escolar</title>
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f5f7fa;
-  color: #202124;
-}
-
-body {
-  padding-bottom: 90px;
-}
-
-/* APP */
-
-.app {
-  width: 100%;
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 18px 14px 30px;
-}
-
-/* CABEÇALHO */
-
-.cabecalho {
-  margin-bottom: 18px;
-}
-
-.titulo {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 700;
-  color: #202124;
-}
-
-.subtitulo {
-  margin: 5px 0 0;
-  font-size: 14px;
-  color: #5f6368;
-}
-
-/* CONTROLES */
-
-.controles {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.campo {
-  flex: 1;
-}
-
-.campo label {
-  display: block;
-  font-size: 12px;
-  font-weight: 600;
-  color: #5f6368;
-  margin-bottom: 5px;
-}
-
-select,
-input[type="date"] {
-  width: 100%;
-  height: 44px;
-  padding: 0 12px;
-  border: 1px solid #dadce0;
-  border-radius: 10px;
-  background: #fff;
-  color: #202124;
-  font-size: 15px;
-  outline: none;
-}
-
-select:focus,
-input[type="date"]:focus {
-  border-color: #1a73e8;
-}
-
-/* STATUS */
-
-.status {
-  min-height: 20px;
-  margin-bottom: 12px;
-  font-size: 13px;
-  color: #5f6368;
-}
-
-/* TURMA */
-
-.turma-info {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.turma-nome {
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.turma-total {
-  font-size: 13px;
-  color: #5f6368;
-}
-
-/* LISTA */
-
-.estudantes {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-/* ESTUDANTE */
-
-.estudante {
-  width: 100%;
-  min-height: 54px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-
-  padding: 10px 14px;
-
-  background: #ffffff;
-  border: 1px solid #e0e3e7;
-  border-radius: 10px;
-
-  cursor: pointer;
-  user-select: none;
-
-  transition:
-    background 0.15s ease,
-    border-color 0.15s ease,
-    transform 0.08s ease;
-}
-
-.estudante:active {
-  transform: scale(0.99);
-}
-
-.estudante:hover {
-  border-color: #c8ccd1;
-}
-
-/* NOME */
-
-.nome-estudante {
-  flex: 1;
-  min-width: 0;
-
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-/* INDICADOR */
-
-.indicador {
-  width: 30px;
-  height: 30px;
-
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: #f1f3f4;
-  color: #80868b;
-
-  font-size: 15px;
-  font-weight: 700;
-}
-
-/* FALTA SELECIONADA */
-
-.estudante.ausente {
-  background: #fce8e6;
-  border-color: #f5b7b1;
-}
-
-.estudante.ausente .nome-estudante {
-  color: #b3261e;
-}
-
-.estudante.ausente .indicador {
-  background: #d93025;
-  color: #fff;
-}
-
-/* REGISTRO EXISTENTE / BLOQUEADO */
-
-.estudante.bloqueado {
-  background: #f8f9fa;
-  border-color: #e5e7eb;
-  cursor: default;
-}
-
-.estudante.bloqueado .nome-estudante {
-  color: #5f6368;
-}
-
-.estudante.bloqueado .indicador {
-  background: #e8eaed;
-  color: #80868b;
-}
-
-/* RESUMO */
-
-.resumo {
-  margin-top: 14px;
-  padding: 10px 14px;
-
-  background: #fff;
-  border: 1px solid #e0e3e7;
-  border-radius: 10px;
-
-  font-size: 14px;
-  color: #5f6368;
-}
-
-.resumo strong {
-  color: #202124;
-}
-
-/* BOTÃO FIXO */
-
-.barra-salvar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  z-index: 100;
-
-  padding: 10px 14px;
-
-  background: rgba(255, 255, 255, 0.97);
-  border-top: 1px solid #dadce0;
-}
-
-.barra-salvar-conteudo {
-  max-width: 760px;
-  margin: 0 auto;
-
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.contador {
-  flex: 1;
-  font-size: 13px;
-  color: #5f6368;
-}
-
-.contador strong {
-  color: #202124;
-}
-
-.btn-salvar {
-  height: 44px;
-  padding: 0 22px;
-
-  border: 0;
-  border-radius: 10px;
-
-  background: #1a73e8;
-  color: white;
-
-  font-size: 15px;
-  font-weight: 600;
-
-  cursor: pointer;
-}
-
-.btn-salvar:hover {
-  background: #1769d1;
-}
-
-.btn-salvar:disabled {
-  background: #c4c7c5;
-  cursor: not-allowed;
-}
-
-/* CARREGANDO */
-
-.carregando {
-  padding: 30px 10px;
-  text-align: center;
-  color: #5f6368;
-  font-size: 14px;
-}
-
-/* POP-UP */
-
-.overlay {
-  position: fixed;
-  inset: 0;
-
-  z-index: 1000;
-
-  display: none;
-  align-items: center;
-  justify-content: center;
-
-  padding: 20px;
-
-  background: rgba(32, 33, 36, 0.45);
-}
-
-.overlay.visivel {
-  display: flex;
-}
-
-.popup {
-  width: 100%;
-  max-width: 380px;
-
-  padding: 24px;
-
-  background: #fff;
-  border-radius: 16px;
-
-  text-align: center;
-
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.18);
-}
-
-.popup-icone {
-  width: 52px;
-  height: 52px;
-
-  margin: 0 auto 14px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: #e6f4ea;
-  color: #137333;
-
-  font-size: 25px;
-  font-weight: 700;
-}
-
-.popup-titulo {
-  margin: 0 0 7px;
-
-  font-size: 19px;
-  font-weight: 700;
-}
-
-.popup-texto {
-  margin: 0 0 20px;
-
-  font-size: 14px;
-  line-height: 1.5;
-  color: #5f6368;
-}
-
-.btn-popup {
-  width: 100%;
-  height: 44px;
-
-  border: 0;
-  border-radius: 10px;
-
-  background: #1a73e8;
-  color: #fff;
-
-  font-size: 15px;
-  font-weight: 600;
-
-  cursor: pointer;
-}
-
-/* MOBILE */
-
-@media (max-width: 600px) {
-
-  .app {
-    padding: 15px 10px 25px;
-  }
-
-  .titulo {
-    font-size: 21px;
-  }
-
-  .subtitulo {
-    font-size: 13px;
-  }
-
-  .controles {
-    gap: 8px;
-  }
-
-  .campo label {
-    font-size: 11px;
-  }
-
-  select,
-  input[type="date"] {
-    height: 42px;
-    font-size: 14px;
-  }
-
-  .estudante {
-    min-height: 52px;
-    padding: 9px 12px;
-  }
-
-  .nome-estudante {
-    font-size: 14px;
-  }
-
-  .indicador {
-    width: 28px;
-    height: 28px;
-  }
-
-  .barra-salvar {
-    padding: 9px 10px;
-  }
-
-  .barra-salvar-conteudo {
-    gap: 8px;
-  }
-
-  .btn-salvar {
-    height: 42px;
-    padding: 0 16px;
-    font-size: 14px;
-  }
-
-  .contador {
-    font-size: 12px;
-  }
-}
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Chamada Rápida</title>
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --success: #188038;
+      --danger: #d93025;
+      --bg: #f8f9fa;
+      --surface: #ffffff;
+      --border: #dadce0;
+      --text: #202124;
+      --text-secondary: #5f6368;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: 80px; /* Espaço para o botão flutuante */
+    }
+
+    .header {
+      background: var(--surface);
+      padding: 16px 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .turma-selector {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 16px;
+      background-color: var(--bg);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .turma-selector:focus {
+      border-color: var(--primary);
+    }
+
+    .estatisticas {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .lista-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    /* Cartão do Estudante (Botão de Toggle) */
+    .aluno-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    /* Estado: Presente (Padrão) */
+    .aluno-card {
+      border-left: 6px solid var(--success);
+    }
+    
+    /* Estado: Faltou */
+    .aluno-card.faltou {
+      background-color: #fce8e6;
+      border-color: #fad2cf;
+      border-left: 6px solid var(--danger);
+    }
+
+    .aluno-info h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .aluno-status {
+      font-size: 13px;
+      color: var(--success);
+      font-weight: 500;
+    }
+
+    .aluno-card.faltou .aluno-status {
+      color: var(--danger);
+    }
+
+    /* Botão Flutuante de Salvar */
+    .fab-salvar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.4);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s, background 0.2s;
+      z-index: 100;
+    }
+
+    .fab-salvar:hover {
+      background: #1557b0;
+      transform: translateX(-50%) scale(1.05);
+    }
+    
+    .fab-salvar:disabled {
+      background: var(--text-secondary);
+      cursor: not-allowed;
+      transform: translateX(-50%);
+    }
+
+    /* Toast Notification (Pop-up) */
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #323232;
+      color: white;
+      padding: 16px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .toast.visivel {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Loader */
+    .loader-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .loader-overlay.ativo {
+      visibility: visible;
+      opacity: 1;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
 </head>
-
 <body>
 
-<div class="app">
-
-  <header class="cabecalho">
-    <h1 class="titulo">Chamada Escolar</h1>
-    <p class="subtitulo">Toque no nome para registrar a falta.</p>
+  <!-- Cabeçalho -->
+  <header class="header">
+    <select class="turma-selector" id="selectTurma" onchange="carregarTurma()">
+      <option value="" disabled selected>Selecione a Turma...</option>
+      <option value="9A">9º Ano A</option>
+      <option value="9B">9º Ano B</option>
+      <option value="1M">1º Ano Médio</option>
+    </select>
+    <div class="estatisticas" id="contador">0/0 Presentes</div>
   </header>
 
-  <section class="controles">
+  <!-- Lista de Estudantes -->
+  <main class="lista-container" id="listaEstudantes">
+    <!-- Renderizado via JS -->
+  </main>
 
+  <!-- Botão de Salvar -->
+  <button class="fab-salvar" id="btnSalvar" onclick="salvarChamada()" disabled>
+    💾 Salvar Chamada
+  </button>
 
-<div class="campo">
-  <label for="data">Data</label>
-  <input type="date" id="data">
-</div>
+  <!-- Pop-up de Aviso -->
+  <div class="toast" id="toast">Mensagem aqui</div>
 
-<div class="campo">
-  <label for="turma">Turma</label>
-  <select id="turma">
-    <option value="">Selecione</option>
-  </select>
-</div>
-
-
-  </section>
-
-  <div id="status" class="status"></div>
-
-  <div id="areaChamada" style="display:none;">
-
-
-<div class="turma-info">
-  <div id="turmaNome" class="turma-nome"></div>
-  <div id="turmaTotal" class="turma-total"></div>
-</div>
-
-<div id="estudantes" class="estudantes"></div>
-
-<div class="resumo">
-  Faltas selecionadas: <strong id="totalFaltas">0</strong>
-</div>
-
-
+  <!-- Tela de Carregamento -->
+  <div class="loader-overlay" id="loader">
+    <div class="spinner"></div>
   </div>
 
-</div>
-
-<!-- BARRA DE SALVAMENTO -->
-
-<div class="barra-salvar">
-
-  <div class="barra-salvar-conteudo">
-
-
-<div class="contador">
-  <strong id="contadorFaltas">0</strong> falta(s)
-</div>
-
-<button
-  id="btnSalvar"
-  class="btn-salvar"
-  onclick="salvarChamada()"
-  disabled
->
-  Salvar chamada
-</button>
-
-
-  </div>
-
-</div>
-
-<!-- POP-UP -->
-
-<div id="overlaySucesso" class="overlay">
-
-  <div class="popup">
-
-
-<div class="popup-icone">✓</div>
-
-<h2 class="popup-titulo">
-  Chamada gravada
-</h2>
-
-<p class="popup-texto">
-  A chamada foi gravada com sucesso.
-</p>
-
-<button
-  class="btn-popup"
-  onclick="fecharPopup()"
->
-  OK
-</button>
-
-
-  </div>
-
-</div>
-
-<script>
-
-const URL_SCRIPT =
-  'https://script.google.com/macros/s/AKfycbzThUzCIL-flrxxXbssTVkti4zm3F7W6xZQW_J7Nw9igoflgzFQ27tjPaMtJk4Jcs9o/exec';
-
-let estudantes = [];
-let turmaAtual = '';
-let dataAtual = '';
-
-/* =========================
-   INICIALIZAÇÃO
-========================= */
-
-document.addEventListener('DOMContentLoaded', () => {
-
-  definirDataAtual();
-
-  carregarTurmas();
-
-  document
-    .getElementById('turma')
-    .addEventListener('change', () => {
-
-      turmaAtual =
-        document.getElementById('turma').value;
-
-      if (turmaAtual) {
-        carregarEstudantes();
-      } else {
-        limparChamada();
-      }
-
-    });
-
-  document
-    .getElementById('data')
-    .addEventListener('change', () => {
-
-      dataAtual =
-        document.getElementById('data').value;
-
-      if (turmaAtual) {
-        carregarEstudantes();
-      }
-
-    });
-
-});
-
-/* =========================
-   DATA ATUAL
-========================= */
-
-function definirDataAtual() {
-
-  const agora = new Date();
-
-  const ano = agora.getFullYear();
-
-  const mes = String(
-    agora.getMonth() + 1
-  ).padStart(2, '0');
-
-  const dia = String(
-    agora.getDate()
-  ).padStart(2, '0');
-
-  dataAtual =
-    `${ano}-${mes}-${dia}`;
-
-  document.getElementById('data').value =
-    dataAtual;
-}
-
-/* =========================
-   CARREGAR TURMAS
-========================= */
-
-async function carregarTurmas() {
-
-  mostrarStatus('Carregando turmas...');
-
-  try {
-
-    const resposta = await fetch(
-      `${URL_SCRIPT}?acao=turmas`
-    );
-
-    const dados = await resposta.json();
-
-    const select =
-      document.getElementById('turma');
-
-    select.innerHTML =
-      '<option value="">Selecione</option>';
-
-    if (Array.isArray(dados)) {
-
-      dados.forEach(turma => {
-
-        const option =
-          document.createElement('option');
-
-        option.value = turma;
-        option.textContent = turma;
-
-        select.appendChild(option);
-
-      });
-
-    }
-
-    mostrarStatus('');
-
-  } catch (erro) {
-
-    console.error(erro);
-
-    mostrarStatus(
-      'Não foi possível carregar as turmas.'
-    );
-
-  }
-
-}
-
-/* =========================
-   CARREGAR ESTUDANTES
-========================= */
-
-async function carregarEstudantes() {
-
-  if (!turmaAtual || !dataAtual) {
-    return;
-  }
-
-  const area =
-    document.getElementById('areaChamada');
-
-  const lista =
-    document.getElementById('estudantes');
-
-  area.style.display = 'block';
-
-  lista.innerHTML =
-    '<div class="carregando">Carregando estudantes...</div>';
-
-  mostrarStatus('');
-
-  document.getElementById('btnSalvar').disabled = true;
-
-  try {
-
-    const url =
-      `${URL_SCRIPT}?acao=estudantes` +
-      `&turma=${encodeURIComponent(turmaAtual)}` +
-      `&data=${encodeURIComponent(dataAtual)}`;
-
-    const resposta =
-      await fetch(url);
-
-    const dados =
-      await resposta.json();
-
-    if (!Array.isArray(dados)) {
-
-      throw new Error(
-        'Dados dos estudantes inválidos.'
-      );
-
-    }
-
-    estudantes =
-      dados.map(estudante => {
-
-        return {
-
-          nome:
-            estudante.nome ||
-            estudante.estudante ||
-            '',
-
-          status:
-            String(
-              estudante.status || 'C'
-            ).toUpperCase()
-
-        };
-
-      });
-
-    document.getElementById('turmaNome')
-      .textContent = turmaAtual;
-
-    document.getElementById('turmaTotal')
-      .textContent =
-      `${estudantes.length} estudante(s)`;
-
-    renderizarEstudantes();
-
-  } catch (erro) {
-
-    console.error(erro);
-
-    lista.innerHTML = '';
-
-    mostrarStatus(
-      'Não foi possível carregar os estudantes.'
-    );
-
-  }
-
-}
-
-/* =========================
-   RENDERIZAR ESTUDANTES
-========================= */
-
-function renderizarEstudantes() {
-
-  const lista =
-    document.getElementById('estudantes');
-
-  lista.innerHTML = '';
-
-  estudantes.forEach((estudante, indice) => {
-
-    const item =
-      document.createElement('div');
-
-    item.className = 'estudante';
-
-    /*
-      A = atestado
-      F = falta
-      C = registro interno / disponível
-    */
-
-    if (
-      estudante.status === 'A'
-    ) {
-
-      item.classList.add('bloqueado');
-
-      item.innerHTML = `
-        <span class="nome-estudante">
-          ${escaparHTML(estudante.nome)}
-        </span>
-
-        <span class="indicador">
-          A
-        </span>
-      `;
-
-    } else if (
-      estudante.status === 'F'
-    ) {
-
-      item.classList.add('ausente');
-
-      item.onclick = () =>
-        alternarFalta(indice);
-
-      item.innerHTML = `
-        <span class="nome-estudante">
-          ${escaparHTML(estudante.nome)}
-        </span>
-
-        <span class="indicador">
-          ✓
-        </span>
-      `;
-
-    } else {
-
-      item.onclick = () =>
-        alternarFalta(indice);
-
-      item.innerHTML = `
-        <span class="nome-estudante">
-          ${escaparHTML(estudante.nome)}
-        </span>
-
-        <span class="indicador">
-        </span>
-      `;
-
-    }
-
-    lista.appendChild(item);
-
-  });
-
-  atualizarContadores();
-
-}
-
-/* =========================
-   ALTERNAR FALTA
-========================= */
-
-function alternarFalta(indice) {
-
-  const estudante =
-    estudantes[indice];
-
-  /*
-    Registros A são protegidos.
-  */
-
-  if (estudante.status === 'A') {
-    return;
-  }
-
-  /*
-    C <-> F
-  */
-
-  if (estudante.status === 'F') {
-
-    estudante.status = 'C';
-
-  } else {
-
-    estudante.status = 'F';
-
-  }
-
-  renderizarEstudantes();
-
-}
-
-/* =========================
-   CONTADORES
-========================= */
-
-function atualizarContadores() {
-
-  const faltas =
-    estudantes.filter(
-      estudante =>
-        estudante.status === 'F'
-    ).length;
-
-  document.getElementById(
-    'totalFaltas'
-  ).textContent = faltas;
-
-  document.getElementById(
-    'contadorFaltas'
-  ).textContent = faltas;
-
-  document.getElementById(
-    'btnSalvar'
-  ).disabled =
-    !turmaAtual ||
-    !dataAtual;
-
-}
-
-/* =========================
-   SALVAR CHAMADA
-========================= */
-
-async function salvarChamada() {
-
-  if (!turmaAtual || !dataAtual) {
-
-    mostrarStatus(
-      'Selecione a turma e a data.'
-    );
-
-    return;
-
-  }
-
-  const botao =
-    document.getElementById('btnSalvar');
-
-  botao.disabled = true;
-
-  botao.textContent =
-    'Salvando...';
-
-  mostrarStatus(
-    'Gravando chamada...'
-  );
-
-  try {
-
-    /*
-      Envia todos os estudantes.
-      O Code.gs continua responsável
-      por gravar corretamente.
-    */
-
-    const dadosEnvio = {
-
-      acao: 'salvarChamada',
-
-      data: dataAtual,
-
-      turma: turmaAtual,
-
-      estudantes:
-        estudantes.map(estudante => ({
-          nome: estudante.nome,
-          status: estudante.status
-        }))
-
+  <script>
+    // ESTADO DA APLICAÇÃO (Single Source of Truth)
+    let turmaAtual = '';
+    let alunos = [];
+    let faltantes = new Set(); // Guarda apenas os IDs de quem faltou para acesso rápido
+
+    // DADOS FALSOS PARA SIMULAÇÃO (Você substituirá pelo fetch() do seu banco)
+    const bancoDeDadosSimulado = {
+      "9A": [
+        { id: "A1", nome: "Ana Carolina Santos", telefone: "1199999999" },
+        { id: "A2", nome: "Bruno Ferreira", telefone: "1188888888" },
+        { id: "A3", nome: "Carlos Eduardo", telefone: "" }
+      ],
+      "9B": [
+        { id: "B1", nome: "Daniela Costa", telefone: "1177777777" },
+        { id: "B2", nome: "Eduardo Silva", telefone: "1166666666" }
+      ]
     };
 
-    const resposta =
-      await fetch(
-        URL_SCRIPT,
-        {
-          method: 'POST',
+    // 1. CARREGAR DADOS DA TURMA
+    async function carregarTurma() {
+      const select = document.getElementById('selectTurma');
+      turmaAtual = select.value;
+      
+      if (!turmaAtual) return;
 
-          headers: {
-            'Content-Type':
-              'text/plain;charset=utf-8'
-          },
+      mostrarLoader(true);
+      document.getElementById('btnSalvar').disabled = true;
 
-          body:
-            JSON.stringify(dadosEnvio)
-        }
-      );
-
-    const resultado =
-      await resposta.json();
-
-    if (
-      resultado &&
-      resultado.sucesso === false
-    ) {
-
-      throw new Error(
-        resultado.mensagem ||
-        'Erro ao gravar a chamada.'
-      );
-
+      try {
+        // SIMULAÇÃO DE REQUISIÇÃO (Substitua por fetch() para o Apps Script)
+        // const response = await fetch(`SUA_URL_DO_GAS?turma=${turmaAtual}`);
+        // alunos = await response.json();
+        
+        // Simulação de tempo de internet (500ms)
+        await new Promise(r => setTimeout(r, 500));
+        alunos = bancoDeDadosSimulado[turmaAtual] || [];
+        
+        // Limpa a seleção anterior
+        faltantes.clear();
+        
+        renderizarLista();
+        document.getElementById('btnSalvar').disabled = false;
+      } catch (erro) {
+        mostrarToast("Erro ao carregar turma!");
+      } finally {
+        mostrarLoader(false);
+      }
     }
 
-    /*
-      Mostra confirmação.
-    */
+    // 2. RENDERIZAR A LISTA NA TELA
+    function renderizarLista() {
+      const container = document.getElementById('listaEstudantes');
+      
+      if (alunos.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding: 40px; color:#5f6368;">Nenhum aluno encontrado nesta turma.</div>`;
+        atualizarContador();
+        return;
+      }
 
-    mostrarPopupSucesso();
+      container.innerHTML = alunos.map(aluno => {
+        const isFalta = faltantes.has(aluno.id);
+        return `
+          <div class="aluno-card ${isFalta ? 'faltou' : ''}" 
+               id="card-${aluno.id}" 
+               onclick="alternarPresenca('${aluno.id}')">
+            <div class="aluno-info">
+              <h3>${aluno.nome}</h3>
+              <span class="aluno-status" id="status-${aluno.id}">
+                ${isFalta ? '❌ Faltou' : '✅ Presente'}
+              </span>
+            </div>
+          </div>
+        `;
+      }).join('');
+      
+      atualizarContador();
+    }
 
-    mostrarStatus('');
+    // 3. LÓGICA DE TOGGLE (Clicar para dar falta)
+    function alternarPresenca(alunoId) {
+      const card = document.getElementById(`card-${alunoId}`);
+      const statusText = document.getElementById(`status-${alunoId}`);
 
-    /*
-      Recarrega os dados depois da gravação
-      para manter a tela sincronizada.
-    */
+      if (faltantes.has(alunoId)) {
+        // Estava com falta, agora está presente
+        faltantes.delete(alunoId);
+        card.classList.remove('faltou');
+        statusText.innerHTML = '✅ Presente';
+      } else {
+        // Estava presente, agora tem falta
+        faltantes.add(alunoId);
+        card.classList.add('faltou');
+        statusText.innerHTML = '❌ Faltou';
+      }
+      
+      atualizarContador();
+    }
 
-    setTimeout(
-      () => carregarEstudantes(),
-      500
-    );
+    // 4. ATUALIZAR NÚMEROS NO CABEÇALHO
+    function atualizarContador() {
+      const total = alunos.length;
+      const presentes = total - faltantes.size;
+      document.getElementById('contador').innerText = `${presentes}/${total} Presentes`;
+    }
 
-  } catch (erro) {
+    // 5. SALVAR A CHAMADA (E engatilhar os WhatsApps no backend)
+    async function salvarChamada() {
+      if (!turmaAtual) return;
 
-    console.error(erro);
+      const alunosQueFaltaram = alunos.filter(a => faltantes.has(a.id));
+      
+      // Aqui nós preparamos os dados exatos que seu backend precisa
+      const payload = {
+        turma: turmaAtual,
+        data: new Date().toISOString(),
+        faltantes: alunosQueFaltaram
+      };
 
-    mostrarStatus(
-      erro.message ||
-      'Não foi possível gravar a chamada.'
-    );
+      mostrarLoader(true);
 
-  } finally {
+      try {
+        /* COMO FAZER NO VERCEL: 
+        const response = await fetch('URL_DO_SEU_WEB_APP_APPS_SCRIPT', {
+          method: 'POST',
+          body: JSON.stringify(payload),
+          headers: { 'Content-Type': 'application/json' }
+        });
+        */
 
-    botao.disabled = false;
+        // Simulando envio para o servidor
+        console.log("Enviando para o servidor:", payload);
+        await new Promise(r => setTimeout(r, 1200));
 
-    botao.textContent =
-      'Salvar chamada';
+        mostrarToast(`Chamada salva! ${faltantes.size} faltas registradas.`);
+        
+        // Limpa a tela após salvar com sucesso
+        document.getElementById('selectTurma').value = "";
+        document.getElementById('listaEstudantes').innerHTML = "";
+        document.getElementById('contador').innerText = "0/0 Presentes";
+        document.getElementById('btnSalvar').disabled = true;
+        turmaAtual = "";
+        faltantes.clear();
 
-  }
+      } catch (erro) {
+        mostrarToast("Erro ao salvar a chamada. Tente novamente.");
+      } finally {
+        mostrarLoader(false);
+      }
+    }
 
-}
+    // --- FUNÇÕES DE INTERFACE (UTILITÁRIOS) ---
+    let toastTimeout;
+    function mostrarToast(mensagem) {
+      const toast = document.getElementById('toast');
+      toast.innerText = mensagem;
+      toast.classList.add('visivel');
+      
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('visivel');
+      }, 3500);
+    }
 
-/* =========================
-   POP-UP
-========================= */
-
-function mostrarPopupSucesso() {
-
-  document
-    .getElementById('overlaySucesso')
-    .classList.add('visivel');
-
-}
-
-function fecharPopup() {
-
-  document
-    .getElementById('overlaySucesso')
-    .classList.remove('visivel');
-
-}
-
-/* =========================
-   LIMPAR
-========================= */
-
-function limparChamada() {
-
-  turmaAtual = '';
-
-  estudantes = [];
-
-  document.getElementById(
-    'areaChamada'
-  ).style.display = 'none';
-
-  document.getElementById(
-    'estudantes'
-  ).innerHTML = '';
-
-  document.getElementById(
-    'btnSalvar'
-  ).disabled = true;
-
-  atualizarContadores();
-
-}
-
-/* =========================
-   STATUS
-========================= */
-
-function mostrarStatus(texto) {
-
-  document.getElementById(
-    'status'
-  ).textContent = texto || '';
-
-}
-
-/* =========================
-   SEGURANÇA HTML
-========================= */
-
-function escaparHTML(valor) {
-
-  return String(valor)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-
-}
-
-</script>
-
+    function mostrarLoader(mostrar) {
+      const loader = document.getElementById('loader');
+      if (mostrar) loader.classList.add('ativo');
+      else loader.classList.remove('ativo');
+    }
+  </script>
 </body>
 </html>
